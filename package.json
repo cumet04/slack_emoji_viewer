@@ -10,6 +10,10 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "dependencies": {
     "nuxt": "^2.0.0",
     "@nuxtjs/axios": "^5.3.6"
