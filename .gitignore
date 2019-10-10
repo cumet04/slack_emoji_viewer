@@ -1,3 +1,4 @@
 node_modules/
 dist
 .nuxt
+static/_dummy_emojis
