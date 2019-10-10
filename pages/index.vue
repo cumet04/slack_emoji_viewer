@@ -3,7 +3,7 @@
     <section v-for="(emojis, author) in by_author" v-bind:key="author">
       <h1>
         <img :src="user_image(emojis[0])" class="user_icon" />
-        <span>{{ author}}</span>
+        <span>{{ author }}</span>
       </h1>
       <ul class="emoji_container">
         <li v-for="emoji in emojis" v-bind:key="emoji.name" class="emoji">
