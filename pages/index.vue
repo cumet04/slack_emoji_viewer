@@ -7,7 +7,12 @@
       </h1>
       <ul class="emoji_container">
         <li v-for="emoji in emojis" v-bind:key="emoji.name" class="emoji">
-          <img :src="emoji.url" :title="display_name(emoji.name)" loading="lazy" class="emoji_img" />
+          <img
+            :src="emoji.url"
+            :title="display_name(emoji.name)"
+            loading="lazy"
+            class="emoji_img"
+          />
         </li>
       </ul>
     </section>
