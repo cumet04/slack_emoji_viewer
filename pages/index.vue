@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -67,16 +67,16 @@ export default {
 .emoji {
   list-style-type: none;
   padding: 5px;
-}
 
-.emoji_img {
-  max-width: 50px;
-  max-height: 50px;
-}
+  &_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+  }
 
-.emoji_container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 800px;
+  &_img {
+    max-width: 50px;
+    max-height: 50px;
+  }
 }
 </style>
