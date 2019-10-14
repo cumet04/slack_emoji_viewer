@@ -21,10 +21,9 @@
 
 <script>
 export default {
-  middleware: 'emoji',
   computed: {
     by_author: function() {
-      const src = [].concat(this.all)
+      const src = [].concat(this.$store.state.emoji.all)
       return src
         .filter(a => a.is_alias == 0)
         .sort((a, b) => {
@@ -44,11 +43,6 @@ export default {
       const base = 'https://ca.slack-edge.com'
       const size = 48
       return `${base}/${emoji.team_id}-${emoji.user_id}-${emoji.avatar_hash}-${size}`
-    }
-  },
-  data() {
-    return {
-      all: this.$store.state.emoji.all
     }
   }
 }
