@@ -1,0 +1,76 @@
+<template>
+  <main>
+    <section v-for="(emojis, author) in by_author" :key="author">
+      <h1>
+        <img :src="user_image(emojis[0])" class="user_icon" />
+        <span>{{ author }}</span>
+      </h1>
+      <ul class="emoji_container">
+        <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
+          <img
+            :src="emoji.url"
+            :title="display_name(emoji.name)"
+            loading="lazy"
+            class="emoji_img"
+          />
+        </li>
+      </ul>
+    </section>
+  </main>
+</template>
+
+<script>
+export default {
+  computed: {
+    by_author: function() {
+      const src = [].concat(this.$store.state.emoji.all)
+      return src
+        .filter(a => a.is_alias == 0)
+        .sort((a, b) => {
+          return a.created - b.created
+        })
+        .reduce((map, emoji) => {
+          const key = emoji.user_display_name
+          if (!(key in map)) map[key] = []
+          map[key].push(emoji)
+          return map
+        }, {})
+    }
+  },
+  methods: {
+    display_name: name => `:${name}:`,
+    user_image: emoji => {
+      const base = 'https://ca.slack-edge.com'
+      const size = 48
+      return `${base}/${emoji.team_id}-${emoji.user_id}-${emoji.avatar_hash}-${size}`
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.user_icon {
+  display: inline-block;
+}
+
+.emoji {
+  list-style-type: none;
+  padding: 5px;
+
+  &_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+  }
+
+  &_img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+</style>
