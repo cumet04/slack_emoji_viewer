@@ -6,7 +6,7 @@
         <span>{{ author }}</span>
       </h1>
       <ul class="emoji_container">
-        <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
+        <li v-for="emoji in emojis" :key="emoji.name" @click="select" class="emoji">
           <img
             :src="emoji.url"
             :title="display_name(emoji.name)"
@@ -43,6 +43,10 @@ export default {
       const base = 'https://ca.slack-edge.com'
       const size = 48
       return `${base}/${emoji.team_id}-${emoji.user_id}-${emoji.avatar_hash}-${size}`
+    },
+    select: function(event) {
+      const name = event.currentTarget.getElementsByClassName('emoji_img')[0].getAttribute('title')
+      this.$store.commit('emoji/push_stock', name)
     }
   }
 }

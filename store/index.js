@@ -17,7 +17,7 @@ export const actions = {
     // const source = slack_get()
     const source = mock_get()
     return source.then(res => {
-      commit('emoji/set', res.data.emoji)
+      commit('emoji/set_all', res.data.emoji)
     })
   }
 }
