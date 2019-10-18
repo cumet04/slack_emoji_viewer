@@ -1,26 +1,26 @@
 <template>
   <main>
-    <section v-for="(emojis, author) in by_author" :key="author">
-      <h1>
-        <img :src="user_image(emojis[0])" class="user_icon" />
-        <span>{{ author }}</span>
-      </h1>
-      <ul class="emoji_container">
-        <li v-for="emoji in emojis" :key="emoji.name" @click="select" class="emoji">
-          <img
-            :src="emoji.url"
-            :title="display_name(emoji.name)"
-            loading="lazy"
-            class="emoji_img"
-          />
-        </li>
-      </ul>
+    <section v-for="(emojis, author) in by_author" :key="author" class="user">
+      <user-wrapper :emoji="emojis[0]">
+        <ul class="list">
+          <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
+            <emoji :emoji="emoji" />
+          </li>
+        </ul>
+      </user-wrapper>
     </section>
   </main>
 </template>
 
 <script>
+import UserWrapper from '~/components/UserWrapper.vue'
+import Emoji from '~/components/Emoji.vue'
+
 export default {
+  components: {
+    'user-wrapper': UserWrapper,
+    emoji: Emoji
+  },
   computed: {
     by_author: function() {
       const src = [].concat(this.$store.state.emoji.all)
@@ -36,45 +36,24 @@ export default {
           return map
         }, {})
     }
-  },
-  methods: {
-    display_name: name => `:${name}:`,
-    user_image: emoji => {
-      const base = 'https://ca.slack-edge.com'
-      const size = 48
-      return `${base}/${emoji.team_id}-${emoji.user_id}-${emoji.avatar_hash}-${size}`
-    },
-    select: function(event) {
-      const name = event.currentTarget.getElementsByClassName('emoji_img')[0].getAttribute('title')
-      this.$store.commit('emoji/push_stock', name)
-    }
   }
 }
 </script>
 
-<style lang="scss">
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
+<style scoped lang="scss">
+.user {
+  margin-bottom: 8px;
 }
 
-.user_icon {
-  display: inline-block;
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 800px;
 }
 
 .emoji {
   list-style-type: none;
-  padding: 5px;
-
-  &_container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 800px;
-  }
-
-  &_img {
-    max-width: 50px;
-    max-height: 50px;
-  }
+  padding: auto;
+  margin: 2px;
 }
 </style>
