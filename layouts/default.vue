@@ -1,38 +1,38 @@
 <template>
   <div id="root">
-    <sidenav id="root_nav" />
-    <nuxt id="root_main" />
-    <board id="root_board" />
+    <the-sidebar id="nav" />
+    <nuxt id="main" />
+    <the-board id="board" />
   </div>
 </template>
 
 <script>
-import sidenav from '~/components/sidenav.vue'
-import board from '~/components/board.vue'
+import TheSidebar from '~/components/TheSidebar.vue'
+import TheBoard from '~/components/TheBoard.vue'
 
 export default {
   components: {
-    sidenav,
-    board
+    'the-sidebar': TheSidebar,
+    'the-board': TheBoard
   }
 }
 </script>
 
-<style  lang="scss">
+<style scoped lang="scss">
 #root {
   display: flex;
   position: relative;
   flex-direction: row;
+}
 
-  &_nav {
-    display: block;
-    width: 200px;
-  }
+#nav {
+  display: block;
+  width: 200px;
+}
 
-  &_board {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-  }
+#board {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 </style>
