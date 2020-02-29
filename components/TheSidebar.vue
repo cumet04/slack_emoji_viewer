@@ -13,10 +13,13 @@
 export default {
   data() {
     return {
-      menus: [{ name: "top", url: "/" }, { name: "by author", url: "/author" }]
+      menus: [
+        { name: "top", url: "/" },
+        { name: "by author", url: "/author" }
+      ]
     };
   }
 };
 </script>
 
-<style lang="scss"></style>
+<style scoped lang="scss"></style>

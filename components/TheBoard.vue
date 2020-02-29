@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .board {
   display: flex;
   flex-direction: row;
