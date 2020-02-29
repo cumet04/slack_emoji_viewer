@@ -23,12 +23,8 @@ export default {
   },
   computed: {
     by_author: function() {
-      const src = [].concat(this.$store.state.emoji.all);
-      return src
+      return this.$store.getters["emoji/latest_sorted"]
         .filter(a => a.is_alias == 0)
-        .sort((a, b) => {
-          return a.created - b.created;
-        })
         .reduce((map, emoji) => {
           const key = emoji.user_display_name;
           if (!(key in map)) map[key] = [];
