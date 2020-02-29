@@ -48,8 +48,6 @@ export default {
 }
 
 .emoji {
-  list-style-type: none;
-  padding: auto;
   margin: 2px;
 }
 </style>
