@@ -21,11 +21,18 @@ export default {
   components: {
     emoji: Emoji
   },
+  mounted() {
+    this.$store.dispatch("emoji/fetch_all");
+  },
   data() {
     return {
-      all: this.$store.getters["emoji/all"],
       keyword: ""
     };
+  },
+  computed: {
+    all() {
+      return this.$store.getters["emoji/all"];
+    }
   }
 };
 </script>

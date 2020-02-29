@@ -21,6 +21,9 @@ export default {
     "user-wrapper": UserWrapper,
     emoji: Emoji
   },
+  mounted() {
+    this.$store.dispatch("emoji/fetch_all");
+  },
   computed: {
     by_author: function() {
       return this.$store.getters["emoji/latest_sorted"]

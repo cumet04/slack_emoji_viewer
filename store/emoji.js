@@ -1,5 +1,8 @@
+const axios = require("axios");
+
 export const state = () => ({
-  all: {}
+  token: "",
+  all: []
 });
 
 export const getters = {
@@ -16,5 +19,24 @@ export const getters = {
 export const mutations = {
   set_all(state, obj) {
     state.all = obj;
+  },
+  set_token(state, obj) {
+    state.token = obj;
+  }
+};
+
+export const actions = {
+  fetch_all({ state, commit }) {
+    if (state.all.length > 0) return;
+
+    const max_count = 2000;
+    axios
+      .post(
+        "https://slack.com/api/emoji.adminList",
+        [`token=${state.token}`, `count=${max_count}`].join("&")
+      )
+      .then(resp => {
+        commit("set_all", resp.data.emoji);
+      });
   }
 };
