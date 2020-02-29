@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import TheSidebar from '~/components/TheSidebar.vue'
-import TheBoard from '~/components/TheBoard.vue'
+import TheSidebar from "~/components/TheSidebar.vue";
+import TheBoard from "~/components/TheBoard.vue";
 
 export default {
   components: {
-    'the-sidebar': TheSidebar,
-    'the-board': TheBoard
+    "the-sidebar": TheSidebar,
+    "the-board": TheBoard
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

@@ -1,22 +1,28 @@
 <template>
-  <img :src="emoji.url" :title="display_name" @click="select" loading="lazy" class="img" />
+  <img
+    :src="emoji.url"
+    :title="display_name"
+    @click="select"
+    loading="lazy"
+    class="img"
+  />
 </template>
 
 <script>
 export default {
-  props: ['emoji'],
+  props: ["emoji"],
   computed: {
     display_name() {
-      return `:${this.emoji.name}:`
+      return `:${this.emoji.name}:`;
     }
   },
   methods: {
     select(event) {
-      const name = event.currentTarget.getAttribute('title')
-      this.$store.commit('emoji/push_stock', name)
+      const name = event.currentTarget.getAttribute("title");
+      this.$store.commit("emoji/push_stock", name);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

@@ -10,11 +10,6 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 100
-  },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "node-sass": "^4.12.0",

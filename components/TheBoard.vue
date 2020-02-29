@@ -15,33 +15,33 @@
 export default {
   computed: {
     hidden() {
-      return this.stock.length == 0
+      return this.stock.length == 0;
     }
   },
   methods: {
     clear() {
-      this.$store.commit('emoji/clear_stock')
+      this.$store.commit("emoji/clear_stock");
     }
   },
   data() {
     return {
       stock: this.$store.state.emoji.stock
-    }
+    };
   },
   watch: {
     stock(value) {
       // 確実にinput要素のvalueが変更したあとにselect -> execする必要があるため
       // v-bindなどは使わずにDOM操作でvalue変更を行う
-      const text = this.stock.join('')
-      const node = this.$el.getElementsByClassName('board_input')[0]
-      node.value = text
+      const text = this.stock.join("");
+      const node = this.$el.getElementsByClassName("board_input")[0];
+      node.value = text;
 
-      node.select()
-      document.execCommand('copy')
-      node.blur()
+      node.select();
+      document.execCommand("copy");
+      node.blur();
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

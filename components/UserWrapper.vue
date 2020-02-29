@@ -12,15 +12,15 @@
 
 <script>
 export default {
-  props: ['emoji'],
+  props: ["emoji"],
   computed: {
     user_image() {
-      const base = 'https://ca.slack-edge.com'
-      const size = 48
-      return `${base}/${this.emoji.team_id}-${this.emoji.user_id}-${this.emoji.avatar_hash}-${size}`
+      const base = "https://ca.slack-edge.com";
+      const size = 48;
+      return `${base}/${this.emoji.team_id}-${this.emoji.user_id}-${this.emoji.avatar_hash}-${size}`;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

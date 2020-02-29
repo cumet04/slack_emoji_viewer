@@ -13,31 +13,31 @@
 </template>
 
 <script>
-import UserWrapper from '~/components/UserWrapper.vue'
-import Emoji from '~/components/Emoji.vue'
+import UserWrapper from "~/components/UserWrapper.vue";
+import Emoji from "~/components/Emoji.vue";
 
 export default {
   components: {
-    'user-wrapper': UserWrapper,
+    "user-wrapper": UserWrapper,
     emoji: Emoji
   },
   computed: {
     by_author: function() {
-      const src = [].concat(this.$store.state.emoji.all)
+      const src = [].concat(this.$store.state.emoji.all);
       return src
         .filter(a => a.is_alias == 0)
         .sort((a, b) => {
-          return a.created - b.created
+          return a.created - b.created;
         })
         .reduce((map, emoji) => {
-          const key = emoji.user_display_name
-          if (!(key in map)) map[key] = []
-          map[key].push(emoji)
-          return map
-        }, {})
+          const key = emoji.user_display_name;
+          if (!(key in map)) map[key] = [];
+          map[key].push(emoji);
+          return map;
+        }, {});
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
