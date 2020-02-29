@@ -20,12 +20,12 @@ export default {
   },
   methods: {
     clear() {
-      this.$store.commit("emoji/clear_stock");
+      this.$store.commit("emoji_stock/clear");
     }
   },
   data() {
     return {
-      stock: this.$store.state.emoji.stock
+      stock: this.$store.state.emoji_stock.stock
     };
   },
   watch: {
