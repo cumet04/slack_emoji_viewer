@@ -21,5 +21,8 @@ export default {
   axios: {},
   build: {
     extend(config, ctx) {}
+  },
+  router: {
+    base: "/slack_emoji_viewer/"
   }
 };
