@@ -15,7 +15,7 @@
     </div>
     <p>
       Go to
-      <a href="https://slack.com/customize/emoji">
+      <a href="https://slack.com/customize/emoji" target="_blank">
         https://slack.com/customize/emoji
       </a>
       and open devtool/Network tab, then find request to emoji.adminList, and
