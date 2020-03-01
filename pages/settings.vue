@@ -8,6 +8,12 @@
       />
       <button @click="save_token">set</button>
     </div>
+    <p>
+      Generate legacy token and set to above from
+      <a href="https://api.slack.com/legacy/custom-integrations/legacy-tokens"
+        >here</a
+      >
+    </p>
   </main>
 </template>
 
