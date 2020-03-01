@@ -1,9 +1,8 @@
 const axios = require("axios");
-const Cookies = require("js-cookie");
 
 export const state = () => ({
-  workspace: Cookies.get("slack_workspace") || null,
-  token: Cookies.get("slack_token") || null,
+  workspace: null,
+  token: null,
   all: []
 });
 
@@ -24,11 +23,9 @@ export const mutations = {
   },
   set_workspace(state, obj) {
     state.workspace = obj;
-    Cookies.set("slack_workspace", obj);
   },
   set_token(state, obj) {
     state.token = obj;
-    Cookies.set("slack_token", obj);
   }
 };
 
