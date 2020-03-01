@@ -1,7 +1,8 @@
 const axios = require("axios");
+const Cookies = require("js-cookie");
 
 export const state = () => ({
-  token: "",
+  token: Cookies.get("slack_token") || null,
   all: []
 });
 
@@ -22,12 +23,14 @@ export const mutations = {
   },
   set_token(state, obj) {
     state.token = obj;
+    Cookies.set("slack_token", obj);
   }
 };
 
 export const actions = {
   fetch_all({ state, commit }) {
     if (state.all.length > 0) return;
+    if (state.token == null) return;
 
     const max_count = 2000;
     axios
