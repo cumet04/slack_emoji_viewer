@@ -35,7 +35,7 @@
 export default {
   data() {
     return {
-      workspace_field_value: "",
+      workspace_field_value: this.$store.state.emoji.workspace,
       token_field_value: ""
     };
   },
@@ -43,7 +43,6 @@ export default {
     save_workspace() {
       this.$store.commit("emoji/set_workspace", this.workspace_field_value);
       this.$store.commit("emoji/set_token", this.token_field_value);
-      this.workspace_field_value = "";
       this.token_field_value = "";
       alert("token saved");
     }

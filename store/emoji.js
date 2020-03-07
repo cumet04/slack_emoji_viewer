@@ -1,8 +1,8 @@
 const axios = require("axios");
 
 export const state = () => ({
-  workspace: null,
-  token: null,
+  workspace: localStorage.emoji_workspace,
+  token: localStorage.emoji_token,
   all: []
 });
 
@@ -23,16 +23,18 @@ export const mutations = {
   },
   set_workspace(state, obj) {
     state.workspace = obj;
+    localStorage.emoji_workspace = state.workspace;
   },
   set_token(state, obj) {
     state.token = obj;
+    localStorage.emoji_token = state.token;
   }
 };
 
 export const actions = {
   fetch_all({ state, commit }) {
     if (state.all.length > 0) return;
-    if (state.workspace == null || state.token == null) return;
+    if (!state.workspace || !state.token) return;
 
     const max_count = 2000;
     axios
