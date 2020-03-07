@@ -13,14 +13,21 @@
       />
       <button @click="save_workspace">set</button>
     </div>
-    <p>
-      Go to
-      <a href="https://slack.com/customize/emoji" target="_blank">
-        https://slack.com/customize/emoji
-      </a>
-      and open devtool/Network tab, then find request to emoji.adminList, and
-      get token from FormData in the requst.
-    </p>
+    <ol>
+      <li class="step">
+        Go to
+        <a href="https://slack.com/customize/emoji" target="_blank">
+          https://slack.com/customize/emoji
+        </a>
+      </li>
+      <li class="step">
+        Open devtool, and focus "Console"
+      </li>
+      <li class="step">
+        Paste below:
+        <pre>window.prompt("token:",TS.boot_data.api_token)</pre>
+      </li>
+    </ol>
   </main>
 </template>
 
@@ -45,13 +52,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  width: 800px;
+.step {
+  list-style: decimal;
 }
 
-.emoji {
-  margin: 2px;
+pre {
+  background-color: lightgray;
+  font-family: Consolas, monospace;
 }
 </style>
