@@ -1,6 +1,6 @@
 <template>
   <main>
-    <input type="text" v-model="keyword" placeholder="Search" />
+    <input type="text" v-model="keyword" placeholder="Filter" />
     <ul class="list">
       <li
         v-for="emoji in all"

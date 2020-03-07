@@ -1,5 +1,6 @@
 <template>
   <main>
+    <input type="text" v-model="keyword" placeholder="Filter" />
     <section v-for="(emojis, author) in by_author" :key="author" class="user">
       <user-wrapper :emoji="emojis[0]">
         <ul class="list">
@@ -24,9 +25,19 @@ export default {
   mounted() {
     this.$store.dispatch("emoji/fetch_all");
   },
+  data() {
+    return {
+      keyword: ""
+    };
+  },
   computed: {
-    by_author: function() {
-      return this.$store.getters["emoji/latest_sorted"]
+    filtered() {
+      return this.$store.getters["emoji/latest_sorted"].filter(e =>
+        e.name.includes(this.keyword)
+      );
+    },
+    by_author() {
+      return this.filtered
         .filter(a => a.is_alias == 0)
         .reduce((map, emoji) => {
           const key = emoji.user_display_name;
