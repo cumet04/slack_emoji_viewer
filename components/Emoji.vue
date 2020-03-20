@@ -19,7 +19,7 @@ export default {
   methods: {
     select(event) {
       const name = event.currentTarget.getAttribute("title");
-      this.$store.commit("emoji_stock/push", name);
+      this.$store.commit("stock/push", name);
     }
   }
 };
