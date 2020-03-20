@@ -1,8 +1,8 @@
 const axios = require("axios");
 
 export const state = () => ({
-  workspace: localStorage.emoji_workspace,
-  token: localStorage.emoji_token,
+  workspace: null,
+  token: null,
   all: []
 });
 
@@ -23,11 +23,9 @@ export const mutations = {
   },
   set_workspace(state, obj) {
     state.workspace = obj;
-    localStorage.emoji_workspace = state.workspace;
   },
   set_token(state, obj) {
     state.token = obj;
-    localStorage.emoji_token = state.token;
   }
 };
 
