@@ -1,9 +1,5 @@
 <template>
   <main>
-    <div class="form-field">
-      <input type="text" v-model="dataFieldValue" placeholder="data string" />
-      <button @click="save_workspace">set</button>
-    </div>
     <ol>
       <li class="step">
         Go to
@@ -12,11 +8,15 @@
         </a>
       </li>
       <li class="step">
-        Open devtool, and focus "Console"
+        Copy this code, and run in devtool/Console
+        <pre><code>{{ copyCodeText }}</code></pre>
       </li>
       <li class="step">
-        Paste below:
-        <pre><code>{{ copyCodeText }}</code></pre>
+        Copy output data, and paste it below
+        <div class="form-field">
+          <input type="text" v-model="dataFieldValue" placeholder="data" />
+          <button @click="save_workspace">set</button>
+        </div>
       </li>
     </ol>
   </main>
