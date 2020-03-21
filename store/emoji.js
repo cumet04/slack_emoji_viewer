@@ -30,15 +30,14 @@ export const mutations = {
 };
 
 export const actions = {
-  fetch_all({ state, commit }) {
+  fetch_all({ state, commit }, workspace) {
     if (state.all.length > 0) return;
-    if (!state.workspace || !state.token) return;
 
     const max_count = 2000;
     axios
       .post(
-        `https://${state.workspace}.slack.com/api/emoji.adminList`,
-        [`token=${state.token}`, `count=${max_count}`].join("&")
+        `https://${workspace.domain}.slack.com/api/emoji.adminList`,
+        [`token=${workspace.token}`, `count=${max_count}`].join("&")
       )
       .then(resp => {
         if (resp.data.ok) {

@@ -1,16 +1,7 @@
 <template>
   <main>
     <div class="form-field">
-      <input
-        type="text"
-        v-model="workspace_field_value"
-        placeholder="slack workspace name"
-      />
-      <input
-        type="text"
-        v-model="token_field_value"
-        placeholder="slack token"
-      />
+      <input type="text" v-model="dataFieldValue" placeholder="data string" />
       <button @click="save_workspace">set</button>
     </div>
     <ol>
@@ -25,7 +16,7 @@
       </li>
       <li class="step">
         Paste below:
-        <pre>window.prompt("token:",TS.boot_data.api_token)</pre>
+        <pre><code>{{ copyCodeText }}</code></pre>
       </li>
     </ol>
   </main>
@@ -35,15 +26,17 @@
 export default {
   data() {
     return {
-      workspace_field_value: this.$store.state.emoji.workspace,
-      token_field_value: ""
+      dataFieldValue: "",
+      copyCodeText: [
+        "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
+        'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))'
+      ].join("\n")
     };
   },
   methods: {
     save_workspace() {
-      this.$store.commit("emoji/set_workspace", this.workspace_field_value);
-      this.$store.commit("emoji/set_token", this.token_field_value);
-      this.token_field_value = "";
+      this.$store.commit("workspace/set", JSON.parse(this.dataFieldValue));
+      this.dataFieldValue = "";
       alert("token saved");
     }
   }
@@ -57,6 +50,5 @@ export default {
 
 pre {
   background-color: lightgray;
-  font-family: Consolas, monospace;
 }
 </style>
