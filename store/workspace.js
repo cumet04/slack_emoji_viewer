@@ -10,17 +10,18 @@ export const getters = {
 };
 
 export const mutations = {
-  setCurrent(state, name) {
-    state._current = name;
+  setCurrent(state, domain) {
+    state._current = domain;
   },
   set(state, { name, domain, icon, token }) {
-    state.all[name] = { name, domain, icon, token };
-    state._current = name;
+    state.all[domain] = { name, domain, icon, token };
+    state.all = Object.assign({}, state.all); // fire watcher
+    state._current = domain;
   },
-  delete(state, name) {
-    delete state.all[name];
+  delete(state, domain) {
+    delete state.all[domain];
   },
   clear(state) {
-    for (let name in state.all) delete state.all[name];
+    for (let domain in state.all) delete state.all[domain];
   }
 };

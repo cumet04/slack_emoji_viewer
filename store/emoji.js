@@ -1,8 +1,6 @@
 const axios = require("axios");
 
 export const state = () => ({
-  workspace: null,
-  token: null,
   all: []
 });
 
@@ -21,11 +19,8 @@ export const mutations = {
   set_all(state, obj) {
     state.all = obj;
   },
-  set_workspace(state, obj) {
-    state.workspace = obj;
-  },
-  set_token(state, obj) {
-    state.token = obj;
+  clear(state) {
+    state.all.splice(0, state.all.length);
   }
 };
 
