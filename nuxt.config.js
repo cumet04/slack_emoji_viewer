@@ -15,7 +15,7 @@ export default {
   },
   loading: { color: "#fff" },
   css: ["@/assets/css/reset.css"],
-  plugins: [],
+  plugins: [{ src: "~/plugins/localStorage.js", ssr: false }],
   buildModules: [],
   modules: ["@nuxtjs/axios"],
   axios: {},

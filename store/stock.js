@@ -1,15 +1,15 @@
 export const state = () => ({
-  stock: []
+  all: []
 });
 
 export const mutations = {
   push(state, obj) {
-    state.stock.push(obj);
+    state.all.push(obj);
   },
   pop(state, obj) {
-    state.stock.pop(obj);
+    state.all.pop(obj);
   },
   clear(state) {
-    state.stock.splice(0, state.stock.length);
+    state.all.splice(0, state.all.length);
   }
 };

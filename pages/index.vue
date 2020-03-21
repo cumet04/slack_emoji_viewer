@@ -22,7 +22,8 @@ export default {
     emoji: Emoji
   },
   mounted() {
-    this.$store.dispatch("emoji/fetch_all");
+    const workspace = this.$store.getters["workspace/current"];
+    if (workspace) this.$store.dispatch("emoji/fetch_all", workspace);
   },
   data() {
     return {
