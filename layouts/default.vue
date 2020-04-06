@@ -13,8 +13,8 @@ import TheBoard from "~/components/TheBoard.vue";
 export default {
   components: {
     "the-sidebar": TheSidebar,
-    "the-board": TheBoard
-  }
+    "the-board": TheBoard,
+  },
 };
 </script>
 

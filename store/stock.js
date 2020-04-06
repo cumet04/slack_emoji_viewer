@@ -1,5 +1,5 @@
 export const state = () => ({
-  all: []
+  all: [],
 });
 
 export const mutations = {
@@ -11,5 +11,5 @@ export const mutations = {
   },
   clear(state) {
     state.all.splice(0, state.all.length);
-  }
+  },
 };

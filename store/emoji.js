@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 export const state = () => ({
-  all: []
+  all: [],
 });
 
 export const getters = {
@@ -12,7 +12,7 @@ export const getters = {
     return getters.all.sort((a, b) => {
       return a.created - b.created;
     });
-  }
+  },
 };
 
 export const mutations = {
@@ -21,7 +21,7 @@ export const mutations = {
   },
   clear(state) {
     state.all.splice(0, state.all.length);
-  }
+  },
 };
 
 export const actions = {
@@ -34,12 +34,12 @@ export const actions = {
         `https://${workspace.domain}.slack.com/api/emoji.adminList`,
         [`token=${workspace.token}`, `count=${max_count}`].join("&")
       )
-      .then(resp => {
+      .then((resp) => {
         if (resp.data.ok) {
           commit("set_all", resp.data.emoji);
         } else {
           console.error(`fetch emoji failed: ${JSON.stringify(resp.data)}`);
         }
       });
-  }
+  },
 };

@@ -16,10 +16,10 @@ export default {
       menus: [
         { name: "top", url: "/" },
         { name: "by author", url: "/author" },
-        { name: "settings", url: "/settings" }
-      ]
+        { name: "settings", url: "/settings" },
+      ],
     };
-  }
+  },
 };
 </script>
 

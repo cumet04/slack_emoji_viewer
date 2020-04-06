@@ -1,12 +1,12 @@
 export const state = () => ({
   all: {},
-  _current: null
+  _current: null,
 });
 
 export const getters = {
   current(state) {
     return state.all[state._current];
-  }
+  },
 };
 
 export const mutations = {
@@ -23,5 +23,5 @@ export const mutations = {
   },
   clear(state) {
     for (let domain in state.all) delete state.all[domain];
-  }
+  },
 };

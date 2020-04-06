@@ -8,10 +8,10 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || ""
-      }
+        content: process.env.npm_package_description || "",
+      },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   loading: { color: "#fff" },
   css: ["@/assets/css/reset.css"],
@@ -20,9 +20,9 @@ export default {
   modules: ["@nuxtjs/axios"],
   axios: {},
   build: {
-    extend(config, ctx) {}
+    extend(config, ctx) {},
   },
   router: {
-    base: "/slack_emoji_viewer/"
-  }
+    base: "/slack_emoji_viewer/",
+  },
 };
