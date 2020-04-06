@@ -48,8 +48,8 @@ export default {
       dataFieldValue: "",
       copyCodeText: [
         "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
-        'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))'
-      ].join("\n")
+        'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))',
+      ].join("\n"),
     };
   },
   computed: {
@@ -60,11 +60,11 @@ export default {
       set(value) {
         this.$store.commit("workspace/setCurrent", value);
         this.$store.commit("emoji/clear");
-      }
+      },
     },
     workspaces() {
       return Object.values(this.$store.state.workspace.all);
-    }
+    },
   },
   methods: {
     saveWorkspace() {
@@ -72,8 +72,8 @@ export default {
       this.$store.commit("emoji/clear");
       this.dataFieldValue = "";
       alert("token saved");
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -18,8 +18,8 @@ export default {
       const base = "https://ca.slack-edge.com";
       const size = 48;
       return `${base}/${this.emoji.team_id}-${this.emoji.user_id}-${this.emoji.avatar_hash}-${size}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

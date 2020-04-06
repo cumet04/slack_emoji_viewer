@@ -19,7 +19,7 @@ import Emoji from "~/components/Emoji.vue";
 
 export default {
   components: {
-    emoji: Emoji
+    emoji: Emoji,
   },
   mounted() {
     const workspace = this.$store.getters["workspace/current"];
@@ -27,14 +27,14 @@ export default {
   },
   data() {
     return {
-      keyword: ""
+      keyword: "",
     };
   },
   computed: {
     all() {
       return this.$store.getters["emoji/all"];
-    }
-  }
+    },
+  },
 };
 </script>
 

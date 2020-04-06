@@ -16,16 +16,16 @@ export default {
   computed: {
     hidden() {
       return this.stock.length == 0;
-    }
+    },
   },
   methods: {
     clear() {
       this.$store.commit("stock/clear");
-    }
+    },
   },
   data() {
     return {
-      stock: this.$store.state.stock.all
+      stock: this.$store.state.stock.all,
     };
   },
   watch: {
@@ -39,8 +39,8 @@ export default {
       node.select();
       document.execCommand("copy");
       node.blur();
-    }
-  }
+    },
+  },
 };
 </script>
 

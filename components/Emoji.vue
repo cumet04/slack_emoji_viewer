@@ -14,14 +14,14 @@ export default {
   computed: {
     display_name() {
       return `:${this.emoji.name}:`;
-    }
+    },
   },
   methods: {
     select(event) {
       const name = event.currentTarget.getAttribute("title");
       this.$store.commit("stock/push", name);
-    }
-  }
+    },
+  },
 };
 </script>
 

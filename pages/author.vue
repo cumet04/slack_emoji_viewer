@@ -20,7 +20,7 @@ import Emoji from "~/components/Emoji.vue";
 export default {
   components: {
     "user-wrapper": UserWrapper,
-    emoji: Emoji
+    emoji: Emoji,
   },
   mounted() {
     const workspace = this.$store.getters["workspace/current"];
@@ -28,26 +28,26 @@ export default {
   },
   data() {
     return {
-      keyword: ""
+      keyword: "",
     };
   },
   computed: {
     filtered() {
-      return this.$store.getters["emoji/latest_sorted"].filter(e =>
+      return this.$store.getters["emoji/latest_sorted"].filter((e) =>
         e.name.includes(this.keyword)
       );
     },
     by_author() {
       return this.filtered
-        .filter(a => a.is_alias == 0)
+        .filter((a) => a.is_alias == 0)
         .reduce((map, emoji) => {
           const key = emoji.user_display_name;
           if (!(key in map)) map[key] = [];
           map[key].push(emoji);
           return map;
         }, {});
-    }
-  }
+    },
+  },
 };
 </script>
 
