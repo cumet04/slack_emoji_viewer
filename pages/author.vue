@@ -1,6 +1,6 @@
 <template>
   <main>
-    <input type="text" v-model="keyword" placeholder="Filter" />
+    <filter-input v-model="keyword" class="filter"></filter-input>
     <section v-for="(emojis, author) in by_author" :key="author" class="user">
       <user-wrapper :emoji="emojis[0]">
         <ul class="list">
@@ -15,11 +15,13 @@
 
 <script>
 import UserWrapper from "~/components/UserWrapper.vue";
+import FilterInput from "~/components/FilterInput.vue";
 import Emoji from "~/components/Emoji.vue";
 
 export default {
   components: {
     "user-wrapper": UserWrapper,
+    "filter-input": FilterInput,
     emoji: Emoji,
   },
   mounted() {
@@ -52,6 +54,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.filter {
+  margin-bottom: 16px;
+}
+
 .user {
   margin-bottom: 12px;
 }
