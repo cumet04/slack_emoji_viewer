@@ -1,8 +1,8 @@
 <template>
   <aside>
-    <h1>menu</h1>
+    <h1 class="header">menu</h1>
     <ul>
-      <li v-for="menu in menus" :key="menu.name">
+      <li v-for="menu in menus" :key="menu.name" class="menu_item">
         <nuxt-link :to="menu.url">{{ menu.name }}</nuxt-link>
       </li>
     </ul>
@@ -23,4 +23,13 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.header {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.menu_item {
+  margin-bottom: 4px;
+}
+</style>

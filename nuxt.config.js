@@ -23,6 +23,6 @@ export default {
     extend(config, ctx) {},
   },
   router: {
-    base: "/slack_emoji_viewer/",
+    base: "/slack_emoji_viewer/", // for gh-pages
   },
 };

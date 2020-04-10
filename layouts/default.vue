@@ -21,13 +21,16 @@ export default {
 <style scoped lang="scss">
 #root {
   display: flex;
+  height: 100vh;
   position: relative;
   flex-direction: row;
 }
 
 #nav {
   display: block;
-  width: 200px;
+  width: 160px;
+  padding: 24px;
+  border-right: lightgray solid 1px;
 }
 
 #board {
