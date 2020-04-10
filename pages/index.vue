@@ -1,6 +1,6 @@
 <template>
   <main>
-    <input type="text" v-model="keyword" placeholder="Filter" />
+    <filter-input v-model="keyword" class="filter"></filter-input>
     <ul class="list">
       <li
         v-for="emoji in all"
@@ -16,10 +16,12 @@
 
 <script>
 import Emoji from "~/components/Emoji.vue";
+import FilterInput from "~/components/FilterInput.vue";
 
 export default {
   components: {
     emoji: Emoji,
+    "filter-input": FilterInput,
   },
   mounted() {
     const workspace = this.$store.getters["workspace/current"];
@@ -39,6 +41,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.filter {
+  margin-bottom: 16px;
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
