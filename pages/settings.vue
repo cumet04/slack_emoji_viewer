@@ -20,17 +20,24 @@
       <h1 class="section_title">New/Update workspace</h1>
       <ol>
         <li class="step">
-          Go to
-          <a href="https://slack.com/customize/emoji" target="_blank">
-            https://slack.com/customize/emoji
-          </a>
+          <p>
+            Go to
+            <a href="https://slack.com/customize/emoji" target="_blank">
+              https://slack.com/customize/emoji
+            </a>
+          </p>
         </li>
         <li class="step">
-          Copy this code, and run in devtool/Console
-          <pre><code>{{ copyCodeText }}</code></pre>
+          <p>Copy this code, and run in devtool/Console</p>
+          <textarea
+            class="code"
+            readonly
+            :value="copyCodeText"
+            @click="$event.target.select()"
+          ></textarea>
         </li>
         <li class="step">
-          Copy output data, and paste it below
+          <p>Copy output data, and paste it below</p>
           <div class="form-field">
             <input type="text" v-model="dataFieldValue" placeholder="data" />
             <button @click="saveWorkspace">set</button>
@@ -79,20 +86,29 @@ export default {
 
 <style scoped lang="scss">
 .section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   &_title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 }
 
 .step {
   list-style: decimal;
   margin-left: 25px;
+  margin-bottom: 8px;
+
+  & > p {
+    margin-bottom: 4px;
+  }
 }
 
-pre {
-  background-color: lightgray;
+.code {
+  width: 610px;
+  height: 28px;
+  padding: 4px;
+  resize: none;
+  background-color: #eee;
 }
 </style>
