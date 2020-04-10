@@ -53,7 +53,7 @@ export default {
 
 <style scoped lang="scss">
 .user {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .list {

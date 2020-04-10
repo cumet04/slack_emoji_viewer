@@ -33,6 +33,10 @@ export default {
   border-right: lightgray solid 1px;
 }
 
+#main {
+  padding: 24px;
+}
+
 #board {
   position: fixed;
   width: 100%;
