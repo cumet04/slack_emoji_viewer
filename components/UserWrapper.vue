@@ -31,7 +31,7 @@ export default {
 
 .icon {
   width: 44px;
-  margin-right: auto;
+  flex-shrink: 0;
 
   &_img {
     width: 36px;

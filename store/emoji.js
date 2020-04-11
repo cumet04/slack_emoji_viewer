@@ -18,6 +18,6 @@ export const mutations = {
     state.all = obj;
   },
   clear(state) {
-    state.all.splice(0, state.all.length);
+    state.all = [];
   },
 };

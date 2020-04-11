@@ -1,6 +1,11 @@
 <template>
   <main>
-    <filter-input v-model="keyword" class="filter"></filter-input>
+    <div class="toolbar">
+      <filter-input v-model="keyword" class="filter"></filter-input>
+      <button class="toolbar_reload" @click="reloadEmojis">
+        <img src="~/assets/images/ico-reload.svg" alt="" />
+      </button>
+    </div>
     <section v-for="(emojis, author) in by_author" :key="author" class="user">
       <user-wrapper :emoji="emojis[0]">
         <ul class="list">
@@ -17,6 +22,7 @@
 import UserWrapper from "~/components/UserWrapper.vue";
 import FilterInput from "~/components/FilterInput.vue";
 import Emoji from "~/components/Emoji.vue";
+import EmojiService from "~/services/emojiService";
 
 export default {
   components: {
@@ -46,12 +52,38 @@ export default {
         }, {});
     },
   },
+  methods: {
+    reloadEmojis() {
+      this.$store.commit("emoji/clear");
+      new EmojiService(this.$store).fetchAll();
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-.filter {
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 16px;
+
+  &_reload {
+    // reset
+    border: none;
+    padding: 0;
+    background: none;
+    line-height: 1;
+
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+main {
+  width: 728px;
 }
 
 .user {
@@ -61,7 +93,6 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
 }
 
 .emoji {
