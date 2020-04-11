@@ -24,10 +24,6 @@ export default {
     "filter-input": FilterInput,
     emoji: Emoji,
   },
-  mounted() {
-    const workspace = this.$store.getters["workspace/current"];
-    if (workspace) this.$store.dispatch("emoji/fetch_all", workspace);
-  },
   data() {
     return {
       keyword: "",

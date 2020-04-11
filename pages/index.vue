@@ -23,10 +23,6 @@ export default {
     emoji: Emoji,
     "filter-input": FilterInput,
   },
-  mounted() {
-    const workspace = this.$store.getters["workspace/current"];
-    if (workspace) this.$store.dispatch("emoji/fetch_all", workspace);
-  },
   data() {
     return {
       keyword: "",
