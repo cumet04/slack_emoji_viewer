@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export const state = () => ({
   all: {},
   _current: null,
@@ -14,14 +16,13 @@ export const mutations = {
     state._current = domain;
   },
   set(state, { name, domain, icon, token }) {
-    state.all[domain] = { name, domain, icon, token };
-    state.all = Object.assign({}, state.all); // fire watcher
+    Vue.set(state.all, domain, { name, domain, icon, token });
     state._current = domain;
   },
   delete(state, domain) {
     delete state.all[domain];
   },
   clear(state) {
-    for (let domain in state.all) delete state.all[domain];
+    state.all = {};
   },
 };
