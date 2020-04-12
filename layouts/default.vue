@@ -27,7 +27,7 @@ export default {
 }
 
 #nav {
-  width: 160px;
+  width: 200px;
 }
 
 #main {

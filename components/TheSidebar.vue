@@ -1,9 +1,18 @@
 <template>
   <aside class="nav">
-    <h1 class="header">menu</h1>
+    <header class="header">
+      menu
+    </header>
     <ul class="menu">
-      <li v-for="menu in menus" :key="menu.name" class="menu_item">
-        <nuxt-link :to="menu.url">{{ menu.name }}</nuxt-link>
+      <li
+        v-for="menu in menus"
+        :key="menu.name"
+        class="menu_item"
+        :class="currentClass(menu.url)"
+      >
+        <nuxt-link :to="menu.url" class="menu_item_link">
+          {{ menu.name }}
+        </nuxt-link>
       </li>
     </ul>
     <footer class="footer">
@@ -34,6 +43,11 @@ export default {
       ],
     };
   },
+  methods: {
+    currentClass(path) {
+      return $nuxt.$route.path == path ? "current" : "";
+    },
+  },
 };
 </script>
 
@@ -41,25 +55,49 @@ export default {
 .nav {
   display: flex;
   flex-direction: column;
-  padding: 24px;
   border-right: lightgray solid 1px;
 }
 
 .header {
   font-size: 20px;
-  margin-bottom: 16px;
+  padding: 20px;
 }
 
 .menu {
-  flex-grow: 1;
+  padding-top: 12px;
+  border-top: #eee solid 1px;
+
   &_item {
-    margin-bottom: 4px;
+    &:hover {
+      background-color: #eee;
+    }
+
+    &.current {
+      background-color: lightskyblue;
+    }
+
+    &_link {
+      display: block;
+      padding: 6px 20px;
+
+      // reset
+      color: inherit;
+      text-decoration: none;
+
+      &::before {
+        content: "#";
+      }
+    }
   }
 }
 
 .footer {
   display: flex;
   justify-content: center;
+  flex-grow: 1;
+  align-items: flex-end;
+
+  padding: 8px 0;
 }
 
 .github_link {
