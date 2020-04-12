@@ -24,6 +24,13 @@ import FilterInput from "~/components/FilterInput.vue";
 import Emoji from "~/components/Emoji.vue";
 import EmojiService from "~/services/emojiService";
 
+const groupBy = (source, getkey) =>
+  source.reduce((map, item) => {
+    const key = getkey(item);
+    (map[key] || (map[key] = [])).push(item);
+    return map;
+  }, {});
+
 export default {
   components: {
     "user-wrapper": UserWrapper,
@@ -42,14 +49,10 @@ export default {
       );
     },
     by_author() {
-      return this.filtered
-        .filter((a) => a.is_alias == 0)
-        .reduce((map, emoji) => {
-          const key = emoji.user_display_name;
-          if (!(key in map)) map[key] = [];
-          map[key].push(emoji);
-          return map;
-        }, {});
+      return groupBy(
+        this.filtered.filter((a) => a.is_alias == 0),
+        (emoji) => emoji.user_display_name
+      );
     },
   },
   methods: {
