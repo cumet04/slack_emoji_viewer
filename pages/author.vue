@@ -6,7 +6,7 @@
         <img src="~/assets/images/ico-reload.svg" alt="" />
       </button>
     </div>
-    <section v-for="(emojis, author) in by_author" :key="author" class="user">
+    <section v-for="(emojis, author) in byAuthor" :key="author" class="user">
       <user-wrapper :emoji="emojis[0]">
         <ul class="list">
           <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
@@ -24,13 +24,6 @@ import FilterInput from "~/components/FilterInput.vue";
 import Emoji from "~/components/Emoji.vue";
 import EmojiService from "~/services/emojiService";
 
-const groupBy = (source, getkey) =>
-  source.reduce((map, item) => {
-    const key = getkey(item);
-    (map[key] || (map[key] = [])).push(item);
-    return map;
-  }, {});
-
 export default {
   components: {
     "user-wrapper": UserWrapper,
@@ -43,16 +36,13 @@ export default {
     };
   },
   computed: {
-    filtered() {
-      return this.$store.getters["emoji/latest_sorted"].filter((e) =>
-        e.name.includes(this.keyword)
-      );
-    },
-    by_author() {
-      return groupBy(
-        this.filtered.filter((a) => a.is_alias == 0),
-        (emoji) => emoji.user_display_name
-      );
+    byAuthor() {
+      const filtered = {};
+      const all = this.$store.getters["emoji/byAuthor"];
+      for (let key in all) {
+        filtered[key] = all[key].filter((e) => e.name.includes(this.keyword));
+      }
+      return filtered;
     },
   },
   methods: {
