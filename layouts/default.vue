@@ -27,10 +27,7 @@ export default {
 }
 
 #nav {
-  display: block;
   width: 160px;
-  padding: 24px;
-  border-right: lightgray solid 1px;
 }
 
 #main {
