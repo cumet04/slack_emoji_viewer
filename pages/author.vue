@@ -6,7 +6,7 @@
         <img src="~/assets/images/ico-reload.svg" alt="" />
       </button>
     </div>
-    <section v-for="(emojis, author) in by_author" :key="author" class="user">
+    <section v-for="(emojis, author) in byAuthor" :key="author" class="user">
       <user-wrapper :emoji="emojis[0]">
         <ul class="list">
           <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
@@ -36,20 +36,13 @@ export default {
     };
   },
   computed: {
-    filtered() {
-      return this.$store.getters["emoji/latest_sorted"].filter((e) =>
-        e.name.includes(this.keyword)
-      );
-    },
-    by_author() {
-      return this.filtered
-        .filter((a) => a.is_alias == 0)
-        .reduce((map, emoji) => {
-          const key = emoji.user_display_name;
-          if (!(key in map)) map[key] = [];
-          map[key].push(emoji);
-          return map;
-        }, {});
+    byAuthor() {
+      const filtered = {};
+      const all = this.$store.getters["emoji/byAuthor"];
+      for (let key in all) {
+        filtered[key] = all[key].filter((e) => e.name.includes(this.keyword));
+      }
+      return filtered;
     },
   },
   methods: {
