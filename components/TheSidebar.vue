@@ -15,6 +15,7 @@ export default {
     return {
       menus: [
         { name: "top", url: "/" },
+        { name: "daily", url: "/daily" },
         { name: "by author", url: "/author" },
         { name: "settings", url: "/settings" },
       ],

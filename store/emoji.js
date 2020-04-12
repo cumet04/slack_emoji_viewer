@@ -21,6 +21,12 @@ export const getters = {
   byAuthor(_, getters) {
     return groupBy(getters.orderByDate, (emoji) => emoji.user_display_name);
   },
+  byDate(_, getters) {
+    return groupBy(getters.all, (emoji) => {
+      // MEMO: This is local time; for UTC, setUTCHours
+      return new Date(emoji.created * 1000).setHours(0, 0, 0);
+    });
+  },
 };
 
 export const mutations = {
