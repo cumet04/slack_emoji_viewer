@@ -1,9 +1,9 @@
 <template>
   <aside class="nav">
     <header class="header">
-      menu
+      <workspace-selector></workspace-selector>
     </header>
-    <ul class="menu">
+    <ol class="menu">
       <li
         v-for="menu in menus"
         :key="menu.name"
@@ -14,7 +14,7 @@
           {{ menu.name }}
         </nuxt-link>
       </li>
-    </ul>
+    </ol>
     <footer class="footer">
       <a
         href="https://github.com/cumet04/slack_emoji_viewer"
@@ -32,11 +32,16 @@
 </template>
 
 <script>
+import WorkspaceSelector from "~/components/WorkspaceSelector.vue";
+
 export default {
+  components: {
+    "workspace-selector": WorkspaceSelector,
+  },
   data() {
     return {
       menus: [
-        { name: "top", url: "/" },
+        { name: "index", url: "/" },
         { name: "daily", url: "/daily" },
         { name: "by author", url: "/author" },
         { name: "settings", url: "/settings" },
@@ -56,11 +61,6 @@ export default {
   display: flex;
   flex-direction: column;
   border-right: lightgray solid 1px;
-}
-
-.header {
-  font-size: 20px;
-  padding: 20px;
 }
 
 .menu {
