@@ -8,6 +8,7 @@ class EmojiService {
 
   async fetchAll() {
     const workspace = this._store.getters["workspace/current"];
+    if (!workspace) return;
 
     const resp = await axios.post(
       `https://${workspace.domain}.slack.com/api/emoji.adminList`,

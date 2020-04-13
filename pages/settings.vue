@@ -16,8 +16,8 @@
         </li>
       </ul>
     </section>
-    <section class="section">
-      <h1 class="section_title">New/Update workspace</h1>
+    <section class="section" id="add_workspace">
+      <h1 class="section_title">Add/Update workspace</h1>
       <ol>
         <li class="step">
           <p>
@@ -70,7 +70,7 @@ export default {
       },
     },
     workspaces() {
-      return Object.values(this.$store.state.workspace.all);
+      return this.$store.getters["workspace/all"];
     },
   },
   methods: {

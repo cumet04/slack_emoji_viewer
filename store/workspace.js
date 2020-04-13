@@ -2,13 +2,16 @@ import Vue from "vue";
 import EmojiService from "~/services/emojiService";
 
 export const state = () => ({
-  all: {},
+  _all: {},
   _current: null,
 });
 
 export const getters = {
+  all(state) {
+    return Object.values(state._all);
+  },
   current(state) {
-    return state.all[state._current];
+    return state._all[state._current];
   },
 };
 
@@ -18,14 +21,14 @@ export const mutations = {
     new EmojiService($nuxt.$store).fetchAll();
   },
   set(state, { name, domain, icon, token }) {
-    Vue.set(state.all, domain, { name, domain, icon, token });
+    Vue.set(state._all, domain, { name, domain, icon, token });
     state._current = domain;
     new EmojiService($nuxt.$store).fetchAll();
   },
   delete(state, domain) {
-    delete state.all[domain];
+    delete state._all[domain];
   },
   clear(state) {
-    state.all = {};
+    state._all = {};
   },
 };
