@@ -21,13 +21,15 @@ export default {
 <style scoped lang="scss">
 #root {
   display: flex;
-  height: 100vh;
   position: relative;
   flex-direction: row;
 }
 
 #nav {
+  position: sticky;
+  top: 0;
   width: 200px;
+  height: 100vh;
 }
 
 #main {
