@@ -39,8 +39,12 @@ export default {
     byAuthor() {
       const filtered = {};
       const all = this.$store.getters["emoji/byAuthor"];
-      for (let key in all) {
-        filtered[key] = all[key].filter((e) => e.name.includes(this.keyword));
+      for (let user in all) {
+        const userEmojis = all[user].filter((e) => {
+          const names = [e.name, ...e.aliases?.map((e) => e.name)];
+          return names.some((name) => name.includes(this.keyword));
+        });
+        if (userEmojis.length > 0) filtered[user] = userEmojis;
       }
       return filtered;
     },

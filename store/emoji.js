@@ -13,13 +13,18 @@ export const getters = {
   all(state) {
     return [].concat(state.all);
   },
+  orderByName(_, getters) {
+    return getters.all.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+  },
   orderByDate(_, getters) {
     return getters.all.sort((a, b) => {
       return a.created - b.created;
     });
   },
   byAuthor(_, getters) {
-    return groupBy(getters.orderByDate, (emoji) => emoji.user_display_name);
+    return groupBy(getters.orderByDate, (emoji) => emoji.userName);
   },
   byDate(_, getters) {
     return groupBy(getters.all, (emoji) => {
