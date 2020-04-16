@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="icon">
-      <img :src="user_image" class="icon_img" />
+      <img :src="emoji.userImage" class="icon_img" />
     </div>
     <div>
-      <h1 class="name">{{ emoji.user_display_name }}</h1>
+      <h1 class="name">{{ emoji.userName }}</h1>
       <slot />
     </div>
   </div>
@@ -13,13 +13,6 @@
 <script>
 export default {
   props: ["emoji"],
-  computed: {
-    user_image() {
-      const base = "https://ca.slack-edge.com";
-      const size = 48;
-      return `${base}/${this.emoji.team_id}-${this.emoji.user_id}-${this.emoji.avatar_hash}-${size}`;
-    },
-  },
 };
 </script>
 

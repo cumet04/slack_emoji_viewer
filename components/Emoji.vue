@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="emoji.url"
+    :src="emoji.image"
     :title="display_name"
     @click="select"
     loading="lazy"

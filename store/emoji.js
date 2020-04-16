@@ -19,7 +19,7 @@ export const getters = {
     });
   },
   byAuthor(_, getters) {
-    return groupBy(getters.orderByDate, (emoji) => emoji.user_display_name);
+    return groupBy(getters.orderByDate, (emoji) => emoji.userName);
   },
   byDate(_, getters) {
     return groupBy(getters.all, (emoji) => {
