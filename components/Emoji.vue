@@ -13,13 +13,14 @@ export default {
   props: ["emoji"],
   computed: {
     display_name() {
-      return `:${this.emoji.name}:`;
+      return [this.emoji.name, ...this.emoji.aliases?.map((e) => e.name)]
+        .map((name) => `:${name}:`)
+        .join(" ");
     },
   },
   methods: {
     select(event) {
-      const name = event.currentTarget.getAttribute("title");
-      this.$store.commit("stock/push", name);
+      this.$store.commit("stock/push", `:${this.emoji.name}:`);
     },
   },
 };
