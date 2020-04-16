@@ -10,7 +10,7 @@
       <li
         v-for="emoji in all"
         :key="emoji.name"
-        v-show="emoji.name.includes(keyword)"
+        v-show="isMatched(emoji)"
         class="emoji"
       >
         <emoji :emoji="emoji" />
@@ -43,6 +43,10 @@ export default {
     reloadEmojis() {
       this.$store.commit("emoji/clear");
       new EmojiService(this.$store).fetchAll();
+    },
+    isMatched(emoji) {
+      const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+      return names.some((name) => name.includes(this.keyword));
     },
   },
 };
