@@ -13,6 +13,11 @@ export const getters = {
   all(state) {
     return [].concat(state.all);
   },
+  orderByName(_, getters) {
+    return getters.all.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+  },
   orderByDate(_, getters) {
     return getters.all.sort((a, b) => {
       return a.created - b.created;

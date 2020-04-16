@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     all() {
-      return this.$store.getters["emoji/all"];
+      return this.$store.getters["emoji/orderByName"];
     },
   },
   methods: {
