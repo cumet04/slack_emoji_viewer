@@ -20,7 +20,11 @@ export default {
   modules: ["@nuxtjs/axios"],
   axios: {},
   build: {
-    extend(config, ctx) {},
+    postcss: {
+      plugins: {
+        "postcss-nesting": {},
+      },
+    },
   },
   router: {
     base: "/slack_emoji_viewer/", // for gh-pages

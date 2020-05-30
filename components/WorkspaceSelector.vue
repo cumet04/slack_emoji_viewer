@@ -2,17 +2,17 @@
   <div class="container" @click="open = !open">
     <div class="workspace current">
       <template v-if="current">
-        <img class="workspace_icon" :src="current.icon.image_34" />
-        <div class="workspace_name">{{ current.name }}</div>
+        <img class="icon" :src="current.icon.image_34" />
+        <div class="name">{{ current.name }}</div>
       </template>
       <template v-else>
-        <div class="workspace_anonymous">(no workspace set)</div>
+        <div class="anonymous">(no workspace set)</div>
       </template>
     </div>
     <div class="selector" v-if="open">
       <ol>
         <li
-          class="selector_item workspace"
+          class="item workspace"
           @click="select(ws.domain)"
           v-for="ws in list"
           :key="ws.domain"
@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .container {
   position: relative;
   margin: 8px;
@@ -83,15 +83,15 @@ export default {
   align-items: center;
   height: 34px;
 
-  &_icon {
+  & .icon {
     margin-right: 4px;
   }
 
-  &_name {
+  & .name {
     font-size: 18px;
   }
 
-  &_anonymous {
+  & .anonymous {
     font-size: 14px;
     color: gray;
     padding-left: 14px;
@@ -106,7 +106,7 @@ export default {
   background: white;
   margin-top: 2px;
 
-  &_item {
+  & .item {
     padding: 4px;
     cursor: pointer;
 
@@ -120,7 +120,7 @@ export default {
   display: block;
   padding: 12px;
 
-  // reset
+  /* reset */
   color: inherit;
   text-decoration: none;
 }

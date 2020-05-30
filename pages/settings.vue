@@ -1,7 +1,7 @@
 <template>
   <main>
     <section class="section">
-      <h1 class="section_title">Select current workspace</h1>
+      <h1 class="title">Select current workspace</h1>
       <ul>
         <li v-for="workspace in workspaces" :key="workspace.domain">
           <label>
@@ -17,7 +17,7 @@
       </ul>
     </section>
     <section class="section" id="add_workspace">
-      <h1 class="section_title">Add/Update workspace</h1>
+      <h1 class="title">Add/Update workspace</h1>
       <ol>
         <li class="step">
           <p>
@@ -84,11 +84,11 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .section {
   margin-bottom: 24px;
 
-  &_title {
+  & .title {
     font-weight: bold;
     margin-bottom: 12px;
   }

@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .filter {
   position: relative;
   display: flex;

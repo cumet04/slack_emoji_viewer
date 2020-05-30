@@ -2,7 +2,7 @@
   <main>
     <div class="toolbar">
       <filter-input v-model="keyword" class="filter"></filter-input>
-      <button class="toolbar_reload" @click="reloadEmojis">
+      <button class="reload" @click="reloadEmojis">
         <img src="~/assets/images/ico-reload.svg" alt="" />
       </button>
     </div>
@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .toolbar {
   display: flex;
   flex-direction: row;
@@ -66,8 +66,8 @@ export default {
   justify-content: space-between;
   margin-bottom: 16px;
 
-  &_reload {
-    // reset
+  & .reload {
+    /* reset */
     border: none;
     padding: 0;
     background: none;

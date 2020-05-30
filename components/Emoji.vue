@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .img {
   width: 32px;
   height: 32px;
