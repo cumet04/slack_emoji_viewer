@@ -14,13 +14,17 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   loading: { color: "#fff" },
-  css: ["@/assets/css/reset.css"],
+  css: ["ress", "~/assets/css/base.css"],
   plugins: [{ src: "~/plugins/localStorage.js", ssr: false }],
   buildModules: [],
   modules: ["@nuxtjs/axios"],
   axios: {},
   build: {
-    extend(config, ctx) {},
+    postcss: {
+      plugins: {
+        "postcss-nesting": {},
+      },
+    },
   },
   router: {
     base: "/slack_emoji_viewer/", // for gh-pages

@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.10.3",
-    "node-sass": "^4.14.1",
     "nuxt": "^2.12.2",
-    "sass-loader": "8.0.2",
+    "postcss-loader": "^3.0.0",
+    "postcss-nesting": "^7.0.1",
+    "ress": "^2.0.4",
     "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {

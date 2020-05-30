@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 #root {
   display: flex;
   position: relative;
@@ -33,6 +33,7 @@ export default {
 }
 
 #main {
+  width: 768px;
   padding: 24px;
 }
 

@@ -38,11 +38,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-main {
-  width: 720px;
-}
-
+<style scoped lang="postcss">
 .section {
   margin-bottom: 12px;
 }

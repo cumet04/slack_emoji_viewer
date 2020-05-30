@@ -7,10 +7,10 @@
       <li
         v-for="menu in menus"
         :key="menu.name"
-        class="menu_item"
+        class="item"
         :class="currentClass(menu.url)"
       >
-        <nuxt-link :to="menu.url" class="menu_item_link">
+        <nuxt-link :to="menu.url" class="link">
           {{ menu.name }}
         </nuxt-link>
       </li>
@@ -21,11 +21,7 @@
         target="_blank"
         class="github_link"
       >
-        <img
-          src="~/assets/images/ico-github.png"
-          alt=""
-          class="github_link_icon"
-        />
+        <img src="~/assets/images/ico-github.png" alt="" class="icon" />
       </a>
     </footer>
   </aside>
@@ -56,7 +52,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .nav {
   display: flex;
   flex-direction: column;
@@ -67,7 +63,7 @@ export default {
   padding-top: 12px;
   border-top: #eee solid 1px;
 
-  &_item {
+  & .item {
     &:hover {
       background-color: #eee;
     }
@@ -76,13 +72,13 @@ export default {
       background-color: lightskyblue;
     }
 
-    &_link {
+    & .link {
       display: block;
-      padding: 6px 20px;
+      padding: 2px 20px;
 
-      // reset
-      color: inherit;
-      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
 
       &::before {
         content: "#";
@@ -104,7 +100,7 @@ export default {
   width: 24px;
   height: 24px;
 
-  &_icon {
+  & .icon {
     width: 100%;
     height: 100%;
   }

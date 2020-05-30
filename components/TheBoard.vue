@@ -2,10 +2,10 @@
   <div>
     <div class="board" :class="{ hidden: hidden }">
       <label for="clipboard">stock</label>
-      <input type="text" name="clipboard" class="board_input" />
-      <button class="board_clear" @click="clear">
-        <span class="board_clear_bar"></span>
-        <span class="board_clear_bar"></span>
+      <input type="text" name="clipboard" class="input" />
+      <button class="clear" @click="clear">
+        <span class="cross_bar"></span>
+        <span class="cross_bar"></span>
       </button>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .board {
   display: flex;
   flex-direction: row;
@@ -52,43 +52,43 @@ export default {
   width: 100%;
   background-color: bisque;
 
-  $height: 30px;
+  --height: 30px;
   position: absolute;
   bottom: 0;
-  height: $height;
+  height: var(--height);
   transition: bottom 0.2s;
 
   &.hidden {
-    bottom: -$height;
+    bottom: calc(-1 * var(--height));
     transition: bottom 0.5s 0.1s;
   }
+}
 
-  &_input {
-    flex-grow: 1;
-  }
+.input {
+  flex-grow: 1;
+}
 
-  &_clear {
-    flex-basis: 25px;
-    height: 25px;
-    position: relative;
-    border: none;
-    background: none;
+.clear {
+  flex-basis: 25px;
+  height: 25px;
+  position: relative;
+  border: none;
+  background: none;
+}
 
-    &_bar {
-      display: block;
-      position: absolute;
-      top: 4px;
-      left: 12px;
-      width: 0;
-      height: 15px;
-      border: solid 1px gray;
-      background-color: gray;
-      transform: rotate(45deg);
+.cross_bar {
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: 12px;
+  width: 0;
+  height: 15px;
+  border: solid 1px gray;
+  background-color: gray;
+  transform: rotate(45deg);
 
-      &:first-child {
-        transform: rotate(-45deg);
-      }
-    }
+  &:first-child {
+    transform: rotate(-45deg);
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="icon">
-      <img :src="emoji.userImage" class="icon_img" />
+      <img :src="emoji.userImage" class="img" />
     </div>
     <div>
       <h1 class="name">{{ emoji.userName }}</h1>
@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="postcss">
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -26,7 +26,7 @@ export default {
   width: 44px;
   flex-shrink: 0;
 
-  &_img {
+  & .img {
     width: 36px;
     height: 36px;
     border-radius: 3px;
