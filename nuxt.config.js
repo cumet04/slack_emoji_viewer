@@ -16,7 +16,7 @@ export default {
   loading: { color: "#fff" },
   css: ["ress", "~/assets/css/base.css"],
   plugins: [{ src: "~/plugins/localStorage.js", ssr: false }],
-  buildModules: [],
+  buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios"],
   axios: {},
   build: {
