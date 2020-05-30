@@ -5,11 +5,11 @@ const getter = (name: string) => store().getters[`workspace/${name}`];
 const commit = (name: string, payload: any) =>
   store().commit(`workspace/${name}`, payload);
 
-type Workspace = {
+export type Workspace = {
   name: string;
   domain: string;
   icon: string;
-  toke: string;
+  token: string;
 };
 
 export default {

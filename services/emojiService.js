@@ -45,7 +45,7 @@ class EmojiService {
         const key = data.alias_for;
         (map[key] || (map[key] = [])).push(mapApiDataToModel(data));
         return map;
-      });
+      }, {});
 
     const emojis = raw
       .filter((data) => data.is_alias == 0)

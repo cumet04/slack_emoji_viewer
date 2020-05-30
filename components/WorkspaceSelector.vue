@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Workspace from "~/services/workspace";
+import Workspaces from "~/services/workspace";
 
 export default {
   data() {
@@ -39,15 +39,15 @@ export default {
   },
   computed: {
     current() {
-      return Workspace.current();
+      return Workspaces.current();
     },
     list() {
-      return Workspace.all().filter((ws) => ws != this.current);
+      return Workspaces.all().filter((ws) => ws != this.current);
     },
   },
   methods: {
     select(domain) {
-      Workspace.setCurrent(domain);
+      Workspaces.setCurrent(domain);
     },
   },
 };
