@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import Workspace from "~/services/workspace";
+
 export default {
   data() {
     return {
@@ -67,20 +69,22 @@ export default {
   computed: {
     selected: {
       get() {
-        return this.$store.getters["workspace/current"]?.domain;
+        return Workspace.current()?.domain;
       },
       set(value) {
-        this.$store.commit("workspace/setCurrent", value);
+        Workspace.setCurrent(value);
         this.$store.commit("emoji/clear");
       },
     },
     workspaces() {
-      return this.$store.getters["workspace/all"];
+      return Workspace.all();
     },
   },
   methods: {
     saveWorkspace() {
-      this.$store.commit("workspace/set", JSON.parse(this.dataFieldValue));
+      const w = JSON.parse(this.dataFieldValue);
+      Workspace.add(w);
+      Workspace.setCurrent(w.domain);
       this.$store.commit("emoji/clear");
       this.dataFieldValue = "";
       alert("token saved");

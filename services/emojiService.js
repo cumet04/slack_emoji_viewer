@@ -1,4 +1,5 @@
 import axios from "axios";
+import Workspace from "~/services/workspace";
 
 async function getAllEmojis(workspace, maxCount) {
   const resp = await axios.post(
@@ -33,7 +34,7 @@ class EmojiService {
   }
 
   async fetchAll() {
-    const workspace = this._store.getters["workspace/current"];
+    const workspace = Workspace.current();
     if (!workspace) return;
     const raw = await getAllEmojis(workspace, this.maxCount);
     if (!raw) return;

@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import Workspace from "~/services/workspace";
+
 export default {
   data() {
     return {
@@ -37,17 +39,15 @@ export default {
   },
   computed: {
     current() {
-      return this.$store.getters["workspace/current"];
+      return Workspace.current();
     },
     list() {
-      return this.$store.getters["workspace/all"].filter(
-        (ws) => ws != this.current
-      );
+      return Workspace.all().filter((ws) => ws != this.current);
     },
   },
   methods: {
     select(domain) {
-      this.$store.commit("workspace/setCurrent", domain);
+      Workspace.setCurrent(domain);
     },
   },
 };
