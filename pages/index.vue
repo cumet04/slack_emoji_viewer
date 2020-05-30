@@ -61,20 +61,10 @@ export default {
   margin-bottom: 16px;
 
   & .reload {
-    /* reset */
-    border: none;
-    padding: 0;
-    background: none;
-    line-height: 1;
-
     cursor: pointer;
     width: 18px;
     height: 18px;
   }
-}
-
-main {
-  width: 720px;
 }
 
 .list {

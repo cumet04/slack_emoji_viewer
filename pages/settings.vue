@@ -18,7 +18,7 @@
     </section>
     <section class="section" id="add_workspace">
       <h1 class="title">Add/Update workspace</h1>
-      <ol>
+      <ol class="steps">
         <li class="step">
           <p>
             Go to
@@ -39,8 +39,13 @@
         <li class="step">
           <p>Copy output data, and paste it below</p>
           <div class="form-field">
-            <input type="text" v-model="dataFieldValue" placeholder="data" />
-            <button @click="saveWorkspace">set</button>
+            <input
+              type="text"
+              class="input"
+              v-model="dataFieldValue"
+              placeholder="data"
+            />
+            <button class="button" @click="saveWorkspace">set</button>
           </div>
         </li>
       </ol>
@@ -86,29 +91,42 @@ export default {
 
 <style scoped lang="postcss">
 .section {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+}
 
-  & .title {
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
+.steps {
+  counter-reset: step;
 }
 
 .step {
-  list-style: decimal;
+  position: relative;
   margin-left: 25px;
-  margin-bottom: 8px;
 
-  & > p {
-    margin-bottom: 4px;
+  &::before {
+    position: absolute;
+    left: -25px;
+    counter-increment: step;
+    content: counter(step) ".";
   }
 }
 
 .code {
-  width: 610px;
-  height: 28px;
+  width: 650px;
+  height: 36px;
   padding: 4px;
   resize: none;
+  font-family: monospace;
   background-color: #eee;
+}
+
+.input {
+  border: solid 1px gray;
+  padding: 0 4px;
+}
+
+.button {
+  background-color: lightgray;
+  border: solid 1px gray;
+  padding: 0 4px;
 }
 </style>

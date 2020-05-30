@@ -39,10 +39,6 @@ export default {
 </script>
 
 <style scoped lang="postcss">
-main {
-  width: 720px;
-}
-
 .section {
   margin-bottom: 12px;
 }

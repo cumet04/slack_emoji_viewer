@@ -74,11 +74,11 @@ export default {
 
     & .link {
       display: block;
-      padding: 6px 20px;
+      padding: 2px 20px;
 
-      /* reset */
-      color: inherit;
-      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
 
       &::before {
         content: "#";

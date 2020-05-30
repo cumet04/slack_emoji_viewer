@@ -17,11 +17,11 @@
           v-for="ws in list"
           :key="ws.domain"
         >
-          <img class="workspace_icon" :src="ws.icon.image_34" />
-          <div class="workspace_name">{{ ws.name }}</div>
+          <img class="icon" :src="ws.icon.image_34" />
+          <div class="name">{{ ws.name }}</div>
         </li>
       </ol>
-      <nuxt-link to="/settings#add_workspace" class="selector_item add">
+      <nuxt-link to="/settings#add_workspace" class="item add">
         <div class="add_text">add workspace...</div>
       </nuxt-link>
     </div>
@@ -81,10 +81,10 @@ export default {
 .workspace {
   display: flex;
   align-items: center;
-  height: 34px;
 
   & .icon {
     margin-right: 4px;
+    height: 34px;
   }
 
   & .name {
@@ -113,15 +113,11 @@ export default {
     &:hover {
       background: #eee;
     }
+
+    &.add {
+      display: block;
+      padding: 8px;
+    }
   }
-}
-
-.add {
-  display: block;
-  padding: 12px;
-
-  /* reset */
-  color: inherit;
-  text-decoration: none;
 }
 </style>

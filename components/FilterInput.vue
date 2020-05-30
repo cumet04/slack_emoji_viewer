@@ -28,7 +28,9 @@ export default {
 .input {
   display: block;
   width: 100%;
+  border: solid 1px lightgray;
   padding-left: 4px;
+  font-size: 1.4rem;
 }
 
 .clear {
@@ -40,7 +42,7 @@ export default {
 
   &::after {
     position: absolute;
-    top: 4px;
+    top: 0px;
     left: 6px;
     color: gray;
     content: "×";

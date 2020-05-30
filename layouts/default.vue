@@ -33,6 +33,7 @@ export default {
 }
 
 #main {
+  width: 768px;
   padding: 24px;
 }
 
