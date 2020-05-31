@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Workspaces from "~/services/workspace";
+import Workspaces from "~/services/workspaces";
 
 export default {
   data() {

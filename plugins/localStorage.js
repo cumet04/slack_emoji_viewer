@@ -1,5 +1,5 @@
 import createPersistedState from "vuex-persistedstate";
-import EmojiService from "~/services/emojiService";
+import Emojis from "~/services/emojis";
 
 export default ({ store }) => {
   window.onNuxtReady(() => {
@@ -19,7 +19,7 @@ export default ({ store }) => {
       key: "vuex-slack_emoji_viewer",
       paths: ["workspace"],
       rehydrated: (store) => {
-        new EmojiService(store).fetchAll();
+        Emojis.fetchAll();
       },
     })(store);
   });

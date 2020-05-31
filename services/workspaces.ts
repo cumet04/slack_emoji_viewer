@@ -1,9 +1,7 @@
-import EmojiService from "~/services/emojiService";
+import Emojis from "~/services/emojis";
+import StoreHelper from "~/services/storeHelper";
 
-const store = () => window.$nuxt.$store;
-const getter = (name: string) => store().getters[`workspace/${name}`];
-const commit = (name: string, payload: any) =>
-  store().commit(`workspace/${name}`, payload);
+const { getter, commit } = StoreHelper("workspace");
 
 export type Workspace = {
   name: string;
@@ -17,7 +15,7 @@ export default {
   current: () => getter("current") as Workspace,
   setCurrent(domain: string) {
     commit("setCurrent", domain);
-    new EmojiService(store()).fetchAll();
+    Emojis.fetchAll();
     return this.current();
   },
   add(w: Workspace) {

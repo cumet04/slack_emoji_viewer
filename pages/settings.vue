@@ -73,7 +73,6 @@ export default {
       },
       set(value) {
         Workspaces.setCurrent(value);
-        this.$store.commit("emoji/clear");
       },
     },
     workspaces() {
@@ -85,7 +84,6 @@ export default {
       const w = JSON.parse(this.dataFieldValue);
       Workspaces.add(w);
       Workspaces.setCurrent(w.domain);
-      this.$store.commit("emoji/clear");
       this.dataFieldValue = "";
       alert("token saved");
     },

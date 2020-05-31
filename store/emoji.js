@@ -29,7 +29,7 @@ export const getters = {
   byDate(_, getters) {
     return groupBy(getters.all, (emoji) => {
       // MEMO: This is local time; for UTC, setUTCHours
-      return new Date(emoji.created * 1000).setHours(0, 0, 0);
+      return emoji.created.setHours(0, 0, 0);
     });
   },
 };
