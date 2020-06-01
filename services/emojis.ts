@@ -87,4 +87,9 @@ export default {
   orderByDate: () => getter("orderByDate") as Emoji[],
   byAuthor: () => getter("byAuthor") as { [author: string]: Emoji[] },
   byDate: () => getter("byDate") as { [author: number]: Emoji[] },
+
+  allStock: () => getter("allStock") as Emoji[],
+  pushStock: (emoji: Emoji) => commit("pushStock", emoji),
+  popStock: (emoji: Emoji) => commit("popStock", emoji),
+  clearStock: () => commit("clearStock"),
 };

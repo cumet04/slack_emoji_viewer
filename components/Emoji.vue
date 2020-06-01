@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Emojis from "~/services/emojis";
+
 export default {
   props: ["emoji"],
   computed: {
@@ -20,7 +22,7 @@ export default {
   },
   methods: {
     select(event) {
-      this.$store.commit("stock/push", `:${this.emoji.name}:`);
+      Emojis.pushStock(this.emoji);
     },
   },
 };
