@@ -1,5 +1,6 @@
 export default {
   mode: "spa",
+  srcDir: "src",
   head: {
     title: process.env.npm_package_name || "",
     meta: [
