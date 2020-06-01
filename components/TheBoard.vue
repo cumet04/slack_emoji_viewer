@@ -2,7 +2,7 @@
   <div>
     <div class="board" :class="{ hidden: hidden }">
       <label for="clipboard">stock</label>
-      <input type="text" name="clipboard" class="input" />
+      <input type="text" name="clipboard" ref="input" class="input" />
       <button class="clear" @click="clear">
         <span class="cross_bar"></span>
         <span class="cross_bar"></span>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import Emojis from "~/services/emojis";
+
 export default {
   computed: {
     hidden() {
@@ -20,20 +22,20 @@ export default {
   },
   methods: {
     clear() {
-      this.$store.commit("stock/clear");
+      Emojis.clearStock();
     },
   },
   data() {
     return {
-      stock: this.$store.state.stock.all,
+      stock: Emojis.allStock(),
     };
   },
   watch: {
     stock(value) {
       // 確実にinput要素のvalueが変更したあとにselect -> execする必要があるため
       // v-bindなどは使わずにDOM操作でvalue変更を行う
-      const text = this.stock.join("");
-      const node = this.$el.getElementsByClassName("board_input")[0];
+      const text = this.stock.map((e) => `:${e.name}:`).join("");
+      const node = this.$refs.input;
       node.value = text;
 
       node.select();
@@ -66,6 +68,8 @@ export default {
 
 .input {
   flex-grow: 1;
+  background-color: white;
+  border: solid 1px lightgray;
 }
 
 .clear {

@@ -1,5 +1,6 @@
 export const state = () => ({
   all: [],
+  stock: [],
 });
 
 const groupBy = (source, getkey) =>
@@ -29,8 +30,11 @@ export const getters = {
   byDate(_, getters) {
     return groupBy(getters.all, (emoji) => {
       // MEMO: This is local time; for UTC, setUTCHours
-      return new Date(emoji.created * 1000).setHours(0, 0, 0);
+      return emoji.created.setHours(0, 0, 0);
     });
+  },
+  allStock(state) {
+    return state.stock;
   },
 };
 
@@ -38,7 +42,13 @@ export const mutations = {
   setAll(state, obj) {
     state.all = obj;
   },
-  clear(state) {
-    state.all = [];
+  pushStock(state, obj) {
+    state.stock.push(obj);
+  },
+  popStock(state, obj) {
+    state.stock.pop(obj);
+  },
+  clearStock(state) {
+    state.stock.splice(0, state.stock.length);
   },
 };
