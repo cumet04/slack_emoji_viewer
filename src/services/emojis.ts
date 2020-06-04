@@ -3,6 +3,7 @@ import { reactive } from "@vue/composition-api";
 import Workspaces from "~/services/workspaces";
 import { Workspace } from "~/services/workspaces";
 
+// FIXME: type
 // Call 'reactive' at first use, to load composition-api plugin in advance
 let _state: any;
 const state = () => {
