@@ -1,7 +1,7 @@
 import axios from "axios";
 import { reactive } from "@vue/composition-api";
-import Workspaces from "~/services/workspaces";
-import { Workspace } from "~/services/workspaces";
+import Workspaces from "~/store/workspaces";
+import { Workspace } from "~/store/workspaces";
 
 // FIXME: type
 // Call 'reactive' at first use, to load composition-api plugin in advance
