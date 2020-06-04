@@ -1,5 +1,5 @@
 import axios from "axios";
-import { reactive, computed } from "@vue/composition-api";
+import { reactive } from "@vue/composition-api";
 import Workspaces from "~/services/workspaces";
 import { Workspace } from "~/services/workspaces";
 
@@ -14,6 +14,7 @@ const state = () => {
   }
   return _state;
 };
+const allClone = () => Object.assign([], state().all) as Emoji[];
 
 // emoji.adminList response's type
 type SlackEmoji = {
@@ -97,25 +98,23 @@ export default {
         return mapped;
       });
 
-    state().all = emojis;
+    state().all.splice(0, state().all.length, ...emojis);
   },
-  all: () => Object.assign([], state().all) as Emoji[],
   orderByName() {
-    return this.all().sort((a, b) => {
+    return allClone().sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
   },
   orderByDate() {
-    return this.all().sort((a, b) => {
+    return allClone().sort((a, b) => {
       return a.created > b.created ? 1 : -1;
     });
   },
   byAuthor() {
-    const source = Object.assign([], this.orderByDate()) as Emoji[];
-    return groupBy(source, (emoji) => emoji.userName);
+    return groupBy(this.orderByDate(), (emoji) => emoji.userName);
   },
   byDate() {
-    return groupBy(this.all(), (emoji) => {
+    return groupBy(allClone(), (emoji) => {
       // MEMO: This is local time; for UTC, setUTCHours
       return emoji.created.setHours(0, 0, 0).toString();
     });

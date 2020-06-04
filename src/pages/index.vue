@@ -35,9 +35,7 @@ export default {
     };
   },
   computed: {
-    all() {
-      return Emojis.orderByName();
-    },
+    all: () => Emojis.orderByName(),
   },
   methods: {
     reloadEmojis() {
