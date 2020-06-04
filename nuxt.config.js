@@ -16,7 +16,10 @@ export default {
   },
   loading: { color: "#fff" },
   css: ["ress", "~/assets/css/base.css"],
-  plugins: [{ src: "~/plugins/localStorage.js", ssr: false }],
+  plugins: [
+    { src: "~/plugins/localStorage.js", ssr: false },
+    { src: "~/plugins/composition-api.ts" },
+  ],
   buildModules: ["@nuxt/typescript-build"],
   modules: ["@nuxtjs/axios"],
   axios: {},
