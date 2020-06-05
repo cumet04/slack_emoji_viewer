@@ -1,5 +1,4 @@
-import Vue from "vue";
-import Emojis from "../store/emojis";
+import { reactive } from "vue";
 
 export type Domain = string;
 export type Workspace = {
@@ -45,7 +44,6 @@ const state = () => {
       all: (all || {}) as { [k: string]: Workspace }, // [k: Domain]
       current: (current || "") as Domain,
     });
-    Emojis.fetchAll();
   }
   return _state;
 };
@@ -56,11 +54,10 @@ export default {
   setCurrent(domain: Domain) {
     state().current = domain;
     saveToStorage(state());
-    Emojis.fetchAll();
     return this.current();
   },
   add(w: Workspace) {
-    Vue.set(state().all, w.domain, w);
+    state().all[w.domain] = w;
     saveToStorage(state());
     return w;
   },

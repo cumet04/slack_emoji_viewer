@@ -15,9 +15,10 @@ export default {
   props: ["emoji"],
   computed: {
     display_name() {
-      return [this.emoji.name, ...this.emoji.aliases?.map((e) => e.name)]
-        .map((name) => `:${name}:`)
-        .join(" ");
+      const names = this.emoji.aliases
+        ? [this.emoji.name, ...this.emoji.aliases.map((e) => e.name)]
+        : [this.emoji.name];
+      return names.map((name) => `:${name}:`).join(" ");
     },
   },
   methods: {

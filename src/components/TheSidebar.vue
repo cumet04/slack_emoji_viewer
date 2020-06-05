@@ -10,9 +10,9 @@
         class="item"
         :class="currentClass(menu.url)"
       >
-        <nuxt-link :to="menu.url" class="link">
+        <router-link :to="menu.url" class="link">
           {{ menu.name }}
-        </nuxt-link>
+        </router-link>
       </li>
     </ol>
     <footer class="footer">

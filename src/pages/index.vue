@@ -42,7 +42,9 @@ export default {
       Emojis.fetchAll();
     },
     isMatched(emoji) {
-      const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+      const names = emoji.aliases
+        ? [emoji.name, ...emoji.aliases.map((e) => e.name)]
+        : [emoji.name];
       return names.some((name) => name.includes(this.keyword));
     },
   },

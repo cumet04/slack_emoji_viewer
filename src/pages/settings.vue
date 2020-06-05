@@ -55,6 +55,7 @@
 
 <script>
 import Workspaces from "../store/workspaces";
+import Emojis from "../store/emojis";
 
 export default {
   data() {
@@ -73,6 +74,7 @@ export default {
       },
       set(value) {
         Workspaces.setCurrent(value);
+        Emojis.fetchAll();
       },
     },
     workspaces() {
@@ -84,6 +86,7 @@ export default {
       const w = JSON.parse(this.dataFieldValue);
       Workspaces.add(w);
       Workspaces.setCurrent(w.domain);
+      Emojis.fetchAll();
       this.dataFieldValue = "";
       alert("token saved");
     },

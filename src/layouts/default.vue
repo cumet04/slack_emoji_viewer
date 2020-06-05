@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <the-sidebar id="nav" />
-    <nuxt id="main" />
+    <router-view id="main" />
     <the-board id="board" />
   </div>
 </template>

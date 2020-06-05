@@ -21,15 +21,16 @@
           <div class="name">{{ ws.name }}</div>
         </li>
       </ol>
-      <nuxt-link to="/settings#add_workspace" class="item add">
+      <router-link to="/settings#add_workspace" class="item add">
         <div class="add_text">add workspace...</div>
-      </nuxt-link>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 import Workspaces from "../store/workspaces";
+import Emojis from "../store/emojis";
 
 export default {
   data() {
@@ -48,6 +49,7 @@ export default {
   methods: {
     select(domain) {
       Workspaces.setCurrent(domain);
+      Emojis.fetchAll();
     },
   },
 };

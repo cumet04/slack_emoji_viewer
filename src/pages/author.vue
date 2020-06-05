@@ -3,7 +3,7 @@
     <div class="toolbar">
       <filter-input v-model="keyword" class="filter"></filter-input>
       <button class="reload" @click="reloadEmojis">
-        <img src="~/assets/images/ico-reload.svg" alt="" />
+        <img src="/src/assets/images/ico-reload.svg" alt="" />
       </button>
     </div>
     <section v-for="(emojis, author) in byAuthor" :key="author" class="user">
@@ -41,7 +41,9 @@ export default {
       const all = Emojis.byAuthor();
       for (let user in all) {
         const userEmojis = all[user].filter((e) => {
-          const names = [e.name, ...e.aliases?.map((e) => e.name)];
+          const names = e.aliases
+            ? [e.name, ...e.aliases.map((e) => e.name)]
+            : [e.name];
           return names.some((name) => name.includes(this.keyword));
         });
         if (userEmojis.length > 0) filtered[user] = userEmojis;
