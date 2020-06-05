@@ -15,6 +15,10 @@ export default {
     "the-sidebar": TheSidebar,
     "the-board": TheBoard,
   },
+  mounted() {
+    const { domain, token } = this.$store.workspace.current();
+    this.$store.emoji.fetchAll(domain, token);
+  },
 };
 </script>
 

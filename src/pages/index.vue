@@ -22,7 +22,6 @@
 <script>
 import Emoji from "../components/Emoji.vue";
 import FilterInput from "../components/FilterInput.vue";
-import Emojis from "../store/emojis";
 
 export default {
   components: {
@@ -35,11 +34,14 @@ export default {
     };
   },
   computed: {
-    all: () => Emojis.orderByName(),
+    all() {
+      return this.$store.emoji.orderByName();
+    },
   },
   methods: {
     reloadEmojis() {
-      Emojis.fetchAll();
+      const { domain, token } = this.$store.workspace.current();
+      this.$store.emoji.fetchAll(domain, token);
     },
     isMatched(emoji) {
       const names = emoji.aliases

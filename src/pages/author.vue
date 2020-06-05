@@ -22,7 +22,6 @@
 import UserWrapper from "../components/UserWrapper.vue";
 import FilterInput from "../components/FilterInput.vue";
 import Emoji from "../components/Emoji.vue";
-import Emojis from "../store/emojis";
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
   computed: {
     byAuthor() {
       const filtered = {};
-      const all = Emojis.byAuthor();
+      const all = this.$store.emoji.byAuthor();
       for (let user in all) {
         const userEmojis = all[user].filter((e) => {
           const names = e.aliases
@@ -53,7 +52,8 @@ export default {
   },
   methods: {
     reloadEmojis() {
-      Emojis.fetchAll();
+      const { domain, token } = this.$store.workspace.current();
+      this.$store.emoji.fetchAll(domain, token);
     },
   },
 };

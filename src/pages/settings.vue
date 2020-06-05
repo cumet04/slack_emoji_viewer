@@ -54,9 +54,6 @@
 </template>
 
 <script>
-import Workspaces from "../store/workspaces";
-import Emojis from "../store/emojis";
-
 export default {
   data() {
     return {
@@ -70,23 +67,26 @@ export default {
   computed: {
     selected: {
       get() {
-        return Workspaces.current()?.domain;
+        const c = this.$store.workspace.current();
+        return c ? c.domain : null;
       },
       set(value) {
-        Workspaces.setCurrent(value);
-        Emojis.fetchAll();
+        this.$store.workspace.setCurrent(value);
+        const { domain, token } = this.$store.workspace.current();
+        this.$store.emoji.fetchAll(domain, token);
       },
     },
     workspaces() {
-      return Workspaces.all();
+      return this.$store.workspace.all();
     },
   },
   methods: {
     saveWorkspace() {
       const w = JSON.parse(this.dataFieldValue);
-      Workspaces.add(w);
-      Workspaces.setCurrent(w.domain);
-      Emojis.fetchAll();
+      this.$store.workspace.add(w);
+      this.$store.workspace.setCurrent(w.domain);
+      const { domain, token } = w;
+      this.$store.emoji.fetchAll(domain, token);
       this.dataFieldValue = "";
       alert("token saved");
     },

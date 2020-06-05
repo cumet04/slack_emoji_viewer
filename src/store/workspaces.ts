@@ -8,6 +8,11 @@ export type Workspace = {
   token: string;
 };
 
+export type WorkspaceState = {
+  all: { [k: string]: Workspace }; // [k: Domain]
+  current: Domain;
+};
+
 const storageKey = "vuex-slack_emoji_viewer";
 function loadFromStorage() {
   const rawStr = localStorage.getItem(storageKey);
@@ -27,7 +32,7 @@ function loadFromStorage() {
   return raw;
 }
 
-function saveToStorage(value: any) {
+function saveToStorage(value: WorkspaceState) {
   localStorage.setItem(
     storageKey,
     JSON.stringify({
@@ -36,29 +41,25 @@ function saveToStorage(value: any) {
   );
 }
 
-let _state: any;
-const state = () => {
-  if (!_state) {
-    const { all, current } = loadFromStorage();
-    _state = reactive({
-      all: (all || {}) as { [k: string]: Workspace }, // [k: Domain]
-      current: (current || "") as Domain,
-    });
-  }
-  return _state;
-};
-
-export default {
-  all: () => Object.values(state().all) as Workspace[],
-  current: () => state().all[state().current] as Workspace,
-  setCurrent(domain: Domain) {
-    state().current = domain;
-    saveToStorage(state());
-    return this.current();
-  },
-  add(w: Workspace) {
-    state().all[w.domain] = w;
-    saveToStorage(state());
-    return w;
-  },
-};
+export function createWorkspaceStore() {
+  const { all, current } = loadFromStorage();
+  const state: WorkspaceState = reactive({
+    all: all || {},
+    current: current || "",
+  });
+  return {
+    state,
+    all: () => Object.values(state.all),
+    current: () => state.all[state.current],
+    setCurrent(domain: Domain) {
+      state.current = domain;
+      saveToStorage(state);
+      return this.current();
+    },
+    add(w: Workspace) {
+      state.all[w.domain] = w;
+      saveToStorage(state);
+      return w;
+    },
+  };
+}

@@ -13,7 +13,6 @@
 
 <script>
 import Emoji from "../components/Emoji.vue";
-import Emojis from "../store/emojis";
 
 export default {
   components: {
@@ -21,7 +20,7 @@ export default {
   },
   computed: {
     byDate() {
-      const map = Emojis.byDate();
+      const map = this.$store.emoji.byDate();
       return Object.keys(map)
         .sort()
         .reverse()

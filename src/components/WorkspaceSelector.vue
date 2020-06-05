@@ -29,9 +29,6 @@
 </template>
 
 <script>
-import Workspaces from "../store/workspaces";
-import Emojis from "../store/emojis";
-
 export default {
   data() {
     return {
@@ -40,16 +37,17 @@ export default {
   },
   computed: {
     current() {
-      return Workspaces.current();
+      return this.$store.workspace.current();
     },
     list() {
-      return Workspaces.all().filter((ws) => ws != this.current);
+      return this.$store.workspace.all().filter((ws) => ws != this.current);
     },
   },
   methods: {
     select(domain) {
-      Workspaces.setCurrent(domain);
-      Emojis.fetchAll();
+      this.$store.workspace.setCurrent(domain);
+      const { token } = this.$store.workspace.current();
+      this.$store.emoji.fetchAll(domain, token);
     },
   },
 };

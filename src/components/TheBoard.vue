@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import Emojis from "../store/emojis";
-
 export default {
   computed: {
     hidden() {
@@ -22,12 +20,12 @@ export default {
   },
   methods: {
     clear() {
-      Emojis.clearStock();
+      this.$store.emoji.clearStock();
     },
   },
   data() {
     return {
-      stock: Emojis.allStock(),
+      stock: this.$store.emoji.allStock(),
     };
   },
   watch: {
