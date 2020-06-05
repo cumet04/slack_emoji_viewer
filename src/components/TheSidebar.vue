@@ -21,14 +21,14 @@
         target="_blank"
         class="github_link"
       >
-        <img src="~/assets/images/ico-github.png" alt="" class="icon" />
+        <img src="/src/assets/images/ico-github.png" alt="" class="icon" />
       </a>
     </footer>
   </aside>
 </template>
 
 <script>
-import WorkspaceSelector from "~/components/WorkspaceSelector.vue";
+import WorkspaceSelector from "../components/WorkspaceSelector.vue";
 
 export default {
   components: {
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     currentClass(path) {
-      return $nuxt.$route.path == path ? "current" : "";
+      return this.$route.path == path ? "current" : "";
     },
   },
 };

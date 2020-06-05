@@ -3,7 +3,7 @@
     <div class="toolbar">
       <filter-input v-model="keyword" class="filter"></filter-input>
       <button class="reload" @click="reloadEmojis">
-        <img src="~/assets/images/ico-reload.svg" alt="" />
+        <img src="/src/assets/images/ico-reload.svg" alt="" />
       </button>
     </div>
     <ul class="list">
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import Emoji from "~/components/Emoji.vue";
-import FilterInput from "~/components/FilterInput.vue";
-import Emojis from "~/store/emojis";
+import Emoji from "../components/Emoji.vue";
+import FilterInput from "../components/FilterInput.vue";
+import Emojis from "../store/emojis";
 
 export default {
   components: {

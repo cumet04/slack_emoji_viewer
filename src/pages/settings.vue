@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Workspaces from "~/store/workspaces";
+import Workspaces from "../store/workspaces";
 
 export default {
   data() {

@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import UserWrapper from "~/components/UserWrapper.vue";
-import FilterInput from "~/components/FilterInput.vue";
-import Emoji from "~/components/Emoji.vue";
-import Emojis from "~/store/emojis";
+import UserWrapper from "../components/UserWrapper.vue";
+import FilterInput from "../components/FilterInput.vue";
+import Emoji from "../components/Emoji.vue";
+import Emojis from "../store/emojis";
 
 export default {
   components: {

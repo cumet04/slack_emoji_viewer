@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import TheSidebar from "~/components/TheSidebar.vue";
-import TheBoard from "~/components/TheBoard.vue";
+import TheSidebar from "../components/TheSidebar.vue";
+import TheBoard from "../components/TheBoard.vue";
 
 export default {
   components: {

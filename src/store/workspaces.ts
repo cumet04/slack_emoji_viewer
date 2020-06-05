@@ -1,6 +1,5 @@
 import Vue from "vue";
-import Emojis from "~/store/emojis";
-import { reactive, watch } from "@vue/composition-api";
+import Emojis from "../store/emojis";
 
 export type Domain = string;
 export type Workspace = {

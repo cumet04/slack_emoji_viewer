@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Emojis from "~/store/emojis";
+import Emojis from "../store/emojis";
 
 export default {
   props: ["emoji"],
