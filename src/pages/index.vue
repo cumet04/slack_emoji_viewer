@@ -22,7 +22,7 @@
 <script>
 import Emoji from "~/components/Emoji.vue";
 import FilterInput from "~/components/FilterInput.vue";
-import Emojis from "~/services/emojis";
+import Emojis from "~/store/emojis";
 
 export default {
   components: {
@@ -35,9 +35,7 @@ export default {
     };
   },
   computed: {
-    all() {
-      return Emojis.orderByName();
-    },
+    all: () => Emojis.orderByName(),
   },
   methods: {
     reloadEmojis() {

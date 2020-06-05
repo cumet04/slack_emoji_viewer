@@ -1,9 +1,21 @@
 import axios from "axios";
-import Workspaces from "~/services/workspaces";
-import { Workspace } from "~/services/workspaces";
-import StoreHelper from "~/services/storeHelper";
+import { reactive } from "@vue/composition-api";
+import Workspaces from "~/store/workspaces";
+import { Workspace } from "~/store/workspaces";
 
-const { getter, commit } = StoreHelper("emoji");
+// FIXME: type
+// Call 'reactive' at first use, to load composition-api plugin in advance
+let _state: any;
+const state = () => {
+  if (!_state) {
+    _state = reactive({
+      all: [] as Emoji[],
+      stock: [] as Emoji[],
+    });
+  }
+  return _state;
+};
+const allClone = () => Object.assign([], state().all) as Emoji[];
 
 // emoji.adminList response's type
 type SlackEmoji = {
@@ -55,6 +67,13 @@ function mapApiDataToModel(data: SlackEmoji): Emoji {
   };
 }
 
+const groupBy = (source: Emoji[], getkey: (a: Emoji) => string) =>
+  source.reduce((map, item) => {
+    const key = getkey(item);
+    (map[key] || (map[key] = [])).push(item);
+    return map;
+  }, {} as { [k: string]: Emoji[] });
+
 export default {
   async fetchAll() {
     const workspace = Workspaces.current();
@@ -80,16 +99,30 @@ export default {
         return mapped;
       });
 
-    commit("setAll", emojis);
+    state().all.splice(0, state().all.length, ...emojis);
   },
-  all: () => getter("all") as Emoji[],
-  orderByName: () => getter("orderByName") as Emoji[],
-  orderByDate: () => getter("orderByDate") as Emoji[],
-  byAuthor: () => getter("byAuthor") as { [author: string]: Emoji[] },
-  byDate: () => getter("byDate") as { [author: number]: Emoji[] },
-
-  allStock: () => getter("allStock") as Emoji[],
-  pushStock: (emoji: Emoji) => commit("pushStock", emoji),
-  popStock: (emoji: Emoji) => commit("popStock", emoji),
-  clearStock: () => commit("clearStock"),
+  orderByName() {
+    return allClone().sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+  },
+  orderByDate() {
+    return allClone().sort((a, b) => {
+      return a.created > b.created ? 1 : -1;
+    });
+  },
+  byAuthor() {
+    return groupBy(this.orderByDate(), (emoji) => emoji.userName);
+  },
+  byDate() {
+    return groupBy(allClone(), (emoji) => {
+      // MEMO: This is local time; for UTC, setUTCHours
+      return emoji.created.setHours(0, 0, 0).toString();
+    });
+  },
+  allStock() {
+    return state().stock;
+  },
+  pushStock: (emoji: Emoji) => state().stock.push(emoji),
+  clearStock: () => state().stock.splice(0, state().stock.length),
 };

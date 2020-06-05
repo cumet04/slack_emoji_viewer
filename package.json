@@ -11,13 +11,13 @@
   "dependencies": {
     "@nuxt/typescript-build": "^1.0.1",
     "@nuxtjs/axios": "^5.10.3",
+    "@vue/composition-api": "^0.5.0",
     "chalk": "^4.0.0",
     "nuxt": "^2.12.2",
     "postcss-loader": "^3.0.0",
     "postcss-nesting": "^7.0.1",
     "ress": "^2.0.4",
-    "typescript": "~3.8",
-    "vuex-persistedstate": "^3.0.1"
+    "typescript": "~3.8"
   },
   "devDependencies": {
     "prettier": "^2.0.5"
