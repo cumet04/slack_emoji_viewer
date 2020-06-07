@@ -5,8 +5,8 @@
   "author": "cumet04",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "vite -c vite.config.ts",
+    "build": "vite build -c vite.config.ts"
   },
   "postcss": {
     "plugins": {
