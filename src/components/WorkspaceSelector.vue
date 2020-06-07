@@ -41,7 +41,7 @@ export default defineComponent({
     );
     const select = (domain: string) => {
       store.workspace.setCurrent(domain);
-      const { token } = store.workspace.current();
+      const token = current.value?.token as string; // value exists after setCurrent
       store.emoji.fetchAll(domain, token);
     };
     return {

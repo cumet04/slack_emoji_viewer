@@ -19,8 +19,8 @@ export default defineComponent({
   },
   setup() {
     const store = fetchStore();
-    const { domain, token } = store.workspace.current();
-    store.emoji.fetchAll(domain, token);
+    const w = store.workspace.current();
+    if (w) store.emoji.fetchAll(w.domain, w.token);
     return {};
   },
 });

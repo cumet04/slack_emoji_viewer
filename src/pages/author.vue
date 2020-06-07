@@ -49,8 +49,8 @@ export default defineComponent({
       return filtered;
     });
     const reloadEmojis = () => {
-      const { domain, token } = store.workspace.current();
-      store.emoji.fetchAll(domain, token);
+      const w = store.workspace.current();
+      if (w) store.emoji.fetchAll(w.domain, w.token);
     };
 
     return {

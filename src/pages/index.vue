@@ -37,8 +37,8 @@ export default defineComponent({
     const keyword = ref("");
     const all = computed(() => store.emoji.orderByName());
     const reloadEmojis = () => {
-      const { domain, token } = store.workspace.current();
-      store.emoji.fetchAll(domain, token);
+      const w = store.workspace.current();
+      if (w) store.emoji.fetchAll(w.domain, w.token);
     };
     const isMatched = (emoji: Emoji) => {
       const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];

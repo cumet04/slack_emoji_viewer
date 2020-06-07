@@ -64,14 +64,14 @@ export default defineComponent({
     const dataFieldValue = ref("");
     const selected = computed({
       get() {
-        const c = store.workspace.current();
-        return c ? c.domain : null;
+        const w = store.workspace.current();
+        return w ? w.domain : null;
       },
       set(value: string | null) {
         if (value === null) return;
         store.workspace.setCurrent(value);
-        const { domain, token } = store.workspace.current();
-        store.emoji.fetchAll(domain, token);
+        const w = store.workspace.current();
+        if (w) store.emoji.fetchAll(w.domain, w.token);
       },
     });
     const workspaces = computed(() => store.workspace.all());

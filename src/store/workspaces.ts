@@ -50,7 +50,7 @@ export function createWorkspaceStore() {
   return {
     state,
     all: () => Object.values(state.all),
-    current: () => state.all[state.current],
+    current: (): Workspace | undefined => state.all[state.current],
     setCurrent(domain: Domain) {
       state.current = domain;
       saveToStorage(state);
