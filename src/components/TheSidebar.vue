@@ -10,9 +10,9 @@
         class="item"
         :class="currentClass(menu.url)"
       >
-        <router-link :to="menu.url" class="link">
+        <nuxt-link :to="menu.url" class="link">
           {{ menu.name }}
-        </router-link>
+        </nuxt-link>
       </li>
     </ol>
     <footer class="footer">
@@ -21,22 +21,20 @@
         target="_blank"
         class="github_link"
       >
-        <img src="/src/assets/images/ico-github.png" alt="" class="icon" />
+        <img src="~/assets/images/ico-github.png" alt="" class="icon" />
       </a>
     </footer>
   </aside>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { useRoute } from "vue-router";
-import WorkspaceSelectorComponent from "../components/WorkspaceSelector.vue";
+<script>
+import WorkspaceSelector from "~/components/WorkspaceSelector.vue";
 
-export default defineComponent({
+export default {
   components: {
-    "workspace-selector": WorkspaceSelectorComponent,
+    "workspace-selector": WorkspaceSelector,
   },
-  setup() {
+  data() {
     return {
       menus: [
         { name: "index", url: "/" },
@@ -44,12 +42,14 @@ export default defineComponent({
         { name: "by author", url: "/author" },
         { name: "settings", url: "/settings" },
       ],
-      currentClass(path: string) {
-        return useRoute().path == path ? "current" : "";
-      },
     };
   },
-});
+  methods: {
+    currentClass(path) {
+      return $nuxt.$route.path == path ? "current" : "";
+    },
+  },
+};
 </script>
 
 <style scoped lang="postcss">

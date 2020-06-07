@@ -11,38 +11,32 @@
   </main>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { fetchStore } from "../store";
-import EmojiComponent from "../components/Emoji.vue";
+<script>
+import Emoji from "~/components/Emoji.vue";
+import Emojis from "~/store/emojis";
 
-export default defineComponent({
+export default {
   components: {
-    emoji: EmojiComponent,
+    emoji: Emoji,
   },
-  setup() {
-    const store = fetchStore();
-
-    const formatDate = (source: number) => {
-      const date = new Date(source);
-      return date.toLocaleDateString();
-    };
-    const byDate = computed(() => {
-      const map = store.emoji.byDate();
+  computed: {
+    byDate() {
+      const map = Emojis.byDate();
       return Object.keys(map)
         .sort()
         .reverse()
         .map((date) => {
-          return { date: formatDate(parseInt(date)), emojis: map[date] };
+          return { date: this.formatDate(parseInt(date)), emojis: map[date] };
         });
-    });
-
-    return {
-      formatDate,
-      byDate,
-    };
+    },
   },
-});
+  methods: {
+    formatDate(source) {
+      const date = new Date(source);
+      return date.toLocaleDateString();
+    },
+  },
+};
 </script>
 
 <style scoped lang="postcss">

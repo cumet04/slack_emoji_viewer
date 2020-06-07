@@ -11,49 +11,39 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  computed,
-  defineComponent,
-  SetupContext,
-  inject,
-  PropType,
-  ref,
-  watch,
-} from "vue";
-import { fetchStore } from "../store";
+<script>
+import Emojis from "~/store/emojis";
 
-export default defineComponent({
-  setup(_, context: SetupContext) {
-    const store = fetchStore();
-
-    const input = ref({} as HTMLInputElement);
-    const stock = computed(() => store.emoji.allStock());
-    const hidden = computed(() => stock.value.length == 0);
-    const clear = () => store.emoji.clearStock();
-
-    watch(
-      () => stock,
-      () => {
-        // 確実にinput要素のvalueが変更したあとにselect -> execする必要があるため
-        // v-bindなどは使わずにDOM操作でvalue変更を行う
-        const text = stock.value.map((e) => `:${e.name}:`).join("");
-        const node = input.value;
-        node.value = text;
-
-        node.select();
-        document.execCommand("copy");
-        node.blur();
-      }
-    );
+export default {
+  computed: {
+    hidden() {
+      return this.stock.length == 0;
+    },
+  },
+  methods: {
+    clear() {
+      Emojis.clearStock();
+    },
+  },
+  data() {
     return {
-      input,
-      stock,
-      hidden,
-      clear,
+      stock: Emojis.allStock(),
     };
   },
-});
+  watch: {
+    stock(value) {
+      // 確実にinput要素のvalueが変更したあとにselect -> execする必要があるため
+      // v-bindなどは使わずにDOM操作でvalue変更を行う
+      const text = this.stock.map((e) => `:${e.name}:`).join("");
+      const node = this.$refs.input;
+      node.value = text;
+
+      node.select();
+      document.execCommand("copy");
+      node.blur();
+    },
+  },
+};
 </script>
 
 <style scoped lang="postcss">
