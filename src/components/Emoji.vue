@@ -2,6 +2,8 @@
   <img
     :src="emoji.image"
     :title="displayName"
+    width="32"
+    height="32"
     @click="select"
     loading="lazy"
     class="img"
