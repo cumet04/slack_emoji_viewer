@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { fetchStore } from "../store";
 
 export default defineComponent({

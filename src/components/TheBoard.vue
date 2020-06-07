@@ -12,19 +12,11 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  SetupContext,
-  inject,
-  PropType,
-  ref,
-  watch,
-} from "vue";
+import { computed, defineComponent, SetupContext, ref, watch } from "vue";
 import { fetchStore } from "../store";
 
 export default defineComponent({
-  setup(_, context: SetupContext) {
+  setup() {
     const store = fetchStore();
 
     const input = ref({} as HTMLInputElement);

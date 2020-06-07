@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import WorkspaceSelectorComponent from "../components/WorkspaceSelector.vue";
 

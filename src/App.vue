@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType } from "vue";
+import { defineComponent } from "vue";
 import { fetchStore } from "./store";
 import TheSidebarComponent from "./components/TheSidebar.vue";
 import TheBoardComponent from "./components/TheBoard.vue";
