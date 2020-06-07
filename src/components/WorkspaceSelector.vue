@@ -21,37 +21,36 @@
           <div class="name">{{ ws.name }}</div>
         </li>
       </ol>
-      <router-link to="/settings#add_workspace" class="item add">
+      <nuxt-link to="/settings#add_workspace" class="item add">
         <div class="add_text">add workspace...</div>
-      </router-link>
+      </nuxt-link>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, inject, PropType, ref } from "vue";
-import { fetchStore } from "../store";
+<script>
+import Workspaces from "~/store/workspaces";
 
-export default defineComponent({
-  setup() {
-    const store = fetchStore();
-    const current = computed(() => store.workspace.current());
-    const list = computed(() =>
-      store.workspace.all().filter((ws) => ws != current.value)
-    );
-    const select = (domain: string) => {
-      store.workspace.setCurrent(domain);
-      const { token } = store.workspace.current();
-      store.emoji.fetchAll(domain, token);
-    };
+export default {
+  data() {
     return {
-      open: ref(false),
-      current,
-      list,
-      select,
+      open: false,
     };
   },
-});
+  computed: {
+    current() {
+      return Workspaces.current();
+    },
+    list() {
+      return Workspaces.all().filter((ws) => ws != this.current);
+    },
+  },
+  methods: {
+    select(domain) {
+      Workspaces.setCurrent(domain);
+    },
+  },
+};
 </script>
 
 <style scoped lang="postcss">
