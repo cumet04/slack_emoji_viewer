@@ -92,7 +92,7 @@ export function createEmojiStore() {
           return mapped;
         });
 
-      state.all.splice(0, state.all.length, ...emojis);
+      state.all = emojis;
     },
     orderByName() {
       return allClone().sort((a, b) => {
