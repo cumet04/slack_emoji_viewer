@@ -18,45 +18,48 @@
   </main>
 </template>
 
-<script>
-import UserWrapper from "../components/UserWrapper.vue";
-import FilterInput from "../components/FilterInput.vue";
-import Emoji from "../components/Emoji.vue";
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { fetchStore } from "../store";
+import { Emoji } from "../store/emojis";
+import UserWrapperComponent from "../components/UserWrapper.vue";
+import EmojiComponent from "../components/Emoji.vue";
+import FilterInputComponent from "../components/FilterInput.vue";
 
-export default {
+export default defineComponent({
   components: {
-    "user-wrapper": UserWrapper,
-    "filter-input": FilterInput,
-    emoji: Emoji,
+    emoji: EmojiComponent,
+    "filter-input": FilterInputComponent,
+    "user-wrapper": UserWrapperComponent,
   },
-  data() {
-    return {
-      keyword: "",
-    };
-  },
-  computed: {
-    byAuthor() {
-      const filtered = {};
-      const all = this.$store.emoji.byAuthor();
+  setup() {
+    const store = fetchStore();
+
+    const keyword = ref("");
+    const byAuthor = computed(() => {
+      const filtered = {} as { [k: string]: Emoji[] };
+      const all = store.emoji.byAuthor();
       for (let user in all) {
         const userEmojis = all[user].filter((e) => {
-          const names = e.aliases
-            ? [e.name, ...e.aliases.map((e) => e.name)]
-            : [e.name];
-          return names.some((name) => name.includes(this.keyword));
+          const names = [e.name, ...e.aliases?.map((e) => e.name)];
+          return names.some((name) => name.includes(keyword.value));
         });
         if (userEmojis.length > 0) filtered[user] = userEmojis;
       }
       return filtered;
-    },
+    });
+    const reloadEmojis = () => {
+      const { domain, token } = store.workspace.current();
+      store.emoji.fetchAll(domain, token);
+    };
+
+    return {
+      keyword,
+      byAuthor,
+      reloadEmojis,
+    };
   },
-  methods: {
-    reloadEmojis() {
-      const { domain, token } = this.$store.workspace.current();
-      this.$store.emoji.fetchAll(domain, token);
-    },
-  },
-};
+});
 </script>
 
 <style scoped lang="postcss">

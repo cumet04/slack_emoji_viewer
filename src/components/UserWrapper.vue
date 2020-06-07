@@ -10,10 +10,23 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ["emoji"],
+<script lang="ts">
+import { defineComponent, PropType } from "vue";
+import { Emoji } from "../store/emojis";
+
+type Props = {
+  emoji: Emoji;
 };
+
+export default defineComponent({
+  props: {
+    emoji: {
+      type: Object as PropType<Emoji>,
+      required: true,
+    },
+  },
+  setup() {},
+});
 </script>
 
 <style scoped lang="postcss">

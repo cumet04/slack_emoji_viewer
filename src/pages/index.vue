@@ -19,38 +19,39 @@
   </main>
 </template>
 
-<script>
-import Emoji from "../components/Emoji.vue";
-import FilterInput from "../components/FilterInput.vue";
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { fetchStore } from "../store";
+import { Emoji } from "../store/emojis";
+import EmojiComponent from "../components/Emoji.vue";
+import FilterInputComponent from "../components/FilterInput.vue";
 
-export default {
+export default defineComponent({
   components: {
-    emoji: Emoji,
-    "filter-input": FilterInput,
+    emoji: EmojiComponent,
+    "filter-input": FilterInputComponent,
   },
-  data() {
+  setup() {
+    const store = fetchStore();
+
+    const keyword = ref("");
+    const all = computed(() => store.emoji.orderByName());
+    const reloadEmojis = () => {
+      const { domain, token } = store.workspace.current();
+      store.emoji.fetchAll(domain, token);
+    };
+    const isMatched = (emoji: Emoji) => {
+      const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+      return names.some((name) => name.includes(keyword.value));
+    };
     return {
-      keyword: "",
+      keyword,
+      all,
+      reloadEmojis,
+      isMatched,
     };
   },
-  computed: {
-    all() {
-      return this.$store.emoji.orderByName();
-    },
-  },
-  methods: {
-    reloadEmojis() {
-      const { domain, token } = this.$store.workspace.current();
-      this.$store.emoji.fetchAll(domain, token);
-    },
-    isMatched(emoji) {
-      const names = emoji.aliases
-        ? [emoji.name, ...emoji.aliases.map((e) => e.name)]
-        : [emoji.name];
-      return names.some((name) => name.includes(this.keyword));
-    },
-  },
-};
+});
 </script>
 
 <style scoped lang="postcss">

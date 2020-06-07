@@ -28,29 +28,30 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import { computed, defineComponent, inject, PropType, ref } from "vue";
+import { fetchStore } from "../store";
+
+export default defineComponent({
+  setup() {
+    const store = fetchStore();
+    const current = computed(() => store.workspace.current());
+    const list = computed(() =>
+      store.workspace.all().filter((ws) => ws != current.value)
+    );
+    const select = (domain: string) => {
+      store.workspace.setCurrent(domain);
+      const { token } = store.workspace.current();
+      store.emoji.fetchAll(domain, token);
+    };
     return {
-      open: false,
+      open: ref(false),
+      current,
+      list,
+      select,
     };
   },
-  computed: {
-    current() {
-      return this.$store.workspace.current();
-    },
-    list() {
-      return this.$store.workspace.all().filter((ws) => ws != this.current);
-    },
-  },
-  methods: {
-    select(domain) {
-      this.$store.workspace.setCurrent(domain);
-      const { token } = this.$store.workspace.current();
-      this.$store.emoji.fetchAll(domain, token);
-    },
-  },
-};
+});
 </script>
 
 <style scoped lang="postcss">

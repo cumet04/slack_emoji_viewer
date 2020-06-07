@@ -27,14 +27,16 @@
   </aside>
 </template>
 
-<script>
-import WorkspaceSelector from "../components/WorkspaceSelector.vue";
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { useRoute } from "vue-router";
+import WorkspaceSelectorComponent from "../components/WorkspaceSelector.vue";
 
-export default {
+export default defineComponent({
   components: {
-    "workspace-selector": WorkspaceSelector,
+    "workspace-selector": WorkspaceSelectorComponent,
   },
-  data() {
+  setup() {
     return {
       menus: [
         { name: "index", url: "/" },
@@ -42,14 +44,12 @@ export default {
         { name: "by author", url: "/author" },
         { name: "settings", url: "/settings" },
       ],
+      currentClass(path: string) {
+        return useRoute().path == path ? "current" : "";
+      },
     };
   },
-  methods: {
-    currentClass(path) {
-      return this.$route.path == path ? "current" : "";
-    },
-  },
-};
+});
 </script>
 
 <style scoped lang="postcss">

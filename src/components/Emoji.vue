@@ -1,30 +1,44 @@
 <template>
   <img
     :src="emoji.image"
-    :title="display_name"
+    :title="displayName"
     @click="select"
     loading="lazy"
     class="img"
   />
 </template>
 
-<script>
-export default {
-  props: ["emoji"],
-  computed: {
-    display_name() {
-      const names = this.emoji.aliases
-        ? [this.emoji.name, ...this.emoji.aliases.map((e) => e.name)]
-        : [this.emoji.name];
-      return names.map((name) => `:${name}:`).join(" ");
-    },
-  },
-  methods: {
-    select(event) {
-      this.$store.emoji.pushStock(this.emoji);
-    },
-  },
+<script lang="ts">
+import { computed, defineComponent, PropType } from "vue";
+import { Emoji } from "../store/emojis";
+import { fetchStore } from "../store";
+
+type Props = {
+  emoji: Emoji;
 };
+
+export default defineComponent({
+  props: {
+    emoji: {
+      type: Object as PropType<Emoji>,
+      required: true,
+    },
+  },
+  setup(props: Props) {
+    const store = fetchStore();
+    const emoji = props.emoji;
+    return {
+      emoji,
+      displayName: computed(() => {
+        const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+        return names.map((name) => `:${name}:`).join(" ");
+      }),
+      select() {
+        store.emoji.pushStock(emoji);
+      },
+    };
+  },
+});
 </script>
 
 <style scoped lang="postcss">

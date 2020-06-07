@@ -53,45 +53,53 @@
   </main>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      dataFieldValue: "",
-      copyCodeText: [
-        "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
-        'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))',
-      ].join("\n"),
-    };
-  },
-  computed: {
-    selected: {
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { fetchStore } from "../store";
+
+export default defineComponent({
+  setup() {
+    const store = fetchStore();
+
+    const dataFieldValue = ref("");
+    const selected = computed({
       get() {
-        const c = this.$store.workspace.current();
+        const c = store.workspace.current();
         return c ? c.domain : null;
       },
-      set(value) {
-        this.$store.workspace.setCurrent(value);
-        const { domain, token } = this.$store.workspace.current();
-        this.$store.emoji.fetchAll(domain, token);
+      set(value: string | null) {
+        if (value === null) return;
+        store.workspace.setCurrent(value);
+        const { domain, token } = store.workspace.current();
+        store.emoji.fetchAll(domain, token);
       },
-    },
-    workspaces() {
-      return this.$store.workspace.all();
-    },
-  },
-  methods: {
-    saveWorkspace() {
-      const w = JSON.parse(this.dataFieldValue);
-      this.$store.workspace.add(w);
-      this.$store.workspace.setCurrent(w.domain);
+    });
+    const workspaces = computed(() => store.workspace.all());
+    const saveWorkspace = () => {
+      const w = JSON.parse(dataFieldValue.value);
+      store.workspace.add(w);
+      store.workspace.setCurrent(w.domain);
       const { domain, token } = w;
-      this.$store.emoji.fetchAll(domain, token);
-      this.dataFieldValue = "";
+      store.emoji.fetchAll(domain, token);
+      dataFieldValue.value = "";
       alert("token saved");
-    },
+    };
+
+    const copyCodeText = [
+      "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
+      'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))',
+    ].join("\n");
+
+    return {
+      dataFieldValue,
+      selected,
+      workspaces,
+      saveWorkspace,
+
+      copyCodeText,
+    };
   },
-};
+});
 </script>
 
 <style scoped lang="postcss">

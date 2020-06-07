@@ -6,20 +6,24 @@
   </div>
 </template>
 
-<script>
-import TheSidebar from "./components/TheSidebar.vue";
-import TheBoard from "./components/TheBoard.vue";
+<script lang="ts">
+import { computed, defineComponent, inject, PropType } from "vue";
+import { fetchStore } from "./store";
+import TheSidebarComponent from "./components/TheSidebar.vue";
+import TheBoardComponent from "./components/TheBoard.vue";
 
-export default {
+export default defineComponent({
   components: {
-    "the-sidebar": TheSidebar,
-    "the-board": TheBoard,
+    "the-sidebar": TheSidebarComponent,
+    "the-board": TheBoardComponent,
   },
-  mounted() {
-    const { domain, token } = this.$store.workspace.current();
-    this.$store.emoji.fetchAll(domain, token);
+  setup() {
+    const store = fetchStore();
+    const { domain, token } = store.workspace.current();
+    store.emoji.fetchAll(domain, token);
+    return {};
   },
-};
+});
 </script>
 
 <style scoped lang="postcss">
