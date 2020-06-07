@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, SetupContext, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { fetchStore } from "../store";
 
 export default defineComponent({

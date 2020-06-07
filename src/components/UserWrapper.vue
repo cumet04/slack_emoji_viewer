@@ -14,10 +14,6 @@
 import { defineComponent, PropType } from "vue";
 import { Emoji } from "../store/emojis";
 
-type Props = {
-  emoji: Emoji;
-};
-
 export default defineComponent({
   props: {
     emoji: {

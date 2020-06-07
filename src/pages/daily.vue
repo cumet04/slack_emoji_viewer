@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
 import { fetchStore } from "../store";
 import EmojiComponent from "../components/Emoji.vue";
 
