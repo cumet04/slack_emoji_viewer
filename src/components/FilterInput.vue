@@ -11,10 +11,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ["value"],
-};
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  props: {
+    value: {
+      type: String,
+    },
+  },
+  setup() {},
+});
 </script>
 
 <style scoped lang="postcss">
