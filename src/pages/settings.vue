@@ -53,42 +53,53 @@
   </main>
 </template>
 
-<script>
-import Workspaces from "~/store/workspaces";
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { fetchStore } from "../store";
 
-export default {
-  data() {
+export default defineComponent({
+  setup() {
+    const store = fetchStore();
+
+    const dataFieldValue = ref("");
+    const selected = computed({
+      get() {
+        const w = store.workspace.current();
+        return w ? w.domain : null;
+      },
+      set(value: string | null) {
+        if (value === null) return;
+        store.workspace.setCurrent(value);
+        const w = store.workspace.current();
+        if (w) store.emoji.fetchAll(w.domain, w.token);
+      },
+    });
+    const workspaces = computed(() => store.workspace.all());
+    const saveWorkspace = () => {
+      const w = JSON.parse(dataFieldValue.value);
+      store.workspace.add(w);
+      store.workspace.setCurrent(w.domain);
+      const { domain, token } = w;
+      store.emoji.fetchAll(domain, token);
+      dataFieldValue.value = "";
+      alert("token saved");
+    };
+
+    const copyCodeText = [
+      "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
+      'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))',
+    ].join("\n");
+
     return {
-      dataFieldValue: "",
-      copyCodeText: [
-        "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
-        'window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))',
-      ].join("\n"),
+      dataFieldValue,
+      selected,
+      workspaces,
+      saveWorkspace,
+
+      copyCodeText,
     };
   },
-  computed: {
-    selected: {
-      get() {
-        return Workspaces.current()?.domain;
-      },
-      set(value) {
-        Workspaces.setCurrent(value);
-      },
-    },
-    workspaces() {
-      return Workspaces.all();
-    },
-  },
-  methods: {
-    saveWorkspace() {
-      const w = JSON.parse(this.dataFieldValue);
-      Workspaces.add(w);
-      Workspaces.setCurrent(w.domain);
-      this.dataFieldValue = "";
-      alert("token saved");
-    },
-  },
-};
+});
 </script>
 
 <style scoped lang="postcss">
