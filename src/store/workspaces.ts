@@ -41,6 +41,7 @@ function saveToStorage(value: WorkspaceState) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createWorkspaceStore() {
   const { all, current } = loadFromStorage();
   const state: WorkspaceState = reactive({
@@ -48,7 +49,6 @@ export function createWorkspaceStore() {
     current: current || "",
   });
   return {
-    state,
     all: () => Object.values(state.all),
     current: (): Workspace | undefined => state.all[state.current],
     setCurrent(domain: Domain) {

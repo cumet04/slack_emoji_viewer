@@ -2,10 +2,14 @@ import { createEmojiStore } from "./store/emojis";
 import { createWorkspaceStore } from "./store/workspaces";
 import { App, InjectionKey, inject } from "vue";
 
-export type Store = ReturnType<typeof createStore>;
+export type Store = {
+  emoji: ReturnType<typeof createEmojiStore>;
+  workspace: ReturnType<typeof createWorkspaceStore>;
+  install(app: App): void;
+};
 const storeKey = Symbol() as InjectionKey<Store>;
 
-export function createStore() {
+export function createStore(): Store {
   const store = {
     emoji: createEmojiStore(),
     workspace: createWorkspaceStore(),
@@ -16,7 +20,7 @@ export function createStore() {
   return store;
 }
 
-export function fetchStore() {
+export function fetchStore(): Store {
   const s = inject(storeKey);
   if (s === undefined) throw "fetchStore failed";
   return s;

@@ -4,9 +4,9 @@
     :title="displayName"
     width="32"
     height="32"
-    @click="select"
     loading="lazy"
     class="img"
+    @click="select"
   />
 </template>
 
@@ -28,15 +28,16 @@ export default defineComponent({
   },
   setup(props: Props) {
     const store = fetchStore();
-    const emoji = props.emoji;
     return {
-      emoji,
       displayName: computed(() => {
-        const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+        const names = [
+          props.emoji.name,
+          ...props.emoji.aliases?.map((e) => e.name),
+        ];
         return names.map((name) => `:${name}:`).join(" ");
       }),
       select() {
-        store.emoji.pushStock(emoji);
+        store.emoji.pushStock(props.emoji);
       },
     };
   },
