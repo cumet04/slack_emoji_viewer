@@ -6,17 +6,17 @@
         <li v-for="workspace in workspaces" :key="workspace.domain">
           <label>
             <input
+              v-model="selected"
               type="radio"
               name="workspace"
               :value="workspace.domain"
-              v-model="selected"
             />
             {{ workspace.name }}
           </label>
         </li>
       </ul>
     </section>
-    <section class="section" id="add_workspace">
+    <section id="add_workspace" class="section">
       <h1 class="title">Add/Update workspace</h1>
       <ol class="steps">
         <li class="step">
@@ -40,9 +40,9 @@
           <p>Copy output data, and paste it below</p>
           <div class="form-field">
             <input
+              v-model="dataFieldValue"
               type="text"
               class="input"
-              v-model="dataFieldValue"
               placeholder="data"
             />
             <button class="button" @click="saveWorkspace">set</button>

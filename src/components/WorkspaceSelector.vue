@@ -9,13 +9,13 @@
         <div class="anonymous">(no workspace set)</div>
       </template>
     </div>
-    <div class="selector" v-if="open">
+    <div v-if="open" class="selector">
       <ol>
         <li
-          class="item workspace"
-          @click="select(ws.domain)"
           v-for="ws in list"
           :key="ws.domain"
+          class="item workspace"
+          @click="select(ws.domain)"
         >
           <img class="icon" :src="ws.icon.image_34" />
           <div class="name">{{ ws.name }}</div>

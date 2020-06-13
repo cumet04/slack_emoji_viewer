@@ -63,6 +63,7 @@ const groupBy = (source: Emoji[], getkey: (a: Emoji) => string) =>
     return map;
   }, {} as { [k: string]: Emoji[] });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createEmojiStore() {
   const state: EmojiState = reactive({
     all: [],
@@ -70,7 +71,6 @@ export function createEmojiStore() {
   });
   const allClone = () => Object.assign([], state.all) as Emoji[];
   return {
-    state,
     async fetchAll(domain: string, token: string) {
       const maxCount = 2000;
       const raw = await getAllEmojis(domain, token, maxCount);

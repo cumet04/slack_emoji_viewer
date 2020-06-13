@@ -9,8 +9,8 @@
     <ul class="list">
       <li
         v-for="emoji in all"
-        :key="emoji.name"
         v-show="isMatched(emoji)"
+        :key="emoji.name"
         class="emoji"
       >
         <emoji :emoji="emoji" />

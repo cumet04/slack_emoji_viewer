@@ -2,7 +2,7 @@
   <div>
     <div class="board" :class="{ hidden: hidden }">
       <label for="clipboard">stock</label>
-      <input type="text" name="clipboard" ref="input" class="input" />
+      <input ref="input" type="text" name="clipboard" class="input" />
       <button class="clear" @click="clear">
         <span class="cross_bar"></span>
         <span class="cross_bar"></span>

@@ -3,9 +3,9 @@
     <input
       type="text"
       :value="value"
-      @input="$emit('input', $event.target.value)"
-      placeholder="Filter"
       class="input"
+      placeholder="Filter"
+      @input="$emit('input', $event.target.value)"
     />
     <div class="clear" @click="$emit('input', '')"></div>
   </div>
@@ -18,9 +18,9 @@ export default defineComponent({
   props: {
     value: {
       type: String,
+      default: "",
     },
   },
-  setup() {},
 });
 </script>
 
