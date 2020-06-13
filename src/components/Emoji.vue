@@ -12,7 +12,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { Emoji } from "../store/emojis";
 import { fetchStore } from "../store";
 
 type Props = {

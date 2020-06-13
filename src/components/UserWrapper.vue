@@ -12,7 +12,6 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Emoji } from "../store/emojis";
 
 export default defineComponent({
   props: {

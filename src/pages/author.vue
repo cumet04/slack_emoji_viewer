@@ -21,7 +21,6 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { fetchStore } from "../store";
-import { Emoji } from "../store/emojis";
 import UserWrapperComponent from "../components/UserWrapper.vue";
 import EmojiComponent from "../components/Emoji.vue";
 import FilterInputComponent from "../components/FilterInput.vue";

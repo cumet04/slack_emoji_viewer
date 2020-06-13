@@ -14,17 +14,7 @@ type SlackEmoji = {
   url: string;
 };
 
-export type Emoji = {
-  userImage: string;
-  userName: string;
-  created: Date;
-  aliases: Emoji[];
-  isAlias: boolean;
-  name: string;
-  image: string;
-};
-
-export type EmojiState = {
+type EmojiState = {
   all: Emoji[];
   stock: Emoji[];
 };
