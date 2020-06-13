@@ -70,8 +70,6 @@ export default defineComponent({
       set(value: string | null) {
         if (value === null) return;
         store.workspace.setCurrent(value);
-        const w = store.workspace.current();
-        if (w) store.emoji.fetchAll(w.domain, w.token);
       },
     });
     const workspaces = computed(() => store.workspace.all());
@@ -79,8 +77,6 @@ export default defineComponent({
       const w = JSON.parse(dataFieldValue.value);
       store.workspace.add(w);
       store.workspace.setCurrent(w.domain);
-      const { domain, token } = w;
-      store.emoji.fetchAll(domain, token);
       dataFieldValue.value = "";
       alert("token saved");
     };

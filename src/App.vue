@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import { fetchStore } from "./store";
+import { reloadEmojis } from "./services/emoji";
 import TheSidebarComponent from "./components/TheSidebar.vue";
 import TheBoardComponent from "./components/TheBoard.vue";
 
@@ -19,8 +20,11 @@ export default defineComponent({
   },
   setup() {
     const store = fetchStore();
-    const w = store.workspace.current();
-    if (w) store.emoji.fetchAll(w.domain, w.token);
+    watch(
+      () => store.workspace.current(),
+      () => reloadEmojis(store)
+    );
+
     return {};
   },
 });
