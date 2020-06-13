@@ -1,5 +1,5 @@
-import { createEmojiStore } from "./store/emojis";
-import { createWorkspaceStore } from "./store/workspaces";
+import { createEmojiStore } from "./stores/emoji";
+import { createWorkspaceStore } from "./stores/workspace";
 import { App, InjectionKey, inject } from "vue";
 
 export type Store = {
