@@ -16,7 +16,6 @@ type SlackEmoji = {
 
 type EmojiState = {
   all: Emoji[];
-  stock: Emoji[];
 };
 
 async function getAllEmojis(domain: string, token: string, maxCount: number) {
@@ -57,7 +56,6 @@ const groupBy = (source: Emoji[], getkey: (a: Emoji) => string) =>
 export function createEmojiStore() {
   const state: EmojiState = reactive({
     all: [],
-    stock: [],
   });
   const allClone = () => Object.assign([], state.all) as Emoji[];
   return {
@@ -103,10 +101,5 @@ export function createEmojiStore() {
         return emoji.created.setHours(0, 0, 0).toString();
       });
     },
-    allStock() {
-      return state.stock;
-    },
-    pushStock: (emoji: Emoji) => state.stock.push(emoji),
-    clearStock: () => state.stock.splice(0, state.stock.length),
   };
 }

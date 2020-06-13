@@ -36,7 +36,7 @@ export default defineComponent({
         return names.map((name) => `:${name}:`).join(" ");
       }),
       select() {
-        store.emoji.pushStock(props.emoji);
+        store.stock.push(props.emoji);
       },
     };
   },
