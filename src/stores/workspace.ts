@@ -1,16 +1,8 @@
 import { reactive } from "vue";
 
-export type Domain = string;
-export type Workspace = {
-  name: string;
-  domain: Domain;
-  icon: string;
-  token: string;
-};
-
-export type WorkspaceState = {
-  all: { [k: string]: Workspace }; // [k: Domain]
-  current: Domain;
+type WorkspaceState = {
+  all: { [k: string]: Workspace };
+  current: string; // domain string
 };
 
 const storageKey = "vuex-slack_emoji_viewer";
@@ -51,7 +43,7 @@ export function createWorkspaceStore() {
   return {
     all: () => Object.values(state.all),
     current: (): Workspace | undefined => state.all[state.current],
-    setCurrent(domain: Domain) {
+    setCurrent(domain: string) {
       state.current = domain;
       saveToStorage(state);
       return this.current();

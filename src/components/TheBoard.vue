@@ -20,9 +20,9 @@ export default defineComponent({
     const store = fetchStore();
 
     const input = ref({} as HTMLInputElement);
-    const stock = computed(() => store.emoji.allStock());
+    const stock = computed(() => store.stock.all());
     const hidden = computed(() => stock.value.length == 0);
-    const clear = () => store.emoji.clearStock();
+    const clear = () => store.stock.clear();
 
     watch(
       () => stock,

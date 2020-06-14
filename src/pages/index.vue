@@ -22,7 +22,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { fetchStore } from "../store";
-import { Emoji } from "../store/emojis";
+import { reloadEmojis } from "../services/emoji";
 import EmojiComponent from "../components/Emoji.vue";
 import FilterInputComponent from "../components/FilterInput.vue";
 
@@ -36,18 +36,15 @@ export default defineComponent({
 
     const keyword = ref("");
     const all = computed(() => store.emoji.orderByName());
-    const reloadEmojis = () => {
-      const w = store.workspace.current();
-      if (w) store.emoji.fetchAll(w.domain, w.token);
-    };
     const isMatched = (emoji: Emoji) => {
       const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
       return names.some((name) => name.includes(keyword.value));
     };
+
     return {
       keyword,
       all,
-      reloadEmojis,
+      reloadEmojis: () => reloadEmojis(store),
       isMatched,
     };
   },

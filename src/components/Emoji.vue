@@ -12,7 +12,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { Emoji } from "../store/emojis";
 import { fetchStore } from "../store";
 
 type Props = {
@@ -37,7 +36,7 @@ export default defineComponent({
         return names.map((name) => `:${name}:`).join(" ");
       }),
       select() {
-        store.emoji.pushStock(props.emoji);
+        store.stock.push(props.emoji);
       },
     };
   },
