@@ -20,6 +20,7 @@ export default defineComponent({
   },
   setup() {
     const store = fetchStore();
+    reloadEmojis(store);
     watch(
       () => store.workspace.current(),
       () => reloadEmojis(store)
