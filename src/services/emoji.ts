@@ -70,7 +70,10 @@ async function fetchAll(
 
 export async function reloadEmojis(store: Store): Promise<void> {
   const w = store.workspace.current();
-  if (!w) return;
+  if (!w) {
+    store.emoji.setAll([]);
+    return;
+  }
   const emojis = await fetchAll(w.domain, w.token);
   if (!emojis) return;
   store.emoji.setAll(emojis);

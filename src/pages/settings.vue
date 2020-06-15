@@ -50,6 +50,11 @@
         </li>
       </ol>
     </section>
+    <section class="section">
+      <h1 class="title">Clear workspace settings</h1>
+      <p>Clear all workspace settings in this app.</p>
+      <button class="button" @click="clearWorkspaces">clear</button>
+    </section>
   </main>
 </template>
 
@@ -62,6 +67,7 @@ export default defineComponent({
     const store = fetchStore();
 
     const dataFieldValue = ref("");
+    const workspaces = computed(() => store.workspace.all());
     const selected = computed({
       get() {
         const w = store.workspace.current();
@@ -72,7 +78,6 @@ export default defineComponent({
         store.workspace.setCurrent(value);
       },
     });
-    const workspaces = computed(() => store.workspace.all());
     const saveWorkspace = () => {
       const w = JSON.parse(dataFieldValue.value);
       store.workspace.add(w);
@@ -80,6 +85,7 @@ export default defineComponent({
       dataFieldValue.value = "";
       alert("token saved");
     };
+    const clearWorkspaces = () => store.workspace.clear();
 
     const copyCodeText = [
       "const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);",
@@ -91,6 +97,7 @@ export default defineComponent({
       selected,
       workspaces,
       saveWorkspace,
+      clearWorkspaces,
 
       copyCodeText,
     };
