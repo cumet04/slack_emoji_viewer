@@ -20,16 +20,16 @@ export default defineComponent({
     const store = fetchStore();
 
     const input = ref({} as HTMLInputElement);
-    const stock = computed(() => store.stock.all());
-    const hidden = computed(() => stock.value.length == 0);
+    const stock = store.stock.all();
+    const hidden = computed(() => stock.length == 0);
     const clear = () => store.stock.clear();
 
     watch(
-      () => stock,
+      () => stock.length,
       () => {
         // 確実にinput要素のvalueが変更したあとにselect -> execする必要があるため
         // v-bindなどは使わずにDOM操作でvalue変更を行う
-        const text = stock.value.map((e) => `:${e.name}:`).join("");
+        const text = stock.map((e) => `:${e.name}:`).join("");
         const node = input.value;
         node.value = text;
 
@@ -38,6 +38,7 @@ export default defineComponent({
         node.blur();
       }
     );
+
     return {
       input,
       stock,
