@@ -56,6 +56,7 @@ export function createWorkspaceStore() {
     clear: () => {
       state.all = {};
       state.current = "";
+      saveToStorage(state);
     },
   };
 }
