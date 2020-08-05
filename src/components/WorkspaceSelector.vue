@@ -21,7 +21,7 @@
           <div class="name">{{ ws.name }}</div>
         </li>
       </ol>
-      <router-link to="/settings#add_workspace" class="item add">
+      <router-link to="/settings#workspace" class="item add">
         <div class="add_text">add workspace...</div>
       </router-link>
     </div>
