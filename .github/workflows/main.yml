@@ -15,6 +15,12 @@ jobs:
         run: npm ci --production
       - name: Build pages
         run: npm run build
+      - name: fix script tag
+        run: sed -i "s/xcript/script/g" dist/index.html
+      - name: inject GA ID
+        run: sed -i "s/GA_TRACKING_ID/$GA_TRACKING_ID/g" dist/index.html
+        env:
+          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
