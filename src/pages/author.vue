@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="toolbar">
-      <filter-input v-model="keyword" class="filter"></filter-input>
+      <filter-input v-model:value="keyword" class="filter"></filter-input>
       <button class="reload" @click="reloadEmojis">
         <img src="/src/assets/images/ico-reload.svg" alt="" />
       </button>

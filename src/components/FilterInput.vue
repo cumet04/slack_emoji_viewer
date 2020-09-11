@@ -5,9 +5,9 @@
       :value="value"
       class="input"
       placeholder="Filter"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('update:value', $event.target.value)"
     />
-    <div class="clear" @click="$emit('input', '')"></div>
+    <div class="clear" @click="$emit('update:value', '')"></div>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default defineComponent({
       default: "",
     },
   },
+  emits: ["update:value"],
 });
 </script>
 
