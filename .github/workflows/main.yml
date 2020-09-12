@@ -2,8 +2,20 @@ name: build pages
 on:
   push:
     branches: master
-  pull_request
+  pull_request:
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js for use with actions
+        uses: actions/setup-node@v1.1.0
+        with:
+          version: 12.x
+      - name: Install Dependencies
+        run: npm ci
+      - name: Check and build
+        run: npm run build
   build:
     runs-on: ubuntu-latest
     steps:
@@ -15,9 +27,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci --production
       - name: Build pages
-        # run lint & diag & build:run with shell instead of 'npm run build',
-        # to keep 'npm-run-all' out of prod-dependencies
-        run: npm run lint && npm run diag && npm run build:run
+        run: npm run build:run
       - name: fix script tag
         run: sed -i "s/xcript/script/g" dist/index.html
       - name: inject GA ID
