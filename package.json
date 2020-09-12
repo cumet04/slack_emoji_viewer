@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite -c vite.config.ts",
     "lint": "eslint --ext .ts,.vue src",
-    "build": "vite build -c vite.config.ts"
+    "diag": "vti diagnostics",
+    "build:run": "vite build -c vite.config.ts",
+    "build": "run-s lint diag build:run"
   },
   "postcss": {
     "plugins": {
@@ -30,6 +32,8 @@
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-vue": "^7.0.0-beta.3",
-    "prettier": "^2.1.1"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1",
+    "vti": "0.0.11"
   }
 }

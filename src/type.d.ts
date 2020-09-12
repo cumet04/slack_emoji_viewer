@@ -1,3 +1,5 @@
+// MEMO: I don't know why eslint claims this
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare type Emoji = {
   userImage: string;
   userName: string;
@@ -11,6 +13,9 @@ declare type Emoji = {
 declare type Workspace = {
   name: string;
   domain: string;
-  icon: string;
+  icon: {
+    // MEMO: add other sizes as needed
+    image_34: string
+  };
   token: string;
 };
