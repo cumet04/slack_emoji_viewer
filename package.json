@@ -17,6 +17,7 @@
     }
   },
   "dependencies": {
+    "@mdi/js": "^5.5.55",
     "axios": "^0.20.0",
     "postcss-nesting": "^7.0.1",
     "ress": "^3.0.0",

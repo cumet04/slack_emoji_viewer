@@ -1,5 +1,6 @@
 import * as router from "vue-router";
 import Index from "./pages/index.vue";
+import Preferences from "./pages/preferences.vue";
 
 export function createRouter(): router.Router {
   const r = router.createRouter({
@@ -9,6 +10,11 @@ export function createRouter(): router.Router {
         name: "index",
         path: "/",
         component: Index,
+      },
+      {
+        name: "preferences",
+        path: "/preferences",
+        component: Preferences,
       },
     ],
   });

@@ -1,5 +1,5 @@
 <template>
-  <main>index</main>
+  <main>preferences</main>
 </template>
 
 <script lang="ts">
