@@ -40,6 +40,7 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .the-header {
+  background-color: var(--color-panel);
   box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.16);
 }
 

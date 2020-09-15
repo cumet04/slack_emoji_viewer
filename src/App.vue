@@ -34,5 +34,7 @@ export default defineComponent({
 <style scoped lang="postcss">
 .root {
   color: var(--color-text);
+  background-color: var(--color-background);
+  min-height: 100vh;
 }
 </style>
