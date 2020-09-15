@@ -94,7 +94,7 @@ export default defineComponent({
   right: 0;
   min-width: 180px;
   box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.16);
-  background-color: white;
+  background-color: var(--color-background);
   border-radius: 4px;
 }
 
@@ -105,7 +105,7 @@ export default defineComponent({
   padding: 8px 16px;
 
   &:hover:not(.current) {
-    background-color: #eee;
+    background-color: #eee; // TODO: theme
   }
 
   & .icon {
@@ -113,7 +113,7 @@ export default defineComponent({
   }
 
   & .check {
-    color: #4caf50;
+    color: var(--color-success);
     padding-left: 16px;
     margin-left: auto;
   }

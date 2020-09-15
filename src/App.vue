@@ -1,11 +1,14 @@
 <template>
-  <the-header></the-header>
-  <router-view></router-view>
+  <div class="root" :style="style">
+    <the-header></the-header>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch } from "vue";
 import { useStore } from "./store";
+import Themes from "./theme";
 import { reloadEmojis } from "./services/emoji";
 import TheHeader from "./components/TheHeader.vue";
 
@@ -21,10 +24,15 @@ export default defineComponent({
       () => reloadEmojis(store)
     );
 
-    return {};
+    return {
+      style: Themes.light,
+    };
   },
 });
 </script>
 
 <style scoped lang="postcss">
+.root {
+  color: var(--color-text);
+}
 </style>
