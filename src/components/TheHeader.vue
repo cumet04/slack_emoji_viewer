@@ -1,5 +1,5 @@
 <template>
-  <header class="root">
+  <header class="the-header">
     <nav class="inner container">
       <router-link to="/" class="logo">
         <img
@@ -15,18 +15,20 @@
       <router-link to="/preferences" class="item">
         <cog-icon size="32px"></cog-icon>
       </router-link>
-      <!-- workspace selector -->
+      <workspace-selector></workspace-selector>
     </nav>
   </header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import WorkspaceSelector from "../components/WorkspaceSelector.vue";
 import ReloadIcon from "../components/icons/ReloadIcon.vue";
 import CogIcon from "../components/icons/CogIcon.vue";
 
 export default defineComponent({
   components: {
+    "workspace-selector": WorkspaceSelector,
     "reload-icon": ReloadIcon,
     "cog-icon": CogIcon,
   },
@@ -37,7 +39,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-.root {
+.the-header {
   box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.16);
 }
 

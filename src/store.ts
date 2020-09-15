@@ -23,8 +23,8 @@ export function createStore(): Store {
   return store;
 }
 
-export function fetchStore(): Store {
+export function useStore(): Store {
   const s = inject(storeKey);
-  if (s === undefined) throw "fetchStore failed";
+  if (s === undefined) throw "useStore failed";
   return s;
 }

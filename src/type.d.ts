@@ -15,7 +15,8 @@ declare type Workspace = {
   domain: string;
   icon: {
     // MEMO: add other sizes as needed
-    image_34: string
+    image_34: string;
+    image_44: string;
   };
   token: string;
 };

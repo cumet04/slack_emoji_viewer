@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from "vue";
-import { fetchStore } from "./store";
+import { useStore } from "./store";
 import { reloadEmojis } from "./services/emoji";
 import TheHeader from "./components/TheHeader.vue";
 
@@ -14,7 +14,7 @@ export default defineComponent({
     "the-header": TheHeader,
   },
   setup() {
-    const store = fetchStore();
+    const store = useStore();
     reloadEmojis(store);
     watch(
       () => store.workspace.current(),
