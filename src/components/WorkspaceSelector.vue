@@ -104,6 +104,7 @@ export default defineComponent({
   align-items: center;
   font-size: 1.8rem;
   padding: 8px 16px;
+  white-space: nowrap;
 
   &:hover:not(.current) {
     background-color: var(--color-background);
