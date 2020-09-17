@@ -53,6 +53,9 @@ export function createWorkspaceStore() {
       saveToStorage(state);
       return w;
     },
+    remove(domain: string) {
+      delete state.all[domain];
+    },
     clear: () => {
       state.all = {};
       state.current = "";
