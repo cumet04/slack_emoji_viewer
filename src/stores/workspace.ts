@@ -1,41 +1,17 @@
 import { reactive } from "vue";
+import storage from "./storage";
 
 type WorkspaceState = {
   all: { [k: string]: Workspace };
   current: string; // domain string
 };
 
-const storageKey = "vuex-slack_emoji_viewer";
-function loadFromStorage() {
-  const rawStr = localStorage.getItem(storageKey);
-  if (!rawStr) return { all: null, current: null };
-  const raw = JSON.parse(rawStr).workspace;
-
-  // migration code
-  if (raw._all) {
-    raw.all = raw._all;
-    delete raw._all;
-  }
-  if (raw._current) {
-    raw.current = raw._current;
-    delete raw._current;
-  }
-
-  return raw;
-}
-
-function saveToStorage(value: WorkspaceState) {
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify({
-      workspace: value,
-    })
-  );
-}
+const key = "workspace";
+const save = (v: WorkspaceState) => storage.save(key, v);
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createWorkspaceStore() {
-  const { all, current } = loadFromStorage();
+  const { all, current } = storage.get(key) as WorkspaceState;
   const state: WorkspaceState = reactive({
     all: all || {},
     current: current || "",
@@ -45,12 +21,12 @@ export function createWorkspaceStore() {
     current: (): Workspace | undefined => state.all[state.current],
     setCurrent(domain: string) {
       state.current = domain;
-      saveToStorage(state);
+      save(state);
       return this.current();
     },
     add(w: Workspace) {
       state.all[w.domain] = w;
-      saveToStorage(state);
+      save(state);
       return w;
     },
     remove(domain: string) {
@@ -59,7 +35,7 @@ export function createWorkspaceStore() {
     clear: () => {
       state.all = {};
       state.current = "";
-      saveToStorage(state);
+      save(state);
     },
   };
 }

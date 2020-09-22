@@ -1,4 +1,4 @@
-type Theme = {
+type ColorScheme = {
   "--color-text-primary": string;
   "--color-text-secondary": string;
   "--color-text-label": string;
@@ -12,8 +12,8 @@ type Theme = {
   "--color-danger": string;
 };
 
-const themes = {
-  light: {
+export const Themes = {
+  Light: {
     "--color-text-primary": "#1D1C1D", // slack light theme's text
     "--color-text-secondary": "#616061", // slack light theme's timestamp
     "--color-text-label": "#FFF", // for text on primary/success/info/warning... (ex. button)
@@ -26,8 +26,8 @@ const themes = {
     "--color-info": "#1861F4",
     "--color-warning": "#FFBF00",
     "--color-danger": "#FF2D26",
-  } as Theme,
-  dark: {
+  },
+  Dark: {
     "--color-text-primary": "#D1D2D3", // slack dark theme's text
     "--color-text-secondary": "#ABABAD", // slack dark theme's timestamp
     "--color-text-label": "#FFF", // for text on primary/success/info/warning... (ex. button)
@@ -39,7 +39,5 @@ const themes = {
     "--color-info": "#1861F4",
     "--color-warning": "#FFBF00",
     "--color-danger": "#FF2D26",
-  } as Theme,
-};
-
-export default themes;
+  },
+} as { [key in Theme]: ColorScheme };

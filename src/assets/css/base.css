@@ -32,6 +32,10 @@ a {
   }
 }
 
+textarea {
+  color: inherit;
+}
+
 h1,
 h2,
 h3,

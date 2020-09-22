@@ -20,3 +20,5 @@ declare type Workspace = {
   };
   token: string;
 };
+
+declare type Theme = "Light" | "Dark";
