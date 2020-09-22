@@ -59,6 +59,25 @@
         </div>
       </card>
     </div>
+
+    <div class="group">
+      <h1 class="title">APPEARANCE</h1>
+      <card class="section">
+        <h2 class="title">Theme</h2>
+        <theme-sample
+          theme="Light"
+          class="theme"
+          :class="currentTheme == 'Light' && 'active'"
+          @click="selectTheme('Light')"
+        ></theme-sample>
+        <theme-sample
+          theme="Dark"
+          class="theme"
+          :class="currentTheme == 'Dark' && 'active'"
+          @click="selectTheme('Dark')"
+        ></theme-sample>
+      </card>
+    </div>
   </main>
 </template>
 
@@ -67,6 +86,7 @@ import { defineComponent, computed, ref } from "vue";
 import Button from "../components/Button.vue";
 import Card from "../components/Card.vue";
 import TextInput from "../components/TextInput.vue";
+import ThemeSample from "../components/ThemeSample.vue";
 import { useStore } from "../store";
 
 export default defineComponent({
@@ -74,6 +94,7 @@ export default defineComponent({
     Button,
     card: Card,
     "text-input": TextInput,
+    "theme-sample": ThemeSample,
   },
   setup() {
     const store = useStore();
@@ -99,6 +120,11 @@ export default defineComponent({
       }
     };
 
+    const currentTheme = computed(() => store.preference.theme());
+    const selectTheme = (t: Theme) => {
+      store.preference.setTheme(t);
+    };
+
     const copyCodeText = `const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);
 window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))`;
     return {
@@ -107,6 +133,9 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
       saveWorkspace,
       selected,
       removeSelected,
+
+      currentTheme,
+      selectTheme,
 
       copyCodeText,
       copyCodeTextRows: copyCodeText.split("\n").length,
@@ -134,6 +163,16 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
 .actions {
   margin-top: 16px;
+}
+
+.theme {
+  &:not(:first-of-type) {
+    margin-top: 16px;
+  }
+
+  &.active {
+    border: solid 1px var(--color-primary);
+  }
 }
 
 .workspaces {

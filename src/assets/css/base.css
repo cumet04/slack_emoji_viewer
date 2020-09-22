@@ -32,7 +32,8 @@ a {
   }
 }
 
-textarea {
+textarea,
+input {
   color: inherit;
 }
 
