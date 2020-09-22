@@ -8,7 +8,11 @@
           <li class="step">
             <p>
               Go to
-              <a href="https://slack.com/customize/emoji" target="_blank">
+              <a
+                href="https://slack.com/customize/emoji"
+                class="text-link"
+                target="_blank"
+              >
                 https://slack.com/customize/emoji
               </a>
             </p>
@@ -163,6 +167,10 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
 .actions {
   margin-top: 16px;
+}
+
+.text-link {
+  color: var(--color-primary);
 }
 
 .theme {
