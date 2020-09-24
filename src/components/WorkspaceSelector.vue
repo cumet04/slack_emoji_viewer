@@ -10,13 +10,13 @@
       <div v-if="open" class="menu">
         <ol>
           <li class="item current" @click="open = false">
+            <check-circle-outline-icon
+              class="check"
+            ></check-circle-outline-icon>
             <img class="icon" :src="current.icon.image_34" />
             <div class="name">
               {{ current.name }}
             </div>
-            <check-circle-outline-icon
-              class="check"
-            ></check-circle-outline-icon>
           </li>
           <li
             v-for="ws in list"
@@ -102,22 +102,26 @@ export default defineComponent({
 .item {
   display: flex;
   align-items: center;
+  padding: 8px 16px 8px 8px;
+  border-radius: 4px;
   font-size: 1.8rem;
-  padding: 8px 16px;
   white-space: nowrap;
 
   &:hover:not(.current) {
     background-color: var(--color-background);
   }
 
-  & .icon {
-    margin-right: 8px;
-  }
-
   & .check {
     color: var(--color-success);
-    padding-left: 16px;
-    margin-left: auto;
+    position: absolute;
+  }
+
+  & .name {
+    margin-left: 8px;
+  }
+
+  & .icon {
+    margin-left: 32px;
   }
 }
 </style>
