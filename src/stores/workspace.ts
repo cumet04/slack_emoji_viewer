@@ -18,6 +18,13 @@ export function createWorkspaceStore() {
   });
   return {
     all: () => Object.values(state.all),
+    display() {
+      // same as all(), but current ws is located at first
+      let list = this.all();
+      const pos = list.findIndex((v) => v == state.all[state.current]);
+      if (pos != -1) list = list.splice(pos, 1).concat(list);
+      return list;
+    },
     current: (): Workspace | undefined => state.all[state.current],
     setCurrent(domain: string) {
       state.current = domain;
@@ -31,6 +38,10 @@ export function createWorkspaceStore() {
     },
     remove(domain: string) {
       delete state.all[domain];
+      if (domain == state.current && this.all().length > 0) {
+        this.setCurrent(this.all()[0].domain);
+      }
+      save(state);
     },
     clear: () => {
       state.all = {};

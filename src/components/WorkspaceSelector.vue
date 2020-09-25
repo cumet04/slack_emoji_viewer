@@ -9,21 +9,17 @@
       </button>
       <div v-if="open" class="menu">
         <ol>
-          <li class="item current" @click="open = false">
-            <check-circle-outline-icon
-              class="check"
-            ></check-circle-outline-icon>
-            <img class="icon" :src="current.icon.image_34" />
-            <div class="name">
-              {{ current.name }}
-            </div>
-          </li>
           <li
             v-for="ws in list"
             :key="ws.domain"
             class="item"
+            :class="ws == current && 'current'"
             @click="select(ws.domain)"
           >
+            <check-circle-outline-icon
+              v-if="ws == current"
+              class="check"
+            ></check-circle-outline-icon>
             <img class="icon" :src="ws.icon.image_34" />
             <div class="name">{{ ws.name }}</div>
           </li>
@@ -50,9 +46,7 @@ export default defineComponent({
 
     const store = useStore();
     const current = computed(() => store.workspace.current());
-    const list = computed(() =>
-      store.workspace.all().filter((ws) => ws != current.value)
-    );
+    const list = computed(() => store.workspace.display());
     const select = (domain: string) => {
       store.workspace.setCurrent(domain);
       open.value = false;
@@ -91,6 +85,7 @@ export default defineComponent({
 
 .menu {
   position: absolute;
+  padding: 4px 0;
   right: 0;
   min-width: 180px;
   box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.16);
@@ -102,9 +97,8 @@ export default defineComponent({
 .item {
   display: flex;
   align-items: center;
-  padding: 8px 16px 8px 8px;
+  padding: 4px 16px 4px 8px;
   border-radius: 4px;
-  font-size: 1.8rem;
   white-space: nowrap;
 
   &:hover:not(.current) {

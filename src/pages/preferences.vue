@@ -3,6 +3,30 @@
     <div class="group">
       <h1 class="title">WORKSPACES</h1>
       <card class="section">
+        <h2 class="title">Available workspaces</h2>
+        <ul class="workspaces">
+          <li v-for="ws in workspaces" :key="ws.domain" class="item">
+            <check-circle-outline-icon
+              v-if="ws == currentWorkspace"
+              class="check"
+            ></check-circle-outline-icon>
+            <button
+              class="button"
+              :class="ws == currentWorkspace && 'current'"
+              @click="selectWorkspace(ws)"
+            >
+              <img class="icon" :src="ws.icon.image_34" />
+              <span class="name">{{ ws.name }}</span>
+            </button>
+            <button class="close" @click="removeWorkspace(ws)">
+              <close-circle-outline-icon
+                size="16px"
+              ></close-circle-outline-icon>
+            </button>
+          </li>
+        </ul>
+      </card>
+      <card class="section">
         <h2 class="title">Add workspace</h2>
         <ol class="steps">
           <li class="step">
@@ -39,27 +63,7 @@
           </li>
         </ol>
         <div class="actions">
-          <Button @click="saveWorkspace">Add</Button>
-        </div>
-      </card>
-      <card class="section">
-        <h2 class="title">Remove workspaces</h2>
-        <ul class="workspaces">
-          <li v-for="ws in workspaces" :key="ws.domain" class="item">
-            <label class="workspace">
-              <input
-                v-model="selected"
-                type="checkbox"
-                :value="ws.domain"
-                class="checkbox"
-              />
-              <img class="icon" :src="ws.icon.image_34" />
-              <span class="name">{{ ws.name }}</span>
-            </label>
-          </li>
-        </ul>
-        <div class="actions">
-          <Button danger @click="removeSelected">Remove</Button>
+          <Button @click="addWorkspace">Add</Button>
         </div>
       </card>
     </div>
@@ -89,12 +93,16 @@
 import { defineComponent, computed, ref } from "vue";
 import Button from "../components/Button.vue";
 import Card from "../components/Card.vue";
+import CheckCircleOutlineIcon from "../components/icons/CheckCircleOutlineIcon.vue";
+import CloseCircleOutlineIcon from "../components/icons/CloseCircleOutlineIcon.vue";
 import TextInput from "../components/TextInput.vue";
 import ThemeSample from "../components/ThemeSample.vue";
 import { useStore } from "../store";
 
 export default defineComponent({
   components: {
+    "check-circle-outline-icon": CheckCircleOutlineIcon,
+    "close-circle-outline-icon": CloseCircleOutlineIcon,
     Button,
     card: Card,
     "text-input": TextInput,
@@ -104,23 +112,22 @@ export default defineComponent({
     const store = useStore();
 
     const dataFieldValue = ref("");
-    const workspaces = computed(() => store.workspace.all());
-    const saveWorkspace = () => {
+    const currentWorkspace = computed(() => store.workspace.current());
+    const workspaces = computed(() => store.workspace.display());
+    const addWorkspace = () => {
       const w = JSON.parse(dataFieldValue.value);
       store.workspace.add(w);
       store.workspace.setCurrent(w.domain);
       dataFieldValue.value = "";
       alert("token saved");
     };
-    const selected = ref([] as string[]);
-    const removeSelected = () => {
-      const msg = [
-        "Remove these workspaces from this app?",
-        ...selected.value,
-      ].join("\n");
+    const selectWorkspace = (ws: Workspace) => {
+      store.workspace.setCurrent(ws.domain);
+    };
+    const removeWorkspace = (ws: Workspace) => {
+      const msg = `Do you remove workspace "${ws.domain}" ?`;
       if (confirm(msg)) {
-        selected.value.forEach((domain) => store.workspace.remove(domain));
-        selected.value = [];
+        store.workspace.remove(ws.domain);
       }
     };
 
@@ -134,9 +141,10 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
     return {
       dataFieldValue,
       workspaces,
-      saveWorkspace,
-      selected,
-      removeSelected,
+      currentWorkspace,
+      addWorkspace,
+      selectWorkspace,
+      removeWorkspace,
 
       currentTheme,
       selectTheme,
@@ -184,21 +192,49 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 }
 
 .workspaces {
-  & .item:not(:first-child) {
-    margin-top: 8px;
-  }
-
-  & .workspace {
+  & .item {
     display: flex;
     align-items: center;
+
+    &:first-child {
+      margin-top: -4px;
+    }
   }
 
-  & .checkbox {
-    margin: 0 8px 0 4px;
+  & .check {
+    position: absolute;
+    color: var(--color-success);
+  }
+
+  & .button {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    padding: 4px 0 4px 4px;
+    margin-left: 28px;
+
+    cursor: inherit;
+    &:hover:not(.current) {
+      cursor: pointer;
+      background-color: var(--color-background);
+    }
   }
 
   & .name {
-    margin-left: 4px;
+    margin-left: 8px;
+  }
+
+  & .close {
+    color: var(--color-border);
+    border-radius: 12px;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+
+    &:hover {
+      background-color: var(--color-background);
+    }
   }
 }
 
