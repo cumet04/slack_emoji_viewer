@@ -6,10 +6,11 @@
         <h2 class="title">Available workspaces</h2>
         <ul class="workspaces">
           <li v-for="ws in workspaces" :key="ws.domain" class="item">
-            <check-circle-outline-icon
+            <mdi-icon
               v-if="ws == currentWorkspace"
+              :path="mdiCheckCircleOutline"
               class="check"
-            ></check-circle-outline-icon>
+            ></mdi-icon>
             <button
               class="button"
               :class="ws == currentWorkspace && 'current'"
@@ -19,9 +20,7 @@
               <span class="name">{{ ws.name }}</span>
             </button>
             <button class="close" @click="removeWorkspace(ws)">
-              <close-circle-outline-icon
-                size="16px"
-              ></close-circle-outline-icon>
+              <mdi-icon :path="mdiCloseCircleOutline" size="16px"></mdi-icon>
             </button>
           </li>
         </ul>
@@ -93,16 +92,13 @@
 import { defineComponent, computed, ref } from "vue";
 import Button from "../components/Button.vue";
 import Card from "../components/Card.vue";
-import CheckCircleOutlineIcon from "../components/icons/CheckCircleOutlineIcon.vue";
-import CloseCircleOutlineIcon from "../components/icons/CloseCircleOutlineIcon.vue";
+import { mdiCheckCircleOutline, mdiCloseCircleOutline } from "@mdi/js";
 import TextInput from "../components/TextInput.vue";
 import ThemeSample from "../components/ThemeSample.vue";
 import { useStore } from "../store";
 
 export default defineComponent({
   components: {
-    "check-circle-outline-icon": CheckCircleOutlineIcon,
-    "close-circle-outline-icon": CloseCircleOutlineIcon,
     Button,
     card: Card,
     "text-input": TextInput,
@@ -154,6 +150,9 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
       copyCodeTextCols: Math.max(
         ...copyCodeText.split("\n").map((t) => t.length)
       ),
+
+      mdiCheckCircleOutline,
+      mdiCloseCircleOutline,
     };
   },
 });

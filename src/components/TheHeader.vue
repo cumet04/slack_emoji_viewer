@@ -10,10 +10,10 @@
       </router-link>
       <div class="spacer"></div>
       <button class="item">
-        <reload-icon></reload-icon>
+        <mdi-icon :path="mdiReload"></mdi-icon>
       </button>
       <router-link to="/preferences" class="item">
-        <cog-icon size="32px"></cog-icon>
+        <mdi-icon :path="mdiCog" size="32px"></mdi-icon>
       </router-link>
       <workspace-selector></workspace-selector>
     </nav>
@@ -23,17 +23,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import WorkspaceSelector from "../components/WorkspaceSelector.vue";
-import ReloadIcon from "../components/icons/ReloadIcon.vue";
-import CogIcon from "../components/icons/CogIcon.vue";
+import { mdiReload, mdiCog } from "@mdi/js";
 
 export default defineComponent({
   components: {
     "workspace-selector": WorkspaceSelector,
-    "reload-icon": ReloadIcon,
-    "cog-icon": CogIcon,
   },
   setup() {
-    return {};
+    return {
+      mdiReload,
+      mdiCog,
+    };
   },
 });
 </script>

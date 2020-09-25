@@ -1,7 +1,7 @@
 <template>
   <div class="workspace-selector">
     <button v-if="!current" class="button anonymous" @click="anonymousEvent">
-      <account-alert-icon size="34px"></account-alert-icon>
+      <mdi-icon :path="mdiAccountAlert" size="34px"></mdi-icon>
     </button>
     <template v-else>
       <button class="button" @click="open = !open">
@@ -16,10 +16,11 @@
             :class="ws == current && 'current'"
             @click="select(ws.domain)"
           >
-            <check-circle-outline-icon
+            <mdi-icon
               v-if="ws == current"
+              :path="mdiCheckCircleOutline"
               class="check"
-            ></check-circle-outline-icon>
+            ></mdi-icon>
             <img class="icon" :src="ws.icon.image_34" />
             <div class="name">{{ ws.name }}</div>
           </li>
@@ -33,14 +34,9 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "../store";
 import { useRouter } from "vue-router";
-import CheckCircleOutlineIcon from "../components/icons/CheckCircleOutlineIcon.vue";
-import AccountAlertIcon from "../components/icons/AccountAlertIcon.vue";
+import { mdiCheckCircleOutline, mdiAccountAlert } from "@mdi/js";
 
 export default defineComponent({
-  components: {
-    "check-circle-outline-icon": CheckCircleOutlineIcon,
-    "account-alert-icon": AccountAlertIcon,
-  },
   setup() {
     const open = ref(false);
 
@@ -64,6 +60,9 @@ export default defineComponent({
       select,
       open,
       anonymousEvent,
+
+      mdiCheckCircleOutline,
+      mdiAccountAlert,
     };
   },
 });
