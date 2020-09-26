@@ -10,7 +10,7 @@
       </router-link>
       <div class="spacer"></div>
       <button class="item">
-        <mdi-icon :path="mdiReload"></mdi-icon>
+        <mdi-icon :path="mdiReload" @click="reloadEmojis"></mdi-icon>
       </button>
       <router-link to="/preferences" class="item">
         <mdi-icon :path="mdiCog" size="32px"></mdi-icon>
@@ -24,13 +24,18 @@
 import { defineComponent } from "vue";
 import WorkspaceSelector from "../components/WorkspaceSelector.vue";
 import { mdiReload, mdiCog } from "@mdi/js";
+import { reloadEmojis } from "../services/emoji";
+import { useStore } from "../store";
 
 export default defineComponent({
   components: {
     "workspace-selector": WorkspaceSelector,
   },
   setup() {
+    const store = useStore();
     return {
+      reloadEmojis: () => reloadEmojis(store),
+
       mdiReload,
       mdiCog,
     };

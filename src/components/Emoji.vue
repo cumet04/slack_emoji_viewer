@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 
 type Props = {
   emoji: Emoji;
@@ -24,14 +24,13 @@ export default defineComponent({
     },
   },
   setup(props: Props) {
+    const names = [
+      props.emoji.name,
+      ...props.emoji.aliases?.map((e) => e.name),
+    ];
+    const displayName = names.map((name) => `:${name}:`).join(" ");
     return {
-      displayName: computed(() => {
-        const names = [
-          props.emoji.name,
-          ...props.emoji.aliases?.map((e) => e.name),
-        ];
-        return names.map((name) => `:${name}:`).join(" ");
-      }),
+      displayName,
     };
   },
 });
