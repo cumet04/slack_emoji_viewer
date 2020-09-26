@@ -3,7 +3,7 @@ type ColorScheme = {
   "--color-text-secondary": string;
   "--color-text-label": string;
   "--color-panel": string;
-  "--color-border": string;
+  "--color-gray": string;
   "--color-background": string;
   "--color-primary": string;
   "--color-success": string;
@@ -18,7 +18,7 @@ export const Themes = {
     "--color-text-secondary": "#616061", // slack light theme's timestamp
     "--color-text-label": "#FFF", // for text on primary/success/info/warning... (ex. button)
     "--color-panel": "#FFFFFF", // slack light theme's background
-    "--color-border": "#8D8D8D", // panel + primary*0.5
+    "--color-gray": "#8D8D8D", // panel + primary*0.5
     "--color-background": "#EDEDED", // panel + (B-7)
     // https://colors.eva.design/
     "--color-primary": "#1976D2",
@@ -32,7 +32,7 @@ export const Themes = {
     "--color-text-secondary": "#ABABAD", // slack dark theme's timestamp
     "--color-text-label": "#FFF", // for text on primary/success/info/warning... (ex. button)
     "--color-panel": "#1A1D21", // slack dark theme's background
-    "--color-border": "#76777A", // panel + primary*0.5
+    "--color-gray": "#76777A", // panel + primary*0.5
     "--color-background": "#282D33", // panel + (B+7)
     "--color-primary": "#1976D2",
     "--color-success": "#31AA41",

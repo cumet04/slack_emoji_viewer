@@ -1,5 +1,6 @@
 import * as router from "vue-router";
 import Index from "./pages/index.vue";
+import List from "./pages/list.vue";
 import Preferences from "./pages/preferences.vue";
 
 export function createRouter(): router.Router {
@@ -7,12 +8,22 @@ export function createRouter(): router.Router {
     history: router.createWebHistory("/slack_emoji_viewer/"),
     routes: [
       {
-        name: "index",
         path: "/",
         component: Index,
       },
       {
-        name: "preferences",
+        path: "/daily",
+        component: List,
+      },
+      {
+        path: "/all",
+        component: List,
+      },
+      {
+        path: "/user",
+        component: List,
+      },
+      {
         path: "/preferences",
         component: Preferences,
       },

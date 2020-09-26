@@ -160,8 +160,6 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
 <style scoped lang="postcss">
 .group {
-  margin-top: 24px;
-
   & .title {
     font-size: 1.6rem;
     margin-bottom: 8px;
@@ -225,7 +223,7 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
   }
 
   & .close {
-    color: var(--color-border);
+    color: var(--color-gray);
     border-radius: 12px;
     width: 24px;
     height: 24px;
@@ -264,7 +262,7 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
     margin-top: 4px;
 
     background-color: var(--color-background);
-    border: solid 1px var(--color-border);
+    border: solid 1px var(--color-gray);
     border-radius: 4px;
 
     font-family: monospace;

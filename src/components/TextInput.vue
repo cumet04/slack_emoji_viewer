@@ -29,7 +29,7 @@ export default defineComponent({
 <style lang="postcss" scoped>
 .text-input-component {
   background-color: var(--color-panel);
-  border: solid 1px var(--color-border);
+  border: solid 1px var(--color-gray);
   border-radius: 4px;
   padding: 4px 8px;
 }

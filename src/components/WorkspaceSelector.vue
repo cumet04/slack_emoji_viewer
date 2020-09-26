@@ -89,7 +89,7 @@ export default defineComponent({
   min-width: 180px;
   box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.16);
   background-color: var(--color-panel);
-  border: solid 1px var(--color-border);
+  border: solid 1px var(--color-gray);
   border-radius: 4px;
 }
 
