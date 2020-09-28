@@ -85,6 +85,22 @@
         ></theme-sample>
       </card>
     </div>
+
+    <div class="group">
+      <h1 class="title">ABOUT</h1>
+      <card class="section about">
+        <h2 class="title">Slack emoji viewer</h2>
+        <p class="build">
+          Build
+          <a :href="commitUrl" class="build-num">{{ buildHash }}</a>
+          at {{ buildTime }}
+        </p>
+        <a :href="githubUrl" class="github">
+          <img :src="githubIcon" width="24" height="24" class="img" />
+          <p class="url">{{ githubUrl }}</p>
+        </a>
+      </card>
+    </div>
   </main>
 </template>
 
@@ -132,6 +148,21 @@ export default defineComponent({
       store.preference.setTheme(t);
     };
 
+    const bhash = import.meta.env.GITHUB_SHA as string;
+    const buildHash = bhash.slice(0, 7);
+    console.log(import.meta.env.BUILD_TIME);
+    const buildTime = new Date(
+      parseInt(import.meta.env.BUILD_TIME as string)
+    ).toISOString();
+    const githubUrl = import.meta.env.REPOSITORY_URL as string;
+    const commitUrl = `${githubUrl}/commit/${bhash}`;
+
+    const githubIcon = computed(() =>
+      currentTheme.value == "Light"
+        ? "/src/assets/images/ico-github.png"
+        : "/src/assets/images/ico-github-light.png"
+    );
+
     const copyCodeText = `const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);
 window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.api_token}))`;
     return {
@@ -144,6 +175,12 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
       currentTheme,
       selectTheme,
+
+      buildHash,
+      commitUrl,
+      buildTime,
+      githubUrl,
+      githubIcon,
 
       copyCodeText,
       copyCodeTextRows: copyCodeText.split("\n").length,
@@ -271,6 +308,21 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
     font-family: monospace;
     resize: none;
+  }
+}
+
+.about {
+  & .build {
+    font-size: 1.6rem;
+  }
+
+  & .github {
+    display: flex;
+    margin-top: 4px;
+
+    & .url {
+      margin-left: 8px;
+    }
   }
 }
 </style>
