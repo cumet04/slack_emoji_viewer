@@ -48,10 +48,27 @@ export function createEmojiStore() {
       return emojis;
     },
     forDaily() {
-      return groupBy(this.forAll([]), (emoji) => {
-        // MEMO: This is local time; for UTC, setUTCHours
-        return emoji.created.setHours(0, 0, 0).toString();
-      });
+      const map = [] as { date: Date; emojis: Emoji[] }[];
+      let pair = { date: new Date(0), emojis: [] } as {
+        date: Date;
+        emojis: Emoji[];
+      };
+
+      // date: sort desc
+      // emojis: sort by date, asc
+      this.forAll([])
+        .sort((a, b) => {
+          return a.created > b.created ? 1 : -1;
+        })
+        .forEach((emoji) => {
+          const date = new Date(emoji.created.setHours(0, 0, 0));
+          if (pair.date.valueOf() != date.valueOf()) {
+            pair = { date, emojis: [] };
+            map.unshift(pair);
+          }
+          pair.emojis.push(emoji);
+        });
+      return map;
     },
     forUser(queries: string[]) {
       const emojis = this.forAll(queries).sort((a, b) => {

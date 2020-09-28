@@ -1,7 +1,8 @@
 <template>
   <div class="user-message">
     <div class="icon">
-      <img :src="userIcon" class="img" />
+      <mdi-icon v-if="mdiIcon != ''" :path="mdiIcon" size="36px"></mdi-icon>
+      <img v-else :src="userIcon" class="img" />
     </div>
     <div>
       <div class="info">
@@ -15,27 +16,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { formatDate } from "../utils";
 
 type Props = {
   userIcon: string;
+  mdiIcon: string;
   userName: string;
-  date: string;
+  date?: string;
 };
-
-function formatDate(d: Date): string {
-  const str = d.toLocaleDateString();
-  let day = new Date();
-  if (str == day.toLocaleDateString()) return "today";
-  day.setDate(day.getDate() - 1);
-  if (str == day.toLocaleDateString()) return "yesterday";
-  return str;
-}
 
 export default defineComponent({
   props: {
     userIcon: {
       type: String,
       default: "/src/assets/images/ico-user.png",
+    },
+    mdiIcon: {
+      type: String,
+      default: "",
     },
     userName: {
       type: String,
@@ -47,9 +45,9 @@ export default defineComponent({
     },
   },
   setup(props: Props) {
-    const date = new Date(Date.parse(props.date));
+    const date = props.date && formatDate(new Date(Date.parse(props.date)));
     return {
-      displayDate: formatDate(date),
+      displayDate: date,
     };
   },
 });
