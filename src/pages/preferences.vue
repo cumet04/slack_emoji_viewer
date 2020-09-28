@@ -160,6 +160,10 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
 <style scoped lang="postcss">
 .group {
+  &:not(:first-of-type) {
+    margin-top: 24px;
+  }
+
   & .title {
     font-size: 1.6rem;
     margin-bottom: 8px;
