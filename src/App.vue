@@ -38,5 +38,6 @@ export default defineComponent({
   color: var(--color-text-primary);
   background-color: var(--color-background);
   min-height: 100vh;
+  padding-bottom: 48px;
 }
 </style>
