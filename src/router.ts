@@ -1,6 +1,8 @@
 import * as router from "vue-router";
 import Index from "./pages/index.vue";
-import List from "./pages/list.vue";
+import All from "./pages/all.vue";
+import Daily from "./pages/daily.vue";
+import User from "./pages/user.vue";
 import Preferences from "./pages/preferences.vue";
 
 export function createRouter(): router.Router {
@@ -13,15 +15,15 @@ export function createRouter(): router.Router {
       },
       {
         path: "/daily",
-        component: List,
+        component: Daily,
       },
       {
         path: "/all",
-        component: List,
+        component: All,
       },
       {
         path: "/user",
-        component: List,
+        component: User,
       },
       {
         path: "/preferences",

@@ -150,7 +150,6 @@ export default defineComponent({
 
     const bhash = import.meta.env.GITHUB_SHA as string;
     const buildHash = bhash.slice(0, 7);
-    console.log(import.meta.env.BUILD_TIME);
     const buildTime = new Date(
       parseInt(import.meta.env.BUILD_TIME as string)
     ).toISOString();

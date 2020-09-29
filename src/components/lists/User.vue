@@ -1,36 +1,33 @@
 <template>
-  <card>
-    <search-input
-      v-model:value="keyword"
-      placeholder="Search emoji"
-    ></search-input>
-    <ul class="users">
-      <li v-for="{ user, emojis } in alls" :key="user.name" class="user">
-        <user-message
-          v-show="shows[user.name]"
-          :user-name="user.name"
-          :user-icon="user.image"
-          :date="user.date"
-        >
-          <ul class="list">
-            <li
-              v-for="emoji in emojis"
-              v-show="shows[user.name] && shows[user.name][emoji.name]"
-              :key="emoji.name"
-              class="emoji"
-            >
-              <emoji :emoji="emoji" :name="emoji.name"></emoji>
-            </li>
-          </ul>
-        </user-message>
-      </li>
-    </ul>
-  </card>
+  <search-input
+    v-model:value="keyword"
+    placeholder="Search user"
+  ></search-input>
+  <ul class="users">
+    <li v-for="{ user, emojis } in alls" :key="user.name" class="user">
+      <user-message
+        v-show="shows[user.name]"
+        :user-name="user.name"
+        :user-icon="user.image"
+        :date="user.date"
+      >
+        <ul class="list">
+          <li
+            v-for="emoji in emojis"
+            v-show="shows[user.name] && shows[user.name][emoji.name]"
+            :key="emoji.name"
+            class="emoji"
+          >
+            <emoji :emoji="emoji" :name="emoji.name"></emoji>
+          </li>
+        </ul>
+      </user-message>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Card from "../../components/Card.vue";
 import Emoji from "../../components/Emoji.vue";
 import SearchInput from "../../components/SearchInput.vue";
 import UserMessage from "../../components/UserMessage.vue";
@@ -38,7 +35,6 @@ import { useStore } from "../../store";
 
 export default defineComponent({
   components: {
-    card: Card,
     emoji: Emoji,
     "search-input": SearchInput,
     "user-message": UserMessage,

@@ -1,32 +1,28 @@
 <template>
-  <card>
-    <search-input
-      v-model:value="keyword"
-      placeholder="Search emoji"
-    ></search-input>
-    <ul class="list">
-      <li
-        v-for="emoji in all"
-        v-show="shows[emoji.name]"
-        :key="emoji.name"
-        class="emoji"
-      >
-        <emoji :emoji="emoji" :name="emoji.name"></emoji>
-      </li>
-    </ul>
-  </card>
+  <search-input
+    v-model:value="keyword"
+    placeholder="Search emoji"
+  ></search-input>
+  <ul class="list">
+    <li
+      v-for="emoji in all"
+      v-show="shows[emoji.name]"
+      :key="emoji.name"
+      class="emoji"
+    >
+      <emoji :emoji="emoji" :name="emoji.name"></emoji>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Card from "../../components/Card.vue";
 import SearchInput from "../../components/SearchInput.vue";
 import Emoji from "../../components/Emoji.vue";
 import { useStore } from "../../store";
 
 export default defineComponent({
   components: {
-    card: Card,
     emoji: Emoji,
     "search-input": SearchInput,
   },
