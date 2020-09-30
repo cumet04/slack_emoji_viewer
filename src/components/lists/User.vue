@@ -32,6 +32,7 @@ import Emoji from "../../components/Emoji.vue";
 import SearchInput from "../../components/SearchInput.vue";
 import UserMessage from "../../components/UserMessage.vue";
 import { useStore } from "../../store";
+import { last } from "../../utils";
 
 export default defineComponent({
   components: {
@@ -46,9 +47,9 @@ export default defineComponent({
       const emojis = store.emoji.forUser([]);
       return Object.keys(emojis).map((user) => ({
         user: {
-          name: emojis[user].slice(-1)[0].userName,
-          image: emojis[user].slice(-1)[0].userImage,
-          date: emojis[user].slice(-1)[0].created,
+          name: last(emojis[user]).userName,
+          image: last(emojis[user]).userImage,
+          date: last(emojis[user]).created,
         },
         emojis: emojis[user],
       }));

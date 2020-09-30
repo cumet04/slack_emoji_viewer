@@ -7,9 +7,7 @@
         :max-rows="maxRows"
         @changed="resetRows"
       ></page>
-      <div v-if="trimmed" class="load">
-        <button class="button" @click="load">load more</button>
-      </div>
+      <load-more-button v-if="trimmed" @click="load"></load-more-button>
     </card>
   </main>
 </template>
@@ -18,12 +16,14 @@
 import { defineComponent, ref } from "vue";
 import Card from "../components/Card.vue";
 import ListTab from "../components/ListTab.vue";
+import LoadMoreButton from "../components/LoadMoreButton.vue";
 import AllPage from "../components/lists/All.vue";
 
 export default defineComponent({
   components: {
     card: Card,
     "list-tab": ListTab,
+    "load-more-button": LoadMoreButton,
     page: AllPage,
   },
   setup() {
@@ -34,7 +34,7 @@ export default defineComponent({
 
     const load = (e: Event) => {
       (e.target as HTMLElement).blur();
-      maxRows.value += 10;
+      maxRows.value += 20;
     };
 
     return {
@@ -49,18 +49,4 @@ export default defineComponent({
 </script>
 
 <style scoped lang="postcss">
-.load {
-  margin-top: 16px;
-
-  & .button {
-    margin: 0 auto;
-    width: 100px;
-    height: 32px;
-    border-radius: 16px;
-
-    font-size: 1.4rem;
-    color: var(--color-text-label);
-    background-color: var(--color-primary);
-  }
-}
 </style>
