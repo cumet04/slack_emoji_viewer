@@ -9,7 +9,7 @@
         />
       </router-link>
       <div class="spacer"></div>
-      <button class="item">
+      <button class="item" title="update emoji database">
         <mdi-icon :path="mdiReload" @click="reloadEmojis"></mdi-icon>
       </button>
       <router-link to="/preferences" class="item">

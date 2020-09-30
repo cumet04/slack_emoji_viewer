@@ -1,7 +1,11 @@
 <template>
   <ul class="days">
     <li v-for="{ date, emojis } in emojis" :key="date" class="day">
-      <user-message :user-name="formatDate(date)" :mdi-icon="mdiCalendarToday">
+      <user-message
+        :user-name="formatDate(date)"
+        :mdi-icon="mdiIcon(date)"
+        :icon-color="mdiColor(date)"
+      >
         <ul class="list">
           <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
             <emoji :emoji="emoji" :name="emoji.name"></emoji>
@@ -16,7 +20,7 @@
 import { computed, defineComponent } from "vue";
 import Emoji from "../../components/Emoji.vue";
 import UserMessage from "../../components/UserMessage.vue";
-import { mdiCalendarToday } from "@mdi/js";
+import { mdiNewBox, mdiCalendarToday } from "@mdi/js";
 import { useStore } from "../../store";
 import { formatDate } from "../../utils";
 
@@ -29,10 +33,18 @@ export default defineComponent({
     const store = useStore();
     const emojis = computed(() => store.emoji.forDaily());
 
+    const isRecent = (date: Date) =>
+      ["today", "yesterday"].includes(formatDate(date));
+    const mdiIcon = (date: Date) =>
+      isRecent(date) ? mdiNewBox : mdiCalendarToday;
+    const mdiColor = (date: Date) =>
+      isRecent(date) ? "var(--color-info)" : "";
+
     return {
       emojis,
       formatDate,
-      mdiCalendarToday,
+      mdiIcon,
+      mdiColor,
     };
   },
 });

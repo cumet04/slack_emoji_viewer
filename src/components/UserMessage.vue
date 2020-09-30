@@ -1,7 +1,12 @@
 <template>
   <div class="user-message">
     <div class="icon">
-      <mdi-icon v-if="mdiIcon != ''" :path="mdiIcon" size="36px"></mdi-icon>
+      <mdi-icon
+        v-if="mdiIcon != ''"
+        :path="mdiIcon"
+        :style="mdiStyle"
+        size="36px"
+      ></mdi-icon>
       <img v-else :src="userIcon" class="img" />
     </div>
     <div>
@@ -21,6 +26,7 @@ import { formatDate } from "../utils";
 type Props = {
   userIcon: string;
   mdiIcon: string;
+  iconColor: string;
   userName: string;
   date?: string;
 };
@@ -35,6 +41,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    iconColor: {
+      type: String,
+      default: "",
+    },
     userName: {
       type: String,
       required: true,
@@ -46,8 +56,10 @@ export default defineComponent({
   },
   setup(props: Props) {
     const date = props.date && formatDate(new Date(Date.parse(props.date)));
+    const mdiStyle = props.iconColor != "" ? `color: ${props.iconColor};` : "";
     return {
       displayDate: date,
+      mdiStyle,
     };
   },
 });
