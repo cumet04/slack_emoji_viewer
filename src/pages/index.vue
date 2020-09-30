@@ -1,7 +1,7 @@
 <template>
   <main class="inner">
     <card class="card">
-      <all-page max-rows="6"></all-page>
+      <all-page :max-rows="6"></all-page>
       <router-link to="/all" class="link">view more</router-link>
     </card>
   </main>

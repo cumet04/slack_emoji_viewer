@@ -74,6 +74,7 @@ export default defineComponent({
 .icon {
   width: 44px;
   flex-shrink: 0;
+  margin-top: 4px;
 
   & .img {
     width: 36px;
@@ -83,8 +84,7 @@ export default defineComponent({
 }
 
 .info {
-  margin-top: 3px;
-  margin-bottom: 6px;
+  height: 29px;
 }
 
 .name {
