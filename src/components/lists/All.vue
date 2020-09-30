@@ -3,55 +3,81 @@
     v-model:value="keyword"
     placeholder="Search emoji"
   ></search-input>
-  <ul class="list">
-    <li
-      v-for="emoji in all"
-      v-show="shows[emoji.name]"
-      :key="emoji.name"
-      class="emoji"
-    >
+  <ul ref="listRef" class="list">
+    <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
       <emoji :emoji="emoji" :name="emoji.name"></emoji>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  SetupContext,
+  watch,
+} from "vue";
 import SearchInput from "../../components/SearchInput.vue";
 import Emoji from "../../components/Emoji.vue";
 import { useStore } from "../../store";
+
+type Props = {
+  maxRows: number;
+  trimmed: boolean;
+};
 
 export default defineComponent({
   components: {
     emoji: Emoji,
     "search-input": SearchInput,
   },
-  setup() {
+  props: {
+    maxRows: {
+      type: Number,
+      default: 10,
+    },
+    trimmed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:trimmed", "changed"],
+  setup(props: Props, ctx: SetupContext) {
     const store = useStore();
 
     const keyword = ref("");
+    watch(keyword, () => ctx.emit("changed"));
 
-    // TODO: something such as virtual scrolling
+    const listWidth = ref(0);
+    const listRef = ref<HTMLUListElement>();
+    onMounted(() => {
+      window.addEventListener("resize", () => {
+        listWidth.value = listRef.value?.clientWidth || 0;
+      });
+      if (listRef.value) {
+        listWidth.value = listRef.value.clientWidth;
+      }
+    });
 
-    // hack for performance: using v-show
-    // This can use DOM instance cache when emojis reappear by deleting keyword
-    const all = computed(() => store.emoji.forAll([]));
-    const shows = computed(() => {
+    const emojis = computed(() => {
       // query-type is omitted -> add colon prefix
       const queries = keyword.value
         .split(" ")
         .map((q) => (!q.startsWith("@") && !q.startsWith(":") ? `:${q}` : q));
-      let map = {} as { [key: string]: boolean };
-      store.emoji.forAll(queries).forEach((e) => {
-        map[e.name] = true;
-      });
-      return map;
+
+      const xCount = Math.floor(listWidth.value / 36); // 36: li.emoji width including margin
+      const all = store.emoji.forAll(queries);
+      const sliced = all.slice(0, xCount * props.maxRows);
+      ctx.emit("update:trimmed", all.length > sliced.length);
+      return sliced;
     });
 
     return {
       keyword,
-      all,
-      shows,
+      listRef,
+      emojis,
     };
   },
 });

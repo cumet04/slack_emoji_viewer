@@ -215,7 +215,7 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 }
 
 .text-link {
-  color: var(--color-primary);
+  color: var(--color-info);
 }
 
 .theme {
