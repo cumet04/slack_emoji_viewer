@@ -3,21 +3,15 @@
     v-model:value="keyword"
     placeholder="Search user"
   ></search-input>
-  <ul class="users">
-    <li v-for="{ user, emojis } in alls" :key="user.name" class="user">
+  <ul ref="usersRef" class="users">
+    <li v-for="{ user, emojis } in emojis" :key="user.name" class="user">
       <user-message
-        v-show="shows[user.name]"
         :user-name="user.name"
         :user-icon="user.image"
         :date="user.date"
       >
         <ul class="list">
-          <li
-            v-for="emoji in emojis"
-            v-show="shows[user.name] && shows[user.name][emoji.name]"
-            :key="emoji.name"
-            class="emoji"
-          >
+          <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
             <emoji :emoji="emoji" :name="emoji.name"></emoji>
           </li>
         </ul>
@@ -27,12 +21,24 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  SetupContext,
+  watch,
+} from "vue";
 import Emoji from "../../components/Emoji.vue";
 import SearchInput from "../../components/SearchInput.vue";
 import UserMessage from "../../components/UserMessage.vue";
 import { useStore } from "../../store";
-import { last } from "../../utils";
+import { last, trimUserEmojis } from "../../utils";
+
+type Props = {
+  maxHeight: number;
+  trimmed: boolean;
+};
 
 export default defineComponent({
   components: {
@@ -40,44 +46,64 @@ export default defineComponent({
     "search-input": SearchInput,
     "user-message": UserMessage,
   },
-  setup() {
+  props: {
+    maxHeight: {
+      type: Number,
+      default: 300,
+    },
+    trimmed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:trimmed", "changed"],
+  setup(props: Props, ctx: SetupContext) {
     const store = useStore();
 
-    const alls = computed(() => {
-      const emojis = store.emoji.forUser([]);
-      return Object.keys(emojis).map((user) => ({
-        user: {
-          name: last(emojis[user]).userName,
-          image: last(emojis[user]).userImage,
-          date: last(emojis[user]).created,
-        },
-        emojis: emojis[user],
-      }));
+    const keyword = ref("");
+    watch(keyword, () => ctx.emit("changed"));
+
+    const usersWidth = ref(0);
+    const usersRef = ref<HTMLUListElement>();
+    onMounted(() => {
+      window.addEventListener("resize", () => {
+        usersWidth.value = usersRef.value?.clientWidth || 0;
+      });
+      if (usersRef.value) {
+        usersWidth.value = usersRef.value.clientWidth;
+      }
     });
 
-    // { [key: username]: { [key: emoji-name]: boolean } }
-    const shows = computed(() => {
+    const emojis = computed(() => {
       // query-type is omitted -> add @ prefix
       const queries = keyword.value
         .split(" ")
         .map((q) => (!q.startsWith("@") && !q.startsWith(":") ? `@${q}` : q));
-      let map = {} as { [key: string]: { [key: string]: boolean } };
-      const emojis = store.emoji.forUser(queries);
-      Object.keys(emojis).forEach((user) => {
-        if (emojis[user].length == 0) return;
-        map[user] = {};
-        emojis[user].forEach((e) => {
-          map[user][e.name] = true;
-        });
-      });
-      return map;
+
+      const raw = store.emoji.forUser(queries);
+      const all = Object.keys(raw).map((user) => ({
+        user: {
+          name: last(raw[user]).userName,
+          image: last(raw[user]).userImage,
+          date: last(raw[user]).created,
+        },
+        emojis: raw[user],
+      }));
+      if (all.length == 0) return [];
+
+      const sliced = trimUserEmojis(all, usersWidth.value, props.maxHeight);
+      ctx.emit(
+        "update:trimmed",
+        all.length > sliced.length ||
+          last(all).emojis.length > last(sliced).emojis.length
+      );
+      return sliced;
     });
 
-    const keyword = ref("");
     return {
       keyword,
-      alls,
-      shows,
+      usersRef,
+      emojis,
     };
   },
 });
