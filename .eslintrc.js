@@ -9,4 +9,7 @@ module.exports = {
     "prettier/@typescript-eslint",
     "prettier/vue",
   ],
+  rules: {
+    "no-console": ["error", { allow: ["error"] }],
+  },
 };

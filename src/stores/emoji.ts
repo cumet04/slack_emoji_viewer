@@ -21,24 +21,60 @@ export function createEmojiStore() {
     setAll(emojis: Emoji[]) {
       state.all = emojis;
     },
-    orderByName() {
-      return allClone().sort((a, b) => {
+    forAll(queries: string[]) {
+      // @-prefixed: search by user name
+      // :-prefixed: search by emoji name
+      let emojis = allClone();
+
+      emojis = emojis.filter((emoji) => {
+        let ok = true;
+        for (const q of queries) {
+          if (q.startsWith("@")) {
+            const u = q.substring(1).toLowerCase();
+            if (!emoji.userName.toLowerCase().includes(u)) ok = false;
+          } else if (q.startsWith(":")) {
+            const u = q.substring(1).toLowerCase();
+            const names = [emoji.name, ...emoji.aliases?.map((e) => e.name)];
+            if (names.every((n) => !n.toLowerCase().includes(u))) ok = false;
+          }
+        }
+        return ok;
+      });
+
+      emojis = emojis.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
+
+      return emojis;
     },
-    orderByDate() {
-      return allClone().sort((a, b) => {
+    forDaily() {
+      const map = [] as { date: Date; emojis: Emoji[] }[];
+      let pair = { date: new Date(0), emojis: [] } as {
+        date: Date;
+        emojis: Emoji[];
+      };
+
+      // date: sort desc
+      // emojis: sort by date, asc
+      this.forAll([])
+        .sort((a, b) => {
+          return a.created > b.created ? 1 : -1;
+        })
+        .forEach((emoji) => {
+          const date = new Date(emoji.created.setHours(0, 0, 0));
+          if (pair.date.valueOf() != date.valueOf()) {
+            pair = { date, emojis: [] };
+            map.unshift(pair);
+          }
+          pair.emojis.push(emoji);
+        });
+      return map;
+    },
+    forUser(queries: string[]) {
+      const emojis = this.forAll(queries).sort((a, b) => {
         return a.created > b.created ? 1 : -1;
       });
-    },
-    byAuthor() {
-      return groupBy(this.orderByDate(), (emoji) => emoji.userName);
-    },
-    byDate() {
-      return groupBy(allClone(), (emoji) => {
-        // MEMO: This is local time; for UTC, setUTCHours
-        return emoji.created.setHours(0, 0, 0).toString();
-      });
+      return groupBy(emojis, (emoji) => emoji.userName);
     },
   };
 }

@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js for use with actions
-        uses: actions/setup-node@v1.1.0
+        uses: actions/setup-node@v1.4.3
         with:
-          version: 12.x
+          version: 14.x
       - name: Install Dependencies
         run: npm ci
       - name: Check and build
@@ -21,19 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js for use with actions
-        uses: actions/setup-node@v1.1.0
+        uses: actions/setup-node@v1.4.3
         with:
-          version: 12.x
+          version: 14.x
       - name: Install Dependencies
         run: npm ci --production
       - name: Build pages
         run: npm run build:run
-      - name: fix script tag
-        run: sed -i "s/xcript/script/g" dist/index.html
-      - name: inject GA ID
-        run: sed -i "s/GA_TRACKING_ID/$GA_TRACKING_ID/g" dist/index.html
-        env:
-          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

@@ -1,8 +1,12 @@
 <template>
   <main class="inner">
-    <list-tab list-type="daily"></list-tab>
+    <list-tab list-type="all"></list-tab>
     <card>
-      <page v-model:trimmed="trimmed" :max-height="maxHeight"></page>
+      <page
+        v-model:trimmed="trimmed"
+        :max-rows="maxRows"
+        @changed="resetRows"
+      ></page>
       <load-more-button v-if="trimmed" @click="load"></load-more-button>
     </card>
   </main>
@@ -13,27 +17,31 @@ import { defineComponent, ref } from "vue";
 import Card from "../components/Card.vue";
 import ListTab from "../components/ListTab.vue";
 import LoadMoreButton from "../components/LoadMoreButton.vue";
-import DailyPage from "../components/lists/Daily.vue";
+import AllPage from "../components/lists/All.vue";
 
 export default defineComponent({
   components: {
     card: Card,
     "list-tab": ListTab,
     "load-more-button": LoadMoreButton,
-    page: DailyPage,
+    page: AllPage,
   },
   setup() {
     const trimmed = ref(false);
-    const maxHeight = ref(800);
+
+    const maxRows = ref(20);
+    const resetRows = () => (maxRows.value = 20);
 
     const load = (e: Event) => {
       (e.target as HTMLElement).blur();
-      maxHeight.value += 800;
+      maxRows.value += 20;
     };
 
     return {
       trimmed,
-      maxHeight,
+
+      maxRows,
+      resetRows,
       load,
     };
   },

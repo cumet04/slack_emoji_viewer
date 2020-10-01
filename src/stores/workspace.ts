@@ -1,62 +1,52 @@
 import { reactive } from "vue";
+import storage from "./storage";
 
 type WorkspaceState = {
   all: { [k: string]: Workspace };
   current: string; // domain string
 };
 
-const storageKey = "vuex-slack_emoji_viewer";
-function loadFromStorage() {
-  const rawStr = localStorage.getItem(storageKey);
-  if (!rawStr) return { all: null, current: null };
-  const raw = JSON.parse(rawStr).workspace;
-
-  // migration code
-  if (raw._all) {
-    raw.all = raw._all;
-    delete raw._all;
-  }
-  if (raw._current) {
-    raw.current = raw._current;
-    delete raw._current;
-  }
-
-  return raw;
-}
-
-function saveToStorage(value: WorkspaceState) {
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify({
-      workspace: value,
-    })
-  );
-}
+const key = "workspace";
+const save = (v: WorkspaceState) => storage.save(key, v);
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createWorkspaceStore() {
-  const { all, current } = loadFromStorage();
+  const { all, current } = storage.get(key) as WorkspaceState;
   const state: WorkspaceState = reactive({
     all: all || {},
     current: current || "",
   });
   return {
     all: () => Object.values(state.all),
+    display() {
+      // same as all(), but current ws is located at first
+      let list = this.all();
+      const pos = list.findIndex((v) => v == state.all[state.current]);
+      if (pos != -1) list = list.splice(pos, 1).concat(list);
+      return list;
+    },
     current: (): Workspace | undefined => state.all[state.current],
     setCurrent(domain: string) {
       state.current = domain;
-      saveToStorage(state);
+      save(state);
       return this.current();
     },
     add(w: Workspace) {
       state.all[w.domain] = w;
-      saveToStorage(state);
+      save(state);
       return w;
+    },
+    remove(domain: string) {
+      delete state.all[domain];
+      if (domain == state.current && this.all().length > 0) {
+        this.setCurrent(this.all()[0].domain);
+      }
+      save(state);
     },
     clear: () => {
       state.all = {};
       state.current = "";
-      saveToStorage(state);
+      save(state);
     },
   };
 }

@@ -1,58 +1,43 @@
 <template>
-  <div id="root">
-    <the-sidebar id="nav" />
-    <router-view id="main" />
-    <the-board id="board" />
+  <div class="root" :style="style">
+    <the-header></the-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from "vue";
-import { fetchStore } from "./store";
+import { computed, defineComponent, watch } from "vue";
+import { useStore } from "./store";
+import { Themes } from "./theme";
 import { reloadEmojis } from "./services/emoji";
-import TheSidebarComponent from "./components/TheSidebar.vue";
-import TheBoardComponent from "./components/TheBoard.vue";
+import TheHeader from "./components/TheHeader.vue";
 
 export default defineComponent({
   components: {
-    "the-sidebar": TheSidebarComponent,
-    "the-board": TheBoardComponent,
+    "the-header": TheHeader,
   },
   setup() {
-    const store = fetchStore();
+    const store = useStore();
     reloadEmojis(store);
     watch(
       () => store.workspace.current(),
       () => reloadEmojis(store)
     );
 
-    return {};
+    const style = computed(() => Themes[store.preference.theme()]);
+
+    return {
+      style,
+    };
   },
 });
 </script>
 
 <style scoped lang="postcss">
-#root {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-}
-
-#nav {
-  position: sticky;
-  top: 0;
-  width: 200px;
-  height: 100vh;
-}
-
-#main {
-  width: 768px;
-  padding: 24px;
-}
-
-#board {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+.root {
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  min-height: 100vh;
+  padding-bottom: 48px;
 }
 </style>

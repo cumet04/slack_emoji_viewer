@@ -1,122 +1,120 @@
 <template>
-  <div class="container" @click="open = !open">
-    <div class="workspace current">
-      <template v-if="current">
-        <img class="icon" :src="current.icon.image_34" />
-        <div class="name">{{ current.name }}</div>
-      </template>
-      <template v-else>
-        <div class="anonymous">(no workspace set)</div>
-      </template>
-    </div>
-    <div v-if="open" class="selector">
-      <ol>
-        <li
-          v-for="ws in list"
-          :key="ws.domain"
-          class="item workspace"
-          @click="select(ws.domain)"
-        >
-          <img class="icon" :src="ws.icon.image_34" />
-          <div class="name">{{ ws.name }}</div>
-        </li>
-      </ol>
-      <router-link to="/settings#workspace" class="item add">
-        <div class="add_text">add workspace...</div>
-      </router-link>
-    </div>
+  <div class="workspace-selector">
+    <button v-if="!current" class="button anonymous" @click="anonymousEvent">
+      <mdi-icon :path="mdiAccountAlert" size="34px"></mdi-icon>
+    </button>
+    <template v-else>
+      <button class="button" @click="open = !open">
+        <img :src="current.icon.image_44" :alt="current.name" class="icon" />
+      </button>
+      <div v-if="open" class="menu">
+        <ol>
+          <li
+            v-for="ws in list"
+            :key="ws.domain"
+            class="item"
+            :class="ws == current && 'current'"
+            @click="select(ws.domain)"
+          >
+            <mdi-icon
+              v-if="ws == current"
+              :path="mdiCheckCircleOutline"
+              class="check"
+            ></mdi-icon>
+            <img class="icon" :src="ws.icon.image_34" />
+            <div class="name">{{ ws.name }}</div>
+          </li>
+        </ol>
+      </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import { fetchStore } from "../store";
+import { useStore } from "../store";
+import { useRouter } from "vue-router";
+import { mdiCheckCircleOutline, mdiAccountAlert } from "@mdi/js";
 
 export default defineComponent({
   setup() {
-    const store = fetchStore();
+    const open = ref(false);
+
+    const store = useStore();
     const current = computed(() => store.workspace.current());
-    const list = computed(() =>
-      store.workspace.all().filter((ws) => ws != current.value)
-    );
+    const list = computed(() => store.workspace.display());
     const select = (domain: string) => {
       store.workspace.setCurrent(domain);
+      open.value = false;
     };
+
+    const router = useRouter();
+    const anonymousEvent = () => {
+      alert("Add workspace to use the app.");
+      router.push({ name: "preferences" });
+    };
+
     return {
-      open: ref(false),
       current,
       list,
       select,
+      open,
+      anonymousEvent,
+
+      mdiCheckCircleOutline,
+      mdiAccountAlert,
     };
   },
 });
 </script>
 
-<style scoped lang="postcss">
-.container {
+<style lang="postcss" scoped>
+.workspace-selector {
   position: relative;
-  margin: 8px;
 }
 
-.current {
-  position: relative;
+.button {
+  width: 44px;
+  height: 44px;
 
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 12px;
-    right: 2px;
-
-    width: 6px;
-    height: 6px;
-    border: black solid 0;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    transform: rotate(45deg);
+  &.anonymous {
+    color: gray;
   }
 }
 
-.workspace {
+.menu {
+  position: absolute;
+  padding: 4px 0;
+  right: 0;
+  min-width: 180px;
+  box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.16);
+  background-color: var(--color-panel);
+  border: solid 1px var(--color-gray);
+  border-radius: 4px;
+}
+
+.item {
   display: flex;
   align-items: center;
+  padding: 4px 16px 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
 
-  & .icon {
-    margin-right: 4px;
-    height: 34px;
+  &:hover:not(.current) {
+    background-color: var(--color-background);
+  }
+
+  & .check {
+    color: var(--color-success);
+    position: absolute;
   }
 
   & .name {
-    font-size: 18px;
+    margin-left: 8px;
   }
 
-  & .anonymous {
-    font-size: 14px;
-    color: gray;
-    padding-left: 14px;
-  }
-}
-
-.selector {
-  position: absolute;
-  width: 100%;
-  border: gray solid 1px;
-  border-radius: 3px;
-  background: white;
-  margin-top: 2px;
-
-  & .item {
-    padding: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background: #eee;
-    }
-
-    &.add {
-      display: block;
-      padding: 8px;
-    }
+  & .icon {
+    margin-left: 32px;
   }
 }
 </style>

@@ -17,6 +17,8 @@ ol {
   list-style-type: none;
 }
 
+img,
+button,
 li {
   display: block;
 }
@@ -28,4 +30,18 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+textarea,
+input {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
 }
