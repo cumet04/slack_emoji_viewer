@@ -27,6 +27,20 @@
       </card>
       <card class="section">
         <h2 class="title">Add workspace</h2>
+        <div class="warning">
+          <h3 class="title">WARNING</h3>
+          <p class="text">
+            These step deal a token that has too powerful permission, and this
+            app stores the token in browser's localStorage.
+            <br />
+            The app uses token for only get emoji list, but the token itself has
+            permission to do any action that you can do in slack's website.
+          </p>
+          <p class="text">
+            Understand above before using the app, and be careful handling your
+            token.
+          </p>
+        </div>
         <ol class="steps">
           <li class="step">
             <p>
@@ -271,6 +285,25 @@ window.prompt("data:",JSON.stringify({name, domain, icon, token: TS.boot_data.ap
 
     &:hover {
       background-color: var(--color-background);
+    }
+  }
+}
+
+.warning {
+  border: solid 1px var(--color-danger);
+  border-radius: 4px;
+  padding: 8px;
+
+  & .title {
+    font-size: 1.6rem;
+    color: var(--color-danger);
+  }
+
+  & .text {
+    font-size: 1.4rem;
+
+    &:not(:first-of-type) {
+      margin-top: 8px;
     }
   }
 }
