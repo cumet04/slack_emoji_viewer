@@ -162,12 +162,10 @@ export default defineComponent({
       store.preference.setTheme(t);
     };
 
-    const bhash = import.meta.env.GITHUB_SHA as string;
+    const bhash = "__github_sha__" as string;
     const buildHash = bhash.slice(0, 7);
-    const buildTime = new Date(
-      parseInt(import.meta.env.BUILD_TIME as string)
-    ).toISOString();
-    const githubUrl = import.meta.env.REPOSITORY_URL as string;
+    const buildTime = new Date(parseInt("__build_time__")).toISOString();
+    const githubUrl = "__repository_url__" as string;
     const commitUrl = `${githubUrl}/commit/${bhash}`;
 
     const githubIcon = computed(() =>
