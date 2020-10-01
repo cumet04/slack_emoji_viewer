@@ -17,24 +17,24 @@
     }
   },
   "dependencies": {
-    "@mdi/js": "^5.5.55",
+    "@mdi/js": "^5.6.55",
     "axios": "^0.20.0",
     "postcss-nesting": "^7.0.1",
     "ress": "^3.0.0",
     "typescript": "~4.0",
     "vite": "^1.0.0-rc.4",
-    "vue": "^3.0.0-rc.10",
-    "vue-router": "^4.0.0-beta.9"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-beta.12"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "@vue/compiler-sfc": "^3.0.0-rc.10",
-    "eslint": "^7.8.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-vue": "^7.0.0-beta.3",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-vue": "^7.0.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.1.1",
-    "vti": "0.0.11"
+    "prettier": "^2.1.2",
+    "vti": "0.0.12"
   }
 }
