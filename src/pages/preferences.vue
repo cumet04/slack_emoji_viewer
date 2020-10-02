@@ -126,6 +126,8 @@ import { mdiCheckCircleOutline, mdiCloseCircleOutline } from "@mdi/js";
 import TextInput from "../components/TextInput.vue";
 import ThemeSample from "../components/ThemeSample.vue";
 import { useStore } from "../store";
+import IcoGithub from "/src/assets/images/ico-github.png";
+import IcoGithubLight from "/src/assets/images/ico-github-light.png";
 
 export default defineComponent({
   components: {
@@ -169,9 +171,7 @@ export default defineComponent({
     const commitUrl = `${githubUrl}/commit/${bhash}`;
 
     const githubIcon = computed(() =>
-      currentTheme.value == "Light"
-        ? "/src/assets/images/ico-github.png"
-        : "/src/assets/images/ico-github-light.png"
+      currentTheme.value == "Light" ? IcoGithub : IcoGithubLight
     );
 
     const copyCodeText = `const {domain, name, icon} = TS.teams.getTeamById(TS.boot_data.team_id);

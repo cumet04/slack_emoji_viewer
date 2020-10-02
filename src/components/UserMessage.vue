@@ -22,6 +22,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { formatDate } from "../utils";
+import IcoUser from "/src/assets/images/ico-user.png";
 
 type Props = {
   userIcon: string;
@@ -35,7 +36,7 @@ export default defineComponent({
   props: {
     userIcon: {
       type: String,
-      default: "/src/assets/images/ico-user.png",
+      default: IcoUser,
     },
     mdiIcon: {
       type: String,
