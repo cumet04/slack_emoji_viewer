@@ -1,3 +1,4 @@
+import replace from "@rollup/plugin-replace";
 import { UserConfig } from "vite";
 
 const url = process.env["GITHUB_SERVER_URL"]
@@ -6,10 +7,14 @@ const url = process.env["GITHUB_SERVER_URL"]
 
 const config: UserConfig = {
   base: "/slack_emoji_viewer",
-  env: {
-    REPOSITORY_URL: url,
-    BUILD_TIME: Date.now().toString(),
-    GITHUB_SHA: process.env["GITHUB_SHA"] || "xxxxxxx",
+  rollupInputOptions: {
+    plugins: [
+      replace({
+        __repository_url__: url,
+        __github_sha__: process.env["GITHUB_SHA"] || "xxxxxxx",
+        __build_time__: Date.now().toString(),
+      }),
+    ],
   },
 };
 

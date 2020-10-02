@@ -15,6 +15,8 @@ import { defineComponent, PropType } from "vue";
 import { Themes } from "../theme";
 import UserMessage from "../components/UserMessage.vue";
 import Emoji from "../components/Emoji.vue";
+import IcoUser from "/src/assets/images/ico-user.png";
+import IcoSlack from "/src/assets/images/ico-slack.png";
 
 type Props = {
   theme: Theme;
@@ -33,13 +35,13 @@ export default defineComponent({
   },
   setup(props: Props) {
     const slackEmoji = {
-      userImage: "/src/assets/images/ico-user.png",
+      userImage: IcoUser,
       userName: "slack",
       created: new Date(),
       aliases: [],
       isAlias: false,
       name: "slack",
-      image: "/src/assets/images/ico-slack.png",
+      image: IcoSlack,
     } as Emoji;
 
     return {
