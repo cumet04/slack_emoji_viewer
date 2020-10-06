@@ -6,10 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "vite -c vite.config.ts",
-    "lint": "eslint --ext .ts,.vue src",
-    "diag": "vti diagnostics",
-    "build:run": "vite build -c vite.config.ts",
-    "build": "run-s lint diag build:run"
+    "build": "vite build -c vite.config.ts"
   },
   "postcss": {
     "plugins": {
@@ -26,13 +23,11 @@
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-vue": "^7.0.0",
-    "npm-run-all": "^4.1.5",
     "postcss-nesting": "^7.0.1",
     "prettier": "^2.1.2",
     "ress": "^3.0.0",
     "typescript": "~4.0",
     "vite": "^1.0.0-rc.4",
-    "vti": "0.0.12",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-beta.12"
   }
