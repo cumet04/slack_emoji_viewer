@@ -1,7 +1,7 @@
 <template>
   <img
     :src="emoji.image"
-    :title="displayName"
+    :title="title"
     width="32"
     height="32"
     loading="lazy"
@@ -27,10 +27,10 @@ export default defineComponent({
     const names = [
       props.emoji.name,
       ...props.emoji.aliases?.map((e) => e.name),
-    ];
-    const displayName = names.map((name) => `:${name}:`).join(" ");
+    ].map((n) => `:${n}:`);
+    const title = `${names.join(" ")}\nby ${props.emoji.userName}`;
     return {
-      displayName,
+      title,
     };
   },
 });
