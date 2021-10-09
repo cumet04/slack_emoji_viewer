@@ -1,9 +1,9 @@
 <template>
   <main class="inner">
-    <list-tab list-type="daily"></list-tab>
+    <list-tab list-type="daily" />
     <card>
-      <page v-model:trimmed="trimmed" :max-height="maxHeight"></page>
-      <load-more-button v-if="trimmed" @click="load"></load-more-button>
+      <page v-model:trimmed="trimmed" :max-height="maxHeight" />
+      <load-more-button v-if="trimmed" @click="load" />
     </card>
   </main>
 </template>
@@ -40,5 +40,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="postcss">
-</style>
+<style scoped lang="postcss"></style>

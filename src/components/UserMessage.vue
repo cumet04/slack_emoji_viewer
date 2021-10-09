@@ -6,7 +6,7 @@
         :path="mdiIcon"
         :style="mdiStyle"
         size="36px"
-      ></mdi-icon>
+      />
       <img v-else :src="userIcon" class="img" />
     </div>
     <div>
@@ -14,7 +14,7 @@
         <span class="name">{{ userName }}</span>
         <span v-if="date" class="date">&nbsp;&nbsp;{{ displayDate }}</span>
       </div>
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

@@ -1,10 +1,7 @@
 <template>
-  <search-input
-    v-model:value="keyword"
-    placeholder="Search user"
-  ></search-input>
+  <search-input v-model:value="keyword" placeholder="Search user" />
   <ul ref="usersRef" class="users">
-    <li v-for="{ user, emojis } in emojis" :key="user.name" class="user">
+    <li v-for="{ user, emojis } in userEmojis" :key="user.name" class="user">
       <user-message
         :user-name="user.name"
         :user-icon="user.image"
@@ -12,7 +9,7 @@
       >
         <ul class="list">
           <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
-            <emoji :emoji="emoji" :name="emoji.name"></emoji>
+            <emoji :emoji="emoji" :name="emoji.name" />
           </li>
         </ul>
       </user-message>
@@ -74,7 +71,7 @@ export default defineComponent({
       }
     });
 
-    const emojis = computed(() => {
+    const userEmojis = computed(() => {
       // query-type is omitted -> add @ prefix
       const queries = keyword.value
         .split(" ")
@@ -103,7 +100,7 @@ export default defineComponent({
     return {
       keyword,
       usersRef,
-      emojis,
+      userEmojis,
     };
   },
 });

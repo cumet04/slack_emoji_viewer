@@ -1,13 +1,13 @@
 <template>
   <main class="inner">
-    <list-tab list-type="all"></list-tab>
+    <list-tab list-type="all" />
     <card>
       <page
         v-model:trimmed="trimmed"
         :max-rows="maxRows"
         @changed="resetRows"
-      ></page>
-      <load-more-button v-if="trimmed" @click="load"></load-more-button>
+      />
+      <load-more-button v-if="trimmed" @click="load" />
     </card>
   </main>
 </template>
@@ -48,5 +48,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="postcss">
-</style>
+<style scoped lang="postcss"></style>

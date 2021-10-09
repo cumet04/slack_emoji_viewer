@@ -1,16 +1,16 @@
 <template>
   <main class="inner">
     <card class="card">
-      <daily-page :max-height="260"></daily-page>
-      <router-link to="/daily" class="link">view more</router-link>
+      <daily-page :max-height="260" />
+      <router-link to="/daily" class="link"> view more </router-link>
     </card>
     <card class="card">
-      <all-page :max-rows="5"></all-page>
-      <router-link to="/all" class="link">view more</router-link>
+      <all-page :max-rows="5" />
+      <router-link to="/all" class="link"> view more </router-link>
     </card>
     <card class="card">
-      <user-page :max-height="260"></user-page>
-      <router-link to="/user" class="link">view more</router-link>
+      <user-page :max-height="260" />
+      <router-link to="/user" class="link"> view more </router-link>
     </card>
   </main>
 </template>

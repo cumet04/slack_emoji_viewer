@@ -10,7 +10,7 @@
               v-if="ws == currentWorkspace"
               :path="mdiCheckCircleOutline"
               class="check"
-            ></mdi-icon>
+            />
             <button
               class="button"
               :class="ws == currentWorkspace && 'current'"
@@ -20,7 +20,7 @@
               <span class="name">{{ ws.name }}</span>
             </button>
             <button class="close" @click="removeWorkspace(ws)">
-              <mdi-icon :path="mdiCloseCircleOutline" size="16px"></mdi-icon>
+              <mdi-icon :path="mdiCloseCircleOutline" size="16px" />
             </button>
           </li>
         </ul>
@@ -63,8 +63,7 @@
               :cols="copyCodeTextCols"
               :value="copyCodeText"
               @click="$event.target.select()"
-            >
-            </textarea>
+            />
           </li>
           <li class="step">
             <p>Copy output data, and paste it below</p>
@@ -72,11 +71,11 @@
               v-model:value="dataFieldValue"
               class="input"
               placeholder="data"
-            ></text-input>
+            />
           </li>
         </ol>
         <div class="actions">
-          <Button @click="addWorkspace">Add</Button>
+          <Button @click="addWorkspace"> Add </Button>
         </div>
       </card>
     </div>
@@ -90,13 +89,13 @@
           class="theme"
           :class="currentTheme == 'Light' && 'active'"
           @click="selectTheme('Light')"
-        ></theme-sample>
+        />
         <theme-sample
           theme="Dark"
           class="theme"
           :class="currentTheme == 'Dark' && 'active'"
           @click="selectTheme('Dark')"
-        ></theme-sample>
+        />
       </card>
     </div>
 

@@ -1,11 +1,8 @@
 <template>
-  <search-input
-    v-model:value="keyword"
-    placeholder="Search emoji"
-  ></search-input>
+  <search-input v-model:value="keyword" placeholder="Search emoji" />
   <ul ref="listRef" class="list">
     <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
-      <emoji :emoji="emoji" :name="emoji.name"></emoji>
+      <emoji :emoji="emoji" :name="emoji.name" />
     </li>
   </ul>
 </template>

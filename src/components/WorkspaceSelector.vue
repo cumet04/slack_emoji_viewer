@@ -1,7 +1,7 @@
 <template>
   <div class="workspace-selector">
     <button v-if="!current" class="button anonymous" @click="anonymousEvent">
-      <mdi-icon :path="mdiAccountAlert" size="34px"></mdi-icon>
+      <mdi-icon :path="mdiAccountAlert" size="34px" />
     </button>
     <template v-else>
       <button class="button" @click="open = !open">
@@ -20,9 +20,11 @@
               v-if="ws == current"
               :path="mdiCheckCircleOutline"
               class="check"
-            ></mdi-icon>
+            />
             <img class="icon" :src="ws.icon.image_34" />
-            <div class="name">{{ ws.name }}</div>
+            <div class="name">
+              {{ ws.name }}
+            </div>
           </li>
         </ol>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <ul ref="daysRef" class="days">
-    <li v-for="{ date, emojis } in emojis" :key="date" class="day">
+    <li v-for="{ date, emojis } in dailyEmojis" :key="date" class="day">
       <user-message
         :user-name="formatDate(date)"
         :mdi-icon="mdiIcon(date)"
@@ -8,7 +8,7 @@
       >
         <ul class="list">
           <li v-for="emoji in emojis" :key="emoji.name" class="emoji">
-            <emoji :emoji="emoji" :name="emoji.name"></emoji>
+            <emoji :emoji="emoji" :name="emoji.name" />
           </li>
         </ul>
       </user-message>
@@ -59,7 +59,7 @@ export default defineComponent({
       }
     });
 
-    const emojis = computed(() => {
+    const dailyEmojis = computed(() => {
       const all = store.emoji.forDaily();
       if (all.length == 0) return [];
 
@@ -82,7 +82,7 @@ export default defineComponent({
     return {
       daysRef,
 
-      emojis,
+      dailyEmojis,
       formatDate,
       mdiIcon,
       mdiColor,
