@@ -8,14 +8,14 @@
           class="icon"
         />
       </router-link>
-      <div class="spacer"></div>
+      <div class="spacer" />
       <button class="item" title="update emoji database">
-        <mdi-icon :path="mdiReload" @click="reloadEmojis"></mdi-icon>
+        <mdi-icon :path="mdiReload" @click="reloadEmojis" />
       </button>
       <router-link to="/preferences" class="item">
-        <mdi-icon :path="mdiCog" size="32px"></mdi-icon>
+        <mdi-icon :path="mdiCog" size="32px" />
       </router-link>
-      <workspace-selector></workspace-selector>
+      <workspace-selector />
     </nav>
   </header>
 </template>

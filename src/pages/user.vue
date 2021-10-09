@@ -1,13 +1,13 @@
 <template>
   <main class="inner">
-    <list-tab list-type="user"></list-tab>
+    <list-tab list-type="user" />
     <card>
       <page
         v-model:trimmed="trimmed"
         :max-height="maxHeight"
         @changed="resetHeight"
-      ></page>
-      <load-more-button v-if="trimmed" @click="load"></load-more-button>
+      />
+      <load-more-button v-if="trimmed" @click="load" />
     </card>
   </main>
 </template>
@@ -46,5 +46,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="postcss">
-</style>
+<style scoped lang="postcss"></style>

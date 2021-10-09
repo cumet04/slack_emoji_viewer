@@ -15,10 +15,15 @@ type SlackEmoji = {
 };
 
 async function getAllEmojis(domain: string, token: string, maxCount: number) {
-  const resp = await axios.post(
+  const resp = (await axios.post(
     `https://${domain}.slack.com/api/emoji.adminList`,
     [`token=${token}`, `count=${maxCount}`].join("&")
-  );
+  )) as {
+    data: {
+      ok: boolean;
+      emoji: unknown;
+    };
+  };
   if (!resp.data.ok) {
     console.error(`fetch emoji failed: ${JSON.stringify(resp.data)}`);
     return null;

@@ -1,15 +1,15 @@
 <template>
   <nav class="list-tab">
     <router-link to="/all" class="link" :class="isAll && 'current'">
-      <mdi-icon :path="mdiFileTableBoxOutline"></mdi-icon>
+      <mdi-icon :path="mdiFileTableBoxOutline" />
       <div class="label">no group</div>
     </router-link>
     <router-link to="/daily" class="link" :class="isDaily && 'current'">
-      <mdi-icon :path="mdiCalendarToday"></mdi-icon>
+      <mdi-icon :path="mdiCalendarToday" />
       <div class="label">by date</div>
     </router-link>
     <router-link to="/user" class="link" :class="isUser && 'current'">
-      <mdi-icon :path="mdiAccount"></mdi-icon>
+      <mdi-icon :path="mdiAccount" />
       <div class="label">by user</div>
     </router-link>
   </nav>

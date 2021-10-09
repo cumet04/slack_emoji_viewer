@@ -2,9 +2,9 @@
   <div class="theme-sample" :style="style">
     <user-message :user-name="userName" :date="slackEmoji.created">
       <div class="emojis">
-        <emoji :emoji="slackEmoji"></emoji>
-        <emoji :emoji="slackEmoji"></emoji>
-        <emoji :emoji="slackEmoji"></emoji>
+        <emoji :emoji="slackEmoji" />
+        <emoji :emoji="slackEmoji" />
+        <emoji :emoji="slackEmoji" />
       </div>
     </user-message>
   </div>

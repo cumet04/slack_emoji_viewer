@@ -1,6 +1,6 @@
 <template>
   <section class="card-component">
-    <slot></slot>
+    <slot />
   </section>
 </template>
 
