@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import vue from '@vitejs/plugin-vue'
+import vue from "@vitejs/plugin-vue";
 import replace from "@rollup/plugin-replace";
 
 const url = process.env["GITHUB_SERVER_URL"]
@@ -16,7 +16,7 @@ export default defineConfig({
         __repository_url__: url,
         __github_sha__: process.env["GITHUB_SHA"] || "xxxxxxx",
         __build_time__: Date.now().toString(),
-      }
+      },
     }),
   ],
 });
