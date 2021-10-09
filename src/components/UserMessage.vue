@@ -6,7 +6,7 @@
         :path="mdiIcon"
         :style="mdiStyle"
         size="36px"
-      />
+      ></mdi-icon>
       <img v-else :src="userIcon" class="img" />
     </div>
     <div>
@@ -29,14 +29,14 @@ type Props = {
   mdiIcon: string;
   iconColor: string;
   userName: string;
-  date?: string;
+  date?: Date;
 };
 
 export default defineComponent({
   props: {
     userIcon: {
       type: String,
-      default: IcoUser,
+      default: IcoUser as string,
     },
     mdiIcon: {
       type: String,
@@ -52,11 +52,11 @@ export default defineComponent({
     },
     date: {
       type: Date,
-      default: null,
+      default: undefined,
     },
   },
   setup(props: Props) {
-    const date = props.date && formatDate(new Date(Date.parse(props.date)));
+    const date = props.date && formatDate(props.date);
     const mdiStyle = props.iconColor != "" ? `color: ${props.iconColor};` : "";
     return {
       displayDate: date,

@@ -62,7 +62,7 @@
               :rows="copyCodeTextRows"
               :cols="copyCodeTextCols"
               :value="copyCodeText"
-              @click="$event.target.select()"
+              @click="($event.target as HTMLTextAreaElement | null)?.select()"
             />
           </li>
           <li class="step">

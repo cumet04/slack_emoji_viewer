@@ -1,5 +1,8 @@
 <template>
-  <search-input v-model:value="keyword" placeholder="Search user" />
+  <search-input
+    v-model:value="keyword"
+    placeholder="Search user"
+  ></search-input>
   <ul ref="usersRef" class="users">
     <li v-for="{ user, emojis } in userEmojis" :key="user.name" class="user">
       <user-message

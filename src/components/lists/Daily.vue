@@ -1,6 +1,10 @@
 <template>
   <ul ref="daysRef" class="days">
-    <li v-for="{ date, emojis } in dailyEmojis" :key="date" class="day">
+    <li
+      v-for="{ date, emojis } in dailyEmojis"
+      :key="date.toISOString()"
+      class="day"
+    >
       <user-message
         :user-name="formatDate(date)"
         :mdi-icon="mdiIcon(date)"
