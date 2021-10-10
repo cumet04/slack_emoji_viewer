@@ -7,9 +7,6 @@ const url = process.env["GITHUB_SERVER_URL"]
   : "https://example.com";
 
 export default defineConfig({
-  build: {
-    outDir: "../dist",
-  },
   plugins: [
     vue(),
     replace({
