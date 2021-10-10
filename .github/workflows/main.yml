@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      working-directory: ./frontend
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js for use with actions
@@ -16,9 +18,3 @@ jobs:
         run: npm ci
       - name: Build pages
         run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-        if: github.ref == 'refs/heads/master'
