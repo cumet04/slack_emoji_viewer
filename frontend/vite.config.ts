@@ -7,7 +7,9 @@ const url = process.env["GITHUB_SERVER_URL"]
   : "https://example.com";
 
 export default defineConfig({
-  base: "/slack_emoji_viewer/",
+  build: {
+    outDir: "../dist",
+  },
   plugins: [
     vue(),
     replace({

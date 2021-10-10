@@ -4,10 +4,11 @@ import All from "./pages/all.vue";
 import Daily from "./pages/daily.vue";
 import User from "./pages/user.vue";
 import Preferences from "./pages/preferences.vue";
+import NotFound from "./pages/404.vue";
 
 export function createRouter(): router.Router {
   const r = router.createRouter({
-    history: router.createWebHistory("/slack_emoji_viewer/"),
+    history: router.createWebHistory(),
     routes: [
       {
         path: "/",
@@ -28,6 +29,10 @@ export function createRouter(): router.Router {
       {
         path: "/preferences",
         component: Preferences,
+      },
+      {
+        path: "/:pathMatch(.*)*",
+        component: NotFound,
       },
     ],
   });
